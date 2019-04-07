@@ -30,12 +30,12 @@ class AuthServiceProvider extends ServiceProvider
             return $user->type === 'admin';
         });
 
-        Gate::define('isAuthor',function($user){
-            return $user->type === 'author';
+        Gate::define('isSKAdmin',function($user){
+            return $user->type === 'skadmin';
         });
 
-        Gate::define('isUser',function($user){
-            return $user->type === 'user';
+        Gate::define('isSKMember',function($user){
+            return $user->type === 'skmember';
         });
 
         Passport::routes();

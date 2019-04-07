@@ -4,10 +4,10 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Users</h3>
+                <h3 class="card-title">Roles</h3>
 
                 <div class="card-tools">
-                    <button class="btn btn-success" data-toggle="modal" @click="newUser" data-target="#addNewUser">Add New <i class="fas fa-user-plus fa-fw"></i></button>
+                    <button class="btn btn-success" data-toggle="modal" @click="newRole" data-target="#addNewRole">Add New <i class="fas fa-user-plus fa-fw"></i></button>
                 </div>
               </div>
               <!-- /.card-header -->
@@ -16,22 +16,20 @@
                   <tbody><tr>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>Email</th>
-                    <th>Type</th>
-                    <th>Registered At</th>
+                    <th>Code</th>
+                    <th>Description</th>
                     <th>Modify</th>
                   </tr>
-                  <tr v-for="user in users.data" :key="user.id">
-                    <td>{{user.id}}</td>
-                    <td>{{user.name}}</td>
-                    <td>{{user.email}}</td>
-                    <td>{{user.type | upText}}</td>
-                    <td>{{user.created_at | dateFormat}}</td>
+                  <tr v-for="role in roles.data" :key="role.id">
+                    <td>{{role.id}}</td>
+                    <td>{{role.name}}</td>
+                    <td>{{role.code | upText}}</td>
+                    <td>{{role.description }}</td>
                     <td>
-                        <a href="#" @click="editUser(user)">
+                        <a href="#" @click="editRole(role)">
                             <i class="fas fa-edit"></i>
                         </a>
-                        <a href="#" @click="deleteUser(user.id)">
+                        <a href="#" @click="deleteRole(role.id)">
                             <i class="fas fa-trash text-red"></i>
                         </a>
                     </td>
@@ -40,7 +38,7 @@
               </div>
               <!-- /.card-body -->
               <div class="card-footer">
-                  <pagination :data="users" @pagination-change-page="getResults"></pagination>
+                  <pagination :data="roles" @pagination-change-page="getResults"></pagination>
               </div>
             </div>
             <!-- /.card -->
@@ -50,17 +48,17 @@
             <not-found></not-found>
         </div>
         <!-- Modal -->
-        <div class="modal fade" id="addNewUser" tabindex="-1" role="dialog" aria-labelledby="addNewUserLabel" aria-hidden="true">
+        <div class="modal fade" id="addNewRole" tabindex="-1" role="dialog" aria-labelledby="addNewRoleLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 v-show="!editmode" class="modal-title" id="addNewUserLabel">New User</h5>
-                    <h5 v-show="editmode" class="modal-title" id="addNewUserLabel">Update User</h5>
+                    <h5 v-show="!editmode" class="modal-title" id="addNewRoleLabel">New Role</h5>
+                    <h5 v-show="editmode" class="modal-title" id="addNewRoleLabel">Update Role</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form @submit.prevent="editmode ? updateUser() : createUser()">
+                <form @submit.prevent="editmode ? updateRole() : createRole()">
                 <div class="modal-body">
                     <div class="form-group">
                         <input v-model="form.name" type="text" name="name"
@@ -70,35 +68,19 @@
                     </div>
 
                     <div class="form-group">
-                        <input v-model="form.email" type="email" name="email"
-                            placeholder="Email Address"
-                            class="form-control" :class="{ 'is-invalid': form.errors.has('email') }">
-                        <has-error :form="form" field="email"></has-error>
-                    </div>
-
-                     <div class="form-group">
-                        <textarea v-model="form.bio" name="bio" id="bio"
-                        placeholder="Short bio for user (Optional)"
-                        class="form-control" :class="{ 'is-invalid': form.errors.has('bio') }"></textarea>
-                        <has-error :form="form" field="bio"></has-error>
-                    </div>
-
-
-                    <div class="form-group">
-                        <select name="type" v-model="form.type" id="type" class="form-control" :class="{ 'is-invalid': form.errors.has('type') }">
-                            <option value="">Select User Role</option>
-                            <option value="admin">Admin</option>
-                            <option value="skadmin">SK Admin</option>
-                            <option value="skmember">SK Member</option>
-                        </select>
-                        <has-error :form="form" field="type"></has-error>
+                        <input v-model="form.code" type="text" name="code"
+                            placeholder="Code"
+                            class="form-control" :class="{ 'is-invalid': form.errors.has('code') }">
+                        <has-error :form="form" field="code"></has-error>
                     </div>
 
                     <div class="form-group">
-                        <input v-model="form.password" type="password" name="password" id="password"
-                        class="form-control" :class="{ 'is-invalid': form.errors.has('password') }">
-                        <has-error :form="form" field="password"></has-error>
+                        <textarea v-model="form.description" name="description" id="description"
+                        placeholder="Short description for role (Optional)"
+                        class="form-control" :class="{ 'is-invalid': form.errors.has('description') }"></textarea>
+                        <has-error :form="form" field="description"></has-error>
                     </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -121,42 +103,39 @@
                 form: new Form({
                     id:'',
                     name : '',
-                    email : '',
-                    password : '',
-                    type : '',
-                    bio : '',
-                    photo : ''
+                    code : '',
+                    description : '',
                 })
             }
         },
         methods:{
             getResults(page = 1) {
-                axios.get('api/user?page=' + page)
+                axios.get('api/role?page=' + page)
                 .then(response => {
-                    this.users = response.data;
+                    this.roles = response.data;
                 });
             },
-            newUser(){
+            newRole(){
                 this.editmode = false;
                 this.form.reset();
             },
-            editUser(user){
+            editRole(role){
                 this.editmode = true;
                 this.form.reset();
-                $('#addNewUser').modal('show');
-                this.form.fill(user);
+                $('#addNewRole').modal('show');
+                this.form.fill(role);
             },
-            loadUsers(){
+            loadRoles(){
                 if(this.$gate.isAdmin() || this.$gate.isSKAdmin()){
-                    axios.get('api/user').then(({data}) => (this.users = data));
+                    axios.get('api/role').then(({data}) => (this.roles = data));
                 }
 
             },
-            updateUser(){
+            updateRole(){
                 this.$Progress.start();
-                this.form.put('api/user/'+this.form.id)
+                this.form.put('api/role/'+this.form.id)
                 .then(() => {
-                    $('#addNewUser').modal('hide');
+                    $('#addNewRole').modal('hide');
                     swal.fire(
                         'Updated!',
                         'Information has been updated.',
@@ -170,7 +149,7 @@
                 });
 
             },
-            deleteUser(id){
+            deleteRole(id){
                 swal.fire({
                     title: 'Are you sure?',
                     text: "You won't be able to revert this!",
@@ -182,7 +161,7 @@
                     }).then((result) => {
                         // Send request to the server
                          if (result.value) {
-                                this.form.delete('api/user/'+id).then(()=>{
+                                this.form.delete('api/role/'+id).then(()=>{
                                     swal.fire(
                                         'Deleted!',
                                         'Your file has been deleted.',
@@ -195,11 +174,11 @@
                          }
                     })
             },
-            createUser(){
+            createRole(){
                 this.$Progress.start();
-                this.form.post('api/user')
+                this.form.post('api/role')
                 .then(()=>{
-                    $('#addNewUser').modal('hide');
+                    $('#addNewRole').modal('hide');
                     Fire.$emit('AfterCreate');
                     toast.fire({
                         type: 'success',
@@ -216,17 +195,17 @@
         created() {
             Fire.$on('searching',() => {
                 let query = this.$parent.search;
-                axios.get('api/findUser?q=' + query)
+                axios.get('api/findRole?q=' + query)
                 .then((data) => {
-                    this.users = data.data
+                    this.roles = data.data
                 })
                 .catch(() => {
 
                 });
             });
-            this.loadUsers();
+            this.loadRoles();
             Fire.$on('AfterCreate',() => {
-                this.loadUsers();
+                this.loadRoles();
             });
         }
     }

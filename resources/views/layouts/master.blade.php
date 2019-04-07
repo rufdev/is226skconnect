@@ -264,7 +264,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </p>
                                 </router-link>
                             </li>
-                            @canany(['isAdmin', 'isAuthor'])
+                            @canany(['isAdmin', 'isSKAdmin'])
                             <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
                                     <i
@@ -285,7 +285,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         </router-link>
                                     </li>
                                     <li class="nav-item">
-                                        <router-link to="/users" class="nav-link ">
+                                        <router-link to="/roles" class="nav-link ">
                                             <i
                                                 class="nav-icon fas fa-key text-blue"
                                             ></i>
