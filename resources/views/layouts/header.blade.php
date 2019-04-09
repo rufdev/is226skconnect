@@ -22,7 +22,7 @@
                               </div>
                               <div id="tg-navigation" class="collapse navbar-collapse tg-navigation">
                                  <ul>
-                                    <li class="menu-item"><a href="">Home</a></li>
+                                    <li class="menu-item"><a href="/">Home</a></li>
                                     <li><a href="">About Us</a></li>
                                     <li class="menu-item">
                                        <a href="">Events</a>
