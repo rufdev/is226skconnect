@@ -264,6 +264,30 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </p>
                                 </router-link>
                             </li>
+                            <li class="nav-item">
+                                <router-link to="/post" class="nav-link">
+                                    <i class="nav-icon fas fa-blog"></i>
+                                    <p>
+                                        Blog Posts
+                                    </p>
+                                </router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link to="/memo" class="nav-link">
+                                    <i class="nav-icon fas fa-file"></i>
+                                    <p>
+                                        Memo
+                                    </p>
+                                </router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link to="/announcement" class="nav-link">
+                                    <i class="nav-icon fas fa-bullhorn"></i>
+                                    <p>
+                                        Announcement
+                                    </p>
+                                </router-link>
+                            </li>
                             @canany(['isAdmin', 'isSKAdmin'])
                             <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">

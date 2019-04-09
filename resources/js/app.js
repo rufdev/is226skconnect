@@ -13,6 +13,7 @@ import { Form, HasError, AlertError } from 'vform';
 import Gate from './Gate';
 Vue.prototype.$gate = new Gate(window.user);
 
+
 import Swal from 'sweetalert2'
 window.swal = Swal;
 
@@ -46,6 +47,9 @@ let routes = [
     { path: '/profile', component: require('./components/Profile.vue').default },
     { path: '/users', component: require('./components/Users.vue').default },
     { path: '/roles', component: require('./components/Roles.vue').default },
+    { path: '/post', component: require('./components/Post.vue').default },
+    { path: '/memo', component: require('./components/Memo.vue').default },
+    { path: '/announcement', component: require('./components/Announcement.vue').default },
     { path: '*', component: require('./components/NotFound.vue').default }
 
 ]
@@ -102,6 +106,14 @@ Vue.component('pagination', require('laravel-vue-pagination'));
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+import CKEditor from '@ckeditor/ckeditor5-vue';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
+// import CKFinder from '@ckeditor/ckeditor5-ckfinder/src/ckfinder';
+
+Vue.use( CKEditor );
+window.ClassicEditor = ClassicEditor;
+// window.CKFinder = CKFinder;
 
 const app = new Vue({
     el: '#app',

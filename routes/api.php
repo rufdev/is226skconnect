@@ -26,6 +26,10 @@ Route::apiResources([
     'role' => 'API\RolesController'
 ]);
 
+Route::apiResources([
+    'post' => 'API\PostsController'
+]);
+
 
 Route::get('profile','API\UserController@profile');
 Route::get('findUser','API\UserController@search');
