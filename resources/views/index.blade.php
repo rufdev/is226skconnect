@@ -67,7 +67,7 @@
                                     <div class="small-post" >
                                         <figure class="tg-featuredimg">
                                             <a href="">
-                                            <img src="http://52.220.57.1/storage/app/uploads/public/5c9/4db/97d/5c94db97de486625688101.jpg" alt="" style="width:275px; height:183px;"> </a>
+                                            <img src="{{ url('/img/'.$post->feature_img) }}" alt="" style="width:275px; height:183px;"> </a>
                                         </figure>
                                         <div class="cp-post-content">
                                         <h3><a href="">{{ $post->title}}</a></h3>
