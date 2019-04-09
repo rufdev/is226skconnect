@@ -11,7 +11,10 @@ class IndexController extends Controller
     {
         //Get only three latest blogs for the homepage
         $posts = Post::orderBy('created_at', 'DESC')->take(3)->get();
-        return view('index', compact('posts'));
+        $recentposts = Post::orderBy('created_at', 'DESC')->take(10)->get();
+        return view('index', compact('posts', 'recentposts'));
+
+
     }
 
     public function post($id)

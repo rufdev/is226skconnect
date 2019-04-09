@@ -71,27 +71,15 @@
                      <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
                         <div class="tg-widget tg-widgetcoursecategories">
                            <div class="tg-widgettitle">
-                              <h3>Course Categories</h3>
+                              <h3>Recent Posts</h3>
                            </div>
                            <div class="tg-widgetcontent">
                               <ul>
-                                 <li><a href="">Perspiciatis ate</a></li>
-                                 <li><a href="">Aomnis isteat</a></li>
-                                 <li><a href="">Canatus error</a></li>
-                                 <li><a href="">Voluptatem clu</a></li>
-                                 <li><a href="">Commodo</a></li>
-                                 <li><a href="">Consequat</a></li>
-                                 <li><a href="">Duis aute</a></li>
-                                 <li><a href="">Aincididunt</a></li>
-                                 <li><a href="">Alter veritatis</a></li>
-                                 <li><a href="">Tempora Incid</a></li>
-                                 <li><a href="">Dolore Magnam</a></li>
-                                 <li><a href="">Aliquam Quaerat</a></li>
-                                 <li><a href="">Quisquam</a></li>
-                                 <li><a href="">Voluptatem</a></li>
-                                 <li><a href="">Aliquip</a></li>
-                                 <li><a href="">Adipisicing</a></li>
+                                @foreach ($recentposts as $recent)
+                                 <li>< <a href="/post/{{ $recent->id }}">{{ $recent->title }}</a></li>
+                                 @endforeach
                               </ul>
+
                            </div>
                         </div>
                      </div>
@@ -114,7 +102,7 @@
                <div class="container">
                   <div class="row">
                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <span class="tg-copyright">Copyright &copy; 2019
+                        <span class="tg-copyright">Copyright &copy; {{ now()->year }}
                         SK Federation of Antipolo City Government. All Rights Reserved</span>
                         <nav class="tg-addnav">
                            <ul>
