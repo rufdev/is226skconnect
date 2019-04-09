@@ -41,6 +41,7 @@ class PostsController extends Controller
             'title' => $request['title'],
             'body' => $request['body'],
             'feature_img'=> $request['feature_img'],
+            'url'=> $request['url'],
             'user_id' => auth()->user()->id
         ]);
     }
