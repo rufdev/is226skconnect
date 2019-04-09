@@ -4,9 +4,14 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\Role;
 class RolesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+        //$this->authorize('isAdmin');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +19,9 @@ class RolesController extends Controller
      */
     public function index()
     {
-        //
+        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
+            return Role::latest()->paginate(5);
+        }
     }
 
     /**
@@ -25,7 +32,15 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'name' => 'required|string|max:191',
+            'code' => 'required|string|max:191|unique:roles',
+        ]);
+        return Role::create([
+            'name' => $request['name'],
+            'code' => $request['code'],
+            'description' => $request['description']
+        ]);
     }
 
     /**
@@ -48,7 +63,17 @@ class RolesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $role = Role::findOrFail($id);
+
+        $this->validate($request,[
+            'name' => 'required|string|max:191',
+            'code' => 'required|string|max:191|unique:roles,code,'.$role->id,
+        ]);
+
+
+        $role->update($request->all());
+
+        return ['message' => 'Updated the role info'];
     }
 
     /**
@@ -59,6 +84,25 @@ class RolesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->authorize('isAdmin');
+
+        $role = Role::findOrFail($id);
+        $role->delete();
+        return ['message'=>'Role Deleted'];
+    }
+
+    public function search(){
+
+        if ($search = \Request::get('q')) {
+            $roles = Role::where(function($query) use ($search){
+                $query->where('name','LIKE',"%$search%")
+                        ->orWhere('code','LIKE',"%$search%");
+            })->paginate(20);
+        }else{
+            $roles = Role::latest()->paginate(5);
+        }
+
+        return $roles;
+
     }
 }

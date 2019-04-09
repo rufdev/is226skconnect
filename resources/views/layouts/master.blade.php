@@ -44,10 +44,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             placeholder="Search"
                             aria-label="Search"
                             v-model="search"
-                            @keyup="searchuser"
+                            @keyup="searchgrid"
                         />
                         <div class="input-group-append">
-                            <button class="btn btn-navbar" @click="searchuser">
+                            <button class="btn btn-navbar" @click="searchgrid">
                                 <i class="fa fa-search"></i>
                             </button>
                         </div>
@@ -240,7 +240,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <div class="info">
                             <a href="#" class="d-block">
                                 {{Auth::user()->name}}
-                                <p>{{Auth::user()->type}}</p>
+                                <p>{{Auth::user()->role->name}}</p>
                             </a>
                         </div>
                     </div>

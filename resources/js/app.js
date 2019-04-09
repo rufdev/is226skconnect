@@ -110,7 +110,7 @@ const app = new Vue({
         search: ''
     },
     methods:{
-        searchuser: _.debounce(() => {
+        searchgrid: _.debounce(() => {
             Fire.$emit('searching');
         },1000)
     }

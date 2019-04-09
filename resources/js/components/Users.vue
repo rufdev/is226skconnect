@@ -17,7 +17,7 @@
                     <th>ID</th>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>Type</th>
+                    <th>Role</th>
                     <th>Registered At</th>
                     <th>Modify</th>
                   </tr>
@@ -25,7 +25,7 @@
                     <td>{{user.id}}</td>
                     <td>{{user.name}}</td>
                     <td>{{user.email}}</td>
-                    <td>{{user.type | upText}}</td>
+                    <td>{{user.role.name | upText}}</td>
                     <td>{{user.created_at | dateFormat}}</td>
                     <td>
                         <a href="#" @click="editUser(user)">
@@ -85,11 +85,14 @@
 
 
                     <div class="form-group">
-                        <select name="type" v-model="form.type" id="type" class="form-control" :class="{ 'is-invalid': form.errors.has('type') }">
-                            <option value="">Select User Role</option>
+                        <select name="type" v-model="form.type" id="type" class="form-control" :class="{ 'is-invalid': form.errors.has('type') } " >
+                            <option v-for="role in roles" v-bind:key="role.id" v-bind:value="role.id">
+                                {{ role.name }}
+                            </option>
+                            <!-- <option value="">Select User Role</option>
                             <option value="admin">Admin</option>
                             <option value="skadmin">SK Admin</option>
-                            <option value="skmember">SK Member</option>
+                            <option value="skmember">SK Member</option> -->
                         </select>
                         <has-error :form="form" field="type"></has-error>
                     </div>
@@ -118,12 +121,13 @@
             return {
                 editmode : false,
                 users : {},
+                roles : [],
                 form: new Form({
                     id:'',
                     name : '',
                     email : '',
                     password : '',
-                    type : '',
+                    type : '3',
                     bio : '',
                     photo : ''
                 })
@@ -149,6 +153,7 @@
             loadUsers(){
                 if(this.$gate.isAdmin() || this.$gate.isSKAdmin()){
                     axios.get('api/user').then(({data}) => (this.users = data));
+                    axios.get('api/role').then(({data}) => (this.roles = data.data));
                 }
 
             },

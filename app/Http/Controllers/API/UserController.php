@@ -25,8 +25,10 @@ class UserController extends Controller
      */
     public function index()
     {
+
         if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
-            return User::latest()->paginate(5);
+            $users = User::with(['role'])->latest()->paginate(5);
+            return $users;
         }
     }
 
@@ -160,6 +162,8 @@ class UserController extends Controller
         }else{
             $users = User::latest()->paginate(5);
         }
+
+        // $users = User::with(['role'])->latest();
 
         return $users;
 

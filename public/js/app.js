@@ -2199,7 +2199,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       editmode: false,
-      users: {},
+      roles: {},
       form: new Form({
         id: '',
         name: '',
@@ -2284,7 +2284,7 @@ __webpack_require__.r(__webpack_exports__);
         Fire.$emit('AfterCreate');
         toast.fire({
           type: 'success',
-          title: 'User Created in successfully'
+          title: 'Role Created in successfully'
         });
 
         _this5.$Progress.finish();
@@ -2434,17 +2434,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       editmode: false,
       users: {},
+      roles: [],
       form: new Form({
         id: '',
         name: '',
         email: '',
         password: '',
-        type: '',
+        type: '3',
         bio: '',
         photo: ''
       })
@@ -2476,6 +2480,10 @@ __webpack_require__.r(__webpack_exports__);
         axios.get('api/user').then(function (_ref) {
           var data = _ref.data;
           return _this2.users = data;
+        });
+        axios.get('api/role').then(function (_ref2) {
+          var data = _ref2.data;
+          return _this2.roles = data.data;
         });
       }
     },
@@ -63084,7 +63092,7 @@ var render = function() {
                           _c("td", [_vm._v(_vm._s(user.email))]),
                           _vm._v(" "),
                           _c("td", [
-                            _vm._v(_vm._s(_vm._f("upText")(user.type)))
+                            _vm._v(_vm._s(_vm._f("upText")(user.role.name)))
                           ]),
                           _vm._v(" "),
                           _c("td", [
@@ -63377,23 +63385,20 @@ var render = function() {
                               }
                             }
                           },
-                          [
-                            _c("option", { attrs: { value: "" } }, [
-                              _vm._v("Select User Role")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "admin" } }, [
-                              _vm._v("Admin")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "skadmin" } }, [
-                              _vm._v("SK Admin")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "skmember" } }, [
-                              _vm._v("SK Member")
-                            ])
-                          ]
+                          _vm._l(_vm.roles, function(role) {
+                            return _c(
+                              "option",
+                              { key: role.id, domProps: { value: role.id } },
+                              [
+                                _vm._v(
+                                  "\n                            " +
+                                    _vm._s(role.name) +
+                                    "\n                        "
+                                )
+                              ]
+                            )
+                          }),
+                          0
                         ),
                         _vm._v(" "),
                         _c("has-error", {
@@ -63513,7 +63518,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Email")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Type")]),
+      _c("th", [_vm._v("Role")]),
       _vm._v(" "),
       _c("th", [_vm._v("Registered At")]),
       _vm._v(" "),
@@ -79418,17 +79423,17 @@ function () {
   _createClass(Gate, [{
     key: "isAdmin",
     value: function isAdmin() {
-      return this.user.type === 'admin';
+      return this.user.role_id === '1';
     }
   }, {
     key: "isSKAdmin",
     value: function isSKAdmin() {
-      return this.user.type === 'skadmin';
+      return this.user.role_id === '2';
     }
   }, {
     key: "isSKMember",
     value: function isSKMember() {
-      return this.user.type === 'skmember';
+      return this.user.role_id === '3';
     } // isAdminOrAuthor(){
     //     if(this.user.type === 'admin' || this.user.type === 'author'){
     //         return true;
@@ -79559,7 +79564,7 @@ var app = new Vue({
     search: ''
   },
   methods: {
-    searchuser: _.debounce(function () {
+    searchgrid: _.debounce(function () {
       Fire.$emit('searching');
     }, 1000)
   }

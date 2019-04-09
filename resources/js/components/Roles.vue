@@ -99,7 +99,7 @@
         data() {
             return {
                 editmode : false,
-                users : {},
+                roles : {},
                 form: new Form({
                     id:'',
                     name : '',
@@ -182,7 +182,7 @@
                     Fire.$emit('AfterCreate');
                     toast.fire({
                         type: 'success',
-                        title: 'User Created in successfully'
+                        title: 'Role Created in successfully'
                     })
                     this.$Progress.finish();
 

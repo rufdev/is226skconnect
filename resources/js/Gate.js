@@ -6,13 +6,13 @@ export default class Gate{
 
 
     isAdmin(){
-        return this.user.type === 'admin';
+        return this.user.role_id === '1';
     }
     isSKAdmin(){
-        return this.user.type === 'skadmin';
+        return this.user.role_id === '2';
     }
     isSKMember(){
-        return this.user.type === 'skmember';
+        return this.user.role_id === '3';
     }
     // isAdminOrAuthor(){
     //     if(this.user.type === 'admin' || this.user.type === 'author'){
