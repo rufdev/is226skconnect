@@ -72,7 +72,7 @@
                                         <div class="cp-post-content">
                                         <h3><a href="">{{ $post->title}}</a></h3>
                                         <div> {!! str_limit($post->body, 100) !!} </div>
-                                        <a href="">Read More...</a>
+                                        <a href="/post/{{ $post->id }}">Read More...</a>
                                         </div>
                                     </div>
                                     </li>

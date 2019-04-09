@@ -13,4 +13,10 @@ class IndexController extends Controller
         $posts = Post::orderBy('created_at', 'DESC')->take(3)->get();
         return view('index', compact('posts'));
     }
+
+    public function post($id)
+    {
+        $post = Post::find($id);
+        return view('post', compact('post'));
+    }
 }
