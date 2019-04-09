@@ -40,6 +40,7 @@ class PostsController extends Controller
         return Post::create([
             'title' => $request['title'],
             'body' => $request['body'],
+            'feature_img'=> $request['feature_img'],
             'user_id' => auth()->user()->id
         ]);
     }
