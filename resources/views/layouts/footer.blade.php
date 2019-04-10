@@ -5,7 +5,7 @@
             <div class="tg-signupbox">
                <div class="container">
                   <div class="tg-signuptextbox">
-                     <h3>Free Signup!</h3>
+                     <h3>Signup to be Updated!</h3>
                      <div class="tg-description">
                         <p>Subscribe Monthly Newsletter &amp; Get Latest New &amp; Updates.</p>
                      </div>
@@ -30,30 +30,23 @@
                               </div>
                               <ul class="tg-infolist">
                                  <li>
-                                    <i class="icon-location"></i>
-                                    <address>Abc, xyz street London, HG521A</address>
+                                    <i class="glyphicon glyphicon-home"></i>
+                                    <address> Antipolo Government City Hall, Antipolo City</address>
                                  </li>
                                  <li>
-                                    <i class="icon-phone-handset"></i>
-                                    <span>0800 - 1234 - 562 - 6</span>
+                                    <i class="glyphicon glyphicon-phone"></i>
+                                    <span> +63910-096-3298</span>
                                  </li>
                                  <li>
-                                    <i class="icon-printer"></i>
-                                    <span>+4 1234 567 - 9</span>
-                                 </li>
-                                 <li>
-                                    <a href="mailto:query@domain.com">
-                                    <i class="icon-envelope"></i>
-                                    <span>query@domain.com</span>
+                                    <a href="m.me/AntipoloCityYouth" target="_blank">
+                                    <i class="glyphicon glyphicon-envelope"></i>
+                                    <span> Antipolo Youth Chat</span>
                                     </a>
                                  </li>
                               </ul>
                               <ul class="tg-socialicons">
-                                 <li class="tg-facebook"><a href=""><i class="fa fa-facebook"></i></a></li>
-                                 <li class="tg-twitter"><a href=""><i class="fa fa-twitter"></i></a></li>
-                                 <li class="tg-linkedin"><a href=""><i class="fa fa-linkedin"></i></a></li>
-                                 <li class="tg-googleplus"><a href=""><i class="fa fa-google-plus"></i></a></li>
-                                 <li class="tg-rss"><a href=""><i class="fa fa-rss"></i></a></li>
+                                 <li class="tg-facebook"><a href="https://www.facebook.com/pg/AntipoloCityYouth" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                 <li class="tg-twitter"><a href="https://twitter.com/AntipoloCityGov" target="_blank"><i class="fa fa-twitter"></i></a></li>
                               </ul>
                            </div>
                         </div>
@@ -74,12 +67,13 @@
                               <h3>Recent Posts</h3>
                            </div>
                            <div class="tg-widgetcontent">
+                            @foreach ($recentposts as $recent)
                               <ul>
-                                @foreach ($recentposts as $recent)
-                                 <li>< <a href="/post/{{ $recent->id }}">{{ $recent->title }}</a></li>
-                                 @endforeach
-                              </ul>
 
+                                 <li><a href="/post/{{ $recent->id }}" target="_blank">{{ $recent->title }}</a></li>
+
+                              </ul>
+                              @endforeach
                            </div>
                         </div>
                      </div>
@@ -106,9 +100,9 @@
                         SK Federation of Antipolo City Government. All Rights Reserved</span>
                         <nav class="tg-addnav">
                            <ul>
-                              <li><a href="">Privacy Policy</a></li>
-                              <li><a href="">Term and Conditions</a></li>
-                              <li><a href="">Contact</a></li>
+                              <li><a href="http://nyc.gov.ph/sangguniangkabataan/" target="_blank">Privacy Policy</a></li>
+                              <li><a href="http://nyc.gov.ph/sangguniangkabataan/" target="_blank">Term and Conditions</a></li>
+                              <li><a href="/contact">Contact</a></li>
                            </ul>
                         </nav>
                      </div>
