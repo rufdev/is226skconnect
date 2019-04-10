@@ -88,3 +88,7 @@
                     @include('layouts.sidebar')
 
 @endsection
+
+@section('footer')
+    @include('layouts.footer')
+@endsection

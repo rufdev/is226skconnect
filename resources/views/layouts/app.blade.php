@@ -44,7 +44,7 @@
                 Content End
     *************************************-->
 
-    @include('layouts.footer')
+    @yield('footer')
 
     <div id="fb-root"></div>
     <!-- Scripts -->

@@ -69,9 +69,7 @@
                            <div class="tg-widgetcontent">
                             @foreach ($recentposts as $recent)
                               <ul>
-
                                  <li><a href="/post/{{ $recent->id }}" target="_blank">{{ $recent->title }}</a></li>
-
                               </ul>
                               @endforeach
                            </div>
