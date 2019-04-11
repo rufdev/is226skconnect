@@ -99,7 +99,19 @@
                         </div>
                         <img id="holder" style="margin-top:15px;max-height:100px;" src="img/logo.png">
                     </div>
-
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <a id="lfm2" data-input="thumbnail2" data-preview="holder2" class="btn btn-primary">
+                                <i class="fas fa-file"></i> Choose
+                                </a>
+                            </span>
+                            <input v-model="form.attachment"
+                                placeholder="File Attachment"
+                                id="thumbnail2" class="form-control" type="text" name="filepath">
+                        </div>
+                        <img id="holder2" style="margin-top:15px;max-height:100px;">
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -126,6 +138,7 @@
                     title : '',
                     body : '',
                     featureimage : '',
+                    attachment : '',
                 })
 
             }
@@ -162,15 +175,18 @@
             newMemo(){
                 this.editmode = false;
                 this.form.reset();
-                $('#lfm').filemanager('image');
+                $('#lfm').filemanager('image', {prefix: route_prefix});
+                $('#lfm2').filemanager('file', {prefix: route_prefix});
             },
             editMemo(memo){
                 this.editmode = true;
                 this.form.reset();
                 $('#addNewMemo').modal('show');
                 this.form.fill(memo);
-                 $('#holder').attr('src',this.form.featureimage);
-                $('#lfm').filemanager('image');
+                $('#holder').attr('src',this.form.featureimage);
+                // $('#holder2').attr('src',this.form.attachment);
+                $('#lfm').filemanager('image', {prefix: route_prefix});
+                $('#lfm2').filemanager('file', {prefix: route_prefix});
 
             },
             loadMemo(){
@@ -182,6 +198,7 @@
             updateMemo(){
                 this.$Progress.start();
                 this.form.featureimage =  $('#thumbnail').val();
+                this.form.attachment =  $('#thumbnail2').val();
                 this.form.put('api/memo/'+this.form.id)
                 .then(() => {
                     $('#addNewMemo').modal('hide');
@@ -226,6 +243,7 @@
             createMemo(){
                 this.$Progress.start();
                 this.form.featureimage =  $('#thumbnail').val();
+                this.form.attachment =  $('#thumbnail2').val();
                 this.form.post('api/memo')
                 .then(()=>{
                     $('#addNewMemo').modal('hide');

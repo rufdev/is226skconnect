@@ -42,6 +42,7 @@ class MemosController extends Controller
             'body' => $request['body'],
             'featureimage'=> $request['featureimage'],
             'url'=> $request['url'],
+            'attachment'=> $request['attachment'],
             'user_id' => auth()->user()->id
         ]);
     }

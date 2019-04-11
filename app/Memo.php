@@ -10,7 +10,7 @@ class Memo extends Model
     use HasApiTokens;
 
     protected $fillable = [
-        'title', 'body', 'user_id', 'featureimage', 'url'
+        'title', 'body', 'user_id', 'featureimage', 'url', 'attachment'
     ];
 
     public function user(){
