@@ -304,8 +304,4 @@
     }
 
 </script>
-<style>
-.ck-content { height:500px; }
-</style>
-
 

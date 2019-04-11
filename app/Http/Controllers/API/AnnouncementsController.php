@@ -5,7 +5,7 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Announcement;
-class AnnouncementController extends Controller
+class AnnouncementsController extends Controller
 {
     public function __construct()
     {

@@ -10,7 +10,7 @@ class Announcement extends Model
     use HasApiTokens;
 
     protected $fillable = [
-        'title', 'body', 'user_id', 'featureimg', 'url'
+        'title', 'body', 'user_id', 'featureimage', 'url'
     ];
 
     public function user(){

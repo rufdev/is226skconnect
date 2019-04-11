@@ -30,9 +30,20 @@ Route::apiResources([
     'post' => 'API\PostsController'
 ]);
 
+Route::apiResources([
+    'memo' => 'API\MemosController'
+]);
+
+Route::apiResources([
+    'announcement' => 'API\AnnouncementsController'
+]);
+
 
 Route::get('profile','API\UserController@profile');
 Route::get('findUser','API\UserController@search');
 Route::put('profile','API\UserController@updateProfile');
 
 Route::get('findRole','API\RolesController@search');
+Route::get('findPost','API\PostsController@search');
+Route::get('findMemo','API\MemosController@search');
+Route::get('findAnnouncement','API\AnnouncementsController@search');

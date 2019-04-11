@@ -2298,54 +2298,98 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       editmode: false,
-      roles: {},
+      announcements: {},
       form: new Form({
         id: '',
-        name: '',
-        code: '',
-        description: ''
+        title: '',
+        body: '',
+        featureimage: ''
       })
     };
   },
   methods: {
+    file_browser_callback: function file_browser_callback(field_name, url, type, win) {
+      var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
+      var y = window.innerHeight || document.documentElement.clientHeight || document.getElementsByTagName('body')[0].clientHeight;
+      var cmsURL = '/laravel-filemanager?field_name=' + field_name;
+
+      if (type == 'image') {
+        cmsURL = cmsURL + "&type=Images";
+      } else {
+        cmsURL = cmsURL + "&type=Files";
+      }
+
+      tinyMCE.activeEditor.windowManager.open({
+        file: cmsURL,
+        title: 'Filemanager',
+        width: x * 0.8,
+        height: y * 0.8,
+        resizable: "yes",
+        close_previous: "no"
+      });
+    },
     getResults: function getResults() {
       var _this = this;
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      axios.get('api/role?page=' + page).then(function (response) {
-        _this.roles = response.data;
+      axios.get('api/announcement?page=' + page).then(function (response) {
+        _this.announcements = response.data;
       });
     },
-    newRole: function newRole() {
+    newAnnouncement: function newAnnouncement() {
       this.editmode = false;
       this.form.reset();
+      $('#lfm').filemanager('image');
     },
-    editRole: function editRole(role) {
+    editAnnouncement: function editAnnouncement(announcement) {
       this.editmode = true;
       this.form.reset();
-      $('#addNewRole').modal('show');
-      this.form.fill(role);
+      $('#addNewAnnouncement').modal('show');
+      this.form.fill(announcement);
+      $('#holder').attr('src', this.form.featureimage);
+      $('#lfm').filemanager('image');
     },
-    loadRoles: function loadRoles() {
+    loadAnnouncement: function loadAnnouncement() {
       var _this2 = this;
 
       if (this.$gate.isAdmin() || this.$gate.isSKAdmin()) {
-        axios.get('api/role').then(function (_ref) {
+        axios.get('api/announcement').then(function (_ref) {
           var data = _ref.data;
-          return _this2.roles = data;
+          return _this2.announcements = data;
         });
       }
     },
-    updateRole: function updateRole() {
+    updateAnnouncement: function updateAnnouncement() {
       var _this3 = this;
 
       this.$Progress.start();
-      this.form.put('api/role/' + this.form.id).then(function () {
-        $('#addNewRole').modal('hide');
+      this.form.featureimage = $('#thumbnail').val();
+      this.form.put('api/announcement/' + this.form.id).then(function () {
+        $('#addNewAnnouncement').modal('hide');
         swal.fire('Updated!', 'Information has been updated.', 'success');
 
         _this3.$Progress.finish();
@@ -2355,7 +2399,7 @@ __webpack_require__.r(__webpack_exports__);
         _this3.$Progress.fail();
       });
     },
-    deleteRole: function deleteRole(id) {
+    deleteAnnouncement: function deleteAnnouncement(id) {
       var _this4 = this;
 
       swal.fire({
@@ -2369,7 +2413,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (result) {
         // Send request to the server
         if (result.value) {
-          _this4.form.delete('api/role/' + id).then(function () {
+          _this4.form.delete('api/announcement/' + id).then(function () {
             swal.fire('Deleted!', 'Your file has been deleted.', 'success');
             Fire.$emit('AfterCreate');
           }).catch(function () {
@@ -2378,16 +2422,17 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
-    createRole: function createRole() {
+    createAnnouncement: function createAnnouncement() {
       var _this5 = this;
 
       this.$Progress.start();
-      this.form.post('api/role').then(function () {
-        $('#addNewRole').modal('hide');
+      this.form.featureimage = $('#thumbnail').val();
+      this.form.post('api/announcement').then(function () {
+        $('#addNewAnnouncement').modal('hide');
         Fire.$emit('AfterCreate');
         toast.fire({
           type: 'success',
-          title: 'Role Created in successfully'
+          title: 'Announcements Created in successfully'
         });
 
         _this5.$Progress.finish();
@@ -2401,13 +2446,13 @@ __webpack_require__.r(__webpack_exports__);
 
     Fire.$on('searching', function () {
       var query = _this6.$parent.search;
-      axios.get('api/findRole?q=' + query).then(function (data) {
-        _this6.roles = data.data;
+      axios.get('api/findAnnouncement?q=' + query).then(function (data) {
+        _this6.announcements = data.data;
       }).catch(function () {});
     });
-    this.loadRoles();
+    this.loadAnnouncement();
     Fire.$on('AfterCreate', function () {
-      _this6.loadRoles();
+      _this6.loadAnnouncement();
     });
   }
 });
@@ -2606,54 +2651,98 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       editmode: false,
-      roles: {},
+      memos: {},
       form: new Form({
         id: '',
-        name: '',
-        code: '',
-        description: ''
+        title: '',
+        body: '',
+        featureimage: ''
       })
     };
   },
   methods: {
+    file_browser_callback: function file_browser_callback(field_name, url, type, win) {
+      var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
+      var y = window.innerHeight || document.documentElement.clientHeight || document.getElementsByTagName('body')[0].clientHeight;
+      var cmsURL = '/laravel-filemanager?field_name=' + field_name;
+
+      if (type == 'image') {
+        cmsURL = cmsURL + "&type=Images";
+      } else {
+        cmsURL = cmsURL + "&type=Files";
+      }
+
+      tinyMCE.activeEditor.windowManager.open({
+        file: cmsURL,
+        title: 'Filemanager',
+        width: x * 0.8,
+        height: y * 0.8,
+        resizable: "yes",
+        close_previous: "no"
+      });
+    },
     getResults: function getResults() {
       var _this = this;
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      axios.get('api/role?page=' + page).then(function (response) {
-        _this.roles = response.data;
+      axios.get('api/memo?page=' + page).then(function (response) {
+        _this.memos = response.data;
       });
     },
-    newRole: function newRole() {
+    newMemo: function newMemo() {
       this.editmode = false;
       this.form.reset();
+      $('#lfm').filemanager('image');
     },
-    editRole: function editRole(role) {
+    editMemo: function editMemo(memo) {
       this.editmode = true;
       this.form.reset();
-      $('#addNewRole').modal('show');
-      this.form.fill(role);
+      $('#addNewMemo').modal('show');
+      this.form.fill(memo);
+      $('#holder').attr('src', this.form.featureimage);
+      $('#lfm').filemanager('image');
     },
-    loadRoles: function loadRoles() {
+    loadMemo: function loadMemo() {
       var _this2 = this;
 
       if (this.$gate.isAdmin() || this.$gate.isSKAdmin()) {
-        axios.get('api/role').then(function (_ref) {
+        axios.get('api/memo').then(function (_ref) {
           var data = _ref.data;
-          return _this2.roles = data;
+          return _this2.memos = data;
         });
       }
     },
-    updateRole: function updateRole() {
+    updateMemo: function updateMemo() {
       var _this3 = this;
 
       this.$Progress.start();
-      this.form.put('api/role/' + this.form.id).then(function () {
-        $('#addNewRole').modal('hide');
+      this.form.featureimage = $('#thumbnail').val();
+      this.form.put('api/memo/' + this.form.id).then(function () {
+        $('#addNewMemo').modal('hide');
         swal.fire('Updated!', 'Information has been updated.', 'success');
 
         _this3.$Progress.finish();
@@ -2663,7 +2752,7 @@ __webpack_require__.r(__webpack_exports__);
         _this3.$Progress.fail();
       });
     },
-    deleteRole: function deleteRole(id) {
+    deleteMemo: function deleteMemo(id) {
       var _this4 = this;
 
       swal.fire({
@@ -2677,7 +2766,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (result) {
         // Send request to the server
         if (result.value) {
-          _this4.form.delete('api/role/' + id).then(function () {
+          _this4.form.delete('api/memo/' + id).then(function () {
             swal.fire('Deleted!', 'Your file has been deleted.', 'success');
             Fire.$emit('AfterCreate');
           }).catch(function () {
@@ -2686,16 +2775,17 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
-    createRole: function createRole() {
+    createMemo: function createMemo() {
       var _this5 = this;
 
       this.$Progress.start();
-      this.form.post('api/role').then(function () {
-        $('#addNewRole').modal('hide');
+      this.form.featureimage = $('#thumbnail').val();
+      this.form.post('api/memo').then(function () {
+        $('#addNewMemo').modal('hide');
         Fire.$emit('AfterCreate');
         toast.fire({
           type: 'success',
-          title: 'Role Created in successfully'
+          title: 'Memo Created in successfully'
         });
 
         _this5.$Progress.finish();
@@ -2709,13 +2799,13 @@ __webpack_require__.r(__webpack_exports__);
 
     Fire.$on('searching', function () {
       var query = _this6.$parent.search;
-      axios.get('api/findRole?q=' + query).then(function (data) {
-        _this6.roles = data.data;
+      axios.get('api/findMemo?q=' + query).then(function (data) {
+        _this6.memos = data.data;
       }).catch(function () {});
     });
-    this.loadRoles();
+    this.loadMemo();
     Fire.$on('AfterCreate', function () {
-      _this6.loadRoles();
+      _this6.loadMemo();
     });
   }
 });
@@ -8948,25 +9038,6 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
 }));
 //# sourceMappingURL=bootstrap.js.map
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Post.vue?vue&type=style&index=0&lang=css&":
-/*!**********************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Post.vue?vue&type=style&index=0&lang=css& ***!
-  \**********************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.ck-content { height:500px;\n}\n", ""]);
-
-// exports
 
 
 /***/ }),
@@ -58601,36 +58672,6 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Post.vue?vue&type=style&index=0&lang=css&":
-/*!**************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Post.vue?vue&type=style&index=0&lang=css& ***!
-  \**************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./Post.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Post.vue?vue&type=style&index=0&lang=css&");
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/passport/AuthorizedClients.vue?vue&type=style&index=0&id=397d14ca&scoped=true&lang=css&":
 /*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/passport/AuthorizedClients.vue?vue&type=style&index=0&id=397d14ca&scoped=true&lang=css& ***!
@@ -63053,7 +63094,9 @@ var render = function() {
           _c("div", { staticClass: "col-12" }, [
             _c("div", { staticClass: "card" }, [
               _c("div", { staticClass: "card-header" }, [
-                _c("h3", { staticClass: "card-title" }, [_vm._v("Roles")]),
+                _c("h3", { staticClass: "card-title" }, [
+                  _vm._v("Announcements")
+                ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "card-tools" }, [
                   _c(
@@ -63062,9 +63105,9 @@ var render = function() {
                       staticClass: "btn btn-success",
                       attrs: {
                         "data-toggle": "modal",
-                        "data-target": "#addNewRole"
+                        "data-target": "#addNewAnnouncement"
                       },
-                      on: { click: _vm.newRole }
+                      on: { click: _vm.newAnnouncement }
                     },
                     [
                       _vm._v("Add New "),
@@ -63081,17 +63124,13 @@ var render = function() {
                     [
                       _vm._m(0),
                       _vm._v(" "),
-                      _vm._l(_vm.roles.data, function(role) {
-                        return _c("tr", { key: role.id }, [
-                          _c("td", [_vm._v(_vm._s(role.id))]),
+                      _vm._l(_vm.announcements.data, function(announcement) {
+                        return _c("tr", { key: announcement.id }, [
+                          _c("td", [_vm._v(_vm._s(announcement.title))]),
                           _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(role.name))]),
+                          _c("td", [_vm._v(_vm._s(announcement.user.name))]),
                           _vm._v(" "),
-                          _c("td", [
-                            _vm._v(_vm._s(_vm._f("upText")(role.code)))
-                          ]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(role.description))]),
+                          _c("td", [_vm._v(_vm._s(announcement.created_at))]),
                           _vm._v(" "),
                           _c("td", [
                             _c(
@@ -63100,7 +63139,7 @@ var render = function() {
                                 attrs: { href: "#" },
                                 on: {
                                   click: function($event) {
-                                    return _vm.editRole(role)
+                                    return _vm.editAnnouncement(announcement)
                                   }
                                 }
                               },
@@ -63113,7 +63152,9 @@ var render = function() {
                                 attrs: { href: "#" },
                                 on: {
                                   click: function($event) {
-                                    return _vm.deleteRole(role.id)
+                                    return _vm.deleteAnnouncement(
+                                      announcement.id
+                                    )
                                   }
                                 }
                               },
@@ -63137,7 +63178,7 @@ var render = function() {
                 { staticClass: "card-footer" },
                 [
                   _c("pagination", {
-                    attrs: { data: _vm.roles },
+                    attrs: { data: _vm.announcements },
                     on: { "pagination-change-page": _vm.getResults }
                   })
                 ],
@@ -63157,10 +63198,10 @@ var render = function() {
       {
         staticClass: "modal fade",
         attrs: {
-          id: "addNewRole",
+          id: "addNewAnnouncement",
           tabindex: "-1",
           role: "dialog",
-          "aria-labelledby": "addNewRoleLabel",
+          "aria-labelledby": "addNewAnnouncementLabel",
           "aria-hidden": "true"
         }
       },
@@ -63168,7 +63209,7 @@ var render = function() {
         _c(
           "div",
           {
-            staticClass: "modal-dialog modal-dialog-centered",
+            staticClass: "modal-dialog modal-dialog-centered modal-lg",
             attrs: { role: "document" }
           },
           [
@@ -63186,9 +63227,9 @@ var render = function() {
                       }
                     ],
                     staticClass: "modal-title",
-                    attrs: { id: "addNewRoleLabel" }
+                    attrs: { id: "addNewAnnouncementLabel" }
                   },
-                  [_vm._v("New Role")]
+                  [_vm._v("New Announcement")]
                 ),
                 _vm._v(" "),
                 _c(
@@ -63203,9 +63244,9 @@ var render = function() {
                       }
                     ],
                     staticClass: "modal-title",
-                    attrs: { id: "addNewRoleLabel" }
+                    attrs: { id: "addNewAnnouncementLabel" }
                   },
-                  [_vm._v("Update Role")]
+                  [_vm._v("Update Announcement")]
                 ),
                 _vm._v(" "),
                 _vm._m(1)
@@ -63217,7 +63258,9 @@ var render = function() {
                   on: {
                     submit: function($event) {
                       $event.preventDefault()
-                      _vm.editmode ? _vm.updateRole() : _vm.createRole()
+                      _vm.editmode
+                        ? _vm.updateAnnouncement()
+                        : _vm.createAnnouncement()
                     }
                   }
                 },
@@ -63232,30 +63275,30 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.form.name,
-                              expression: "form.name"
+                              value: _vm.form.title,
+                              expression: "form.title"
                             }
                           ],
                           staticClass: "form-control",
-                          class: { "is-invalid": _vm.form.errors.has("name") },
+                          class: { "is-invalid": _vm.form.errors.has("title") },
                           attrs: {
                             type: "text",
-                            name: "name",
-                            placeholder: "Name"
+                            name: "title",
+                            placeholder: "Title"
                           },
-                          domProps: { value: _vm.form.name },
+                          domProps: { value: _vm.form.title },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
                                 return
                               }
-                              _vm.$set(_vm.form, "name", $event.target.value)
+                              _vm.$set(_vm.form, "title", $event.target.value)
                             }
                           }
                         }),
                         _vm._v(" "),
                         _c("has-error", {
-                          attrs: { form: _vm.form, field: "name" }
+                          attrs: { form: _vm.form, field: "title" }
                         })
                       ],
                       1
@@ -63265,63 +63308,64 @@ var render = function() {
                       "div",
                       { staticClass: "form-group" },
                       [
+                        _c("editor", {
+                          staticClass: "form-control",
+                          class: { "is-invalid": _vm.form.errors.has("body") },
+                          attrs: {
+                            name: "body",
+                            init: {
+                              path_absolute: "",
+                              selector: "editor[name=body]",
+                              plugins: [
+                                "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+                                "searchreplace wordcount visualblocks visualchars code fullscreen",
+                                "insertdatetime media nonbreaking save table contextmenu directionality",
+                                "emoticons template paste textcolor colorpicker textpattern"
+                              ],
+                              toolbar:
+                                "createAnnouncementsinsertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media",
+                              relative_urls: false,
+                              height: 400,
+                              file_browser_callback: _vm.file_browser_callback
+                            }
+                          },
+                          model: {
+                            value: _vm.form.body,
+                            callback: function($$v) {
+                              _vm.$set(_vm.form, "body", $$v)
+                            },
+                            expression: "form.body"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("has-error", {
+                          attrs: { form: _vm.form, field: "body" }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("div", { staticClass: "input-group" }, [
+                        _vm._m(2),
+                        _vm._v(" "),
                         _c("input", {
                           directives: [
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.form.code,
-                              expression: "form.code"
+                              value: _vm.form.featureimage,
+                              expression: "form.featureimage"
                             }
                           ],
                           staticClass: "form-control",
-                          class: { "is-invalid": _vm.form.errors.has("code") },
                           attrs: {
+                            placeholder: "Feature Image",
+                            id: "thumbnail",
                             type: "text",
-                            name: "code",
-                            placeholder: "Code"
+                            name: "filepath"
                           },
-                          domProps: { value: _vm.form.code },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(_vm.form, "code", $event.target.value)
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("has-error", {
-                          attrs: { form: _vm.form, field: "code" }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "form-group" },
-                      [
-                        _c("textarea", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.form.description,
-                              expression: "form.description"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          class: {
-                            "is-invalid": _vm.form.errors.has("description")
-                          },
-                          attrs: {
-                            name: "description",
-                            id: "description",
-                            placeholder: "Short description for role (Optional)"
-                          },
-                          domProps: { value: _vm.form.description },
+                          domProps: { value: _vm.form.featureimage },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
@@ -63329,19 +63373,22 @@ var render = function() {
                               }
                               _vm.$set(
                                 _vm.form,
-                                "description",
+                                "featureimage",
                                 $event.target.value
                               )
                             }
                           }
-                        }),
-                        _vm._v(" "),
-                        _c("has-error", {
-                          attrs: { form: _vm.form, field: "description" }
                         })
-                      ],
-                      1
-                    )
+                      ]),
+                      _vm._v(" "),
+                      _c("img", {
+                        staticStyle: {
+                          "margin-top": "15px",
+                          "max-height": "100px"
+                        },
+                        attrs: { id: "holder", src: "img/logo.png" }
+                      })
+                    ])
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "modal-footer" }, [
@@ -63403,13 +63450,11 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("tr", [
-      _c("th", [_vm._v("ID")]),
+      _c("th", [_vm._v("Title")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Name")]),
+      _c("th", [_vm._v("Created by")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Code")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Description")]),
+      _c("th", [_vm._v("Date Created")]),
       _vm._v(" "),
       _c("th", [_vm._v("Modify")])
     ])
@@ -63430,6 +63475,28 @@ var staticRenderFns = [
       },
       [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "input-group-btn" }, [
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-primary",
+          attrs: {
+            id: "lfm",
+            "data-input": "thumbnail",
+            "data-preview": "holder"
+          }
+        },
+        [
+          _c("i", { staticClass: "fas fa-images" }),
+          _vm._v(" Choose\n                            ")
+        ]
+      )
+    ])
   }
 ]
 render._withStripped = true
@@ -63576,7 +63643,7 @@ var render = function() {
           _c("div", { staticClass: "col-12" }, [
             _c("div", { staticClass: "card" }, [
               _c("div", { staticClass: "card-header" }, [
-                _c("h3", { staticClass: "card-title" }, [_vm._v("Roles")]),
+                _c("h3", { staticClass: "card-title" }, [_vm._v("Memos")]),
                 _vm._v(" "),
                 _c("div", { staticClass: "card-tools" }, [
                   _c(
@@ -63585,9 +63652,9 @@ var render = function() {
                       staticClass: "btn btn-success",
                       attrs: {
                         "data-toggle": "modal",
-                        "data-target": "#addNewRole"
+                        "data-target": "#addNewMemo"
                       },
-                      on: { click: _vm.newRole }
+                      on: { click: _vm.newMemo }
                     },
                     [
                       _vm._v("Add New "),
@@ -63604,17 +63671,13 @@ var render = function() {
                     [
                       _vm._m(0),
                       _vm._v(" "),
-                      _vm._l(_vm.roles.data, function(role) {
-                        return _c("tr", { key: role.id }, [
-                          _c("td", [_vm._v(_vm._s(role.id))]),
+                      _vm._l(_vm.memos.data, function(memo) {
+                        return _c("tr", { key: memo.id }, [
+                          _c("td", [_vm._v(_vm._s(memo.title))]),
                           _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(role.name))]),
+                          _c("td", [_vm._v(_vm._s(memo.user.name))]),
                           _vm._v(" "),
-                          _c("td", [
-                            _vm._v(_vm._s(_vm._f("upText")(role.code)))
-                          ]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(role.description))]),
+                          _c("td", [_vm._v(_vm._s(memo.created_at))]),
                           _vm._v(" "),
                           _c("td", [
                             _c(
@@ -63623,7 +63686,7 @@ var render = function() {
                                 attrs: { href: "#" },
                                 on: {
                                   click: function($event) {
-                                    return _vm.editRole(role)
+                                    return _vm.editMemo(memo)
                                   }
                                 }
                               },
@@ -63636,7 +63699,7 @@ var render = function() {
                                 attrs: { href: "#" },
                                 on: {
                                   click: function($event) {
-                                    return _vm.deleteRole(role.id)
+                                    return _vm.deleteMemo(memo.id)
                                   }
                                 }
                               },
@@ -63660,7 +63723,7 @@ var render = function() {
                 { staticClass: "card-footer" },
                 [
                   _c("pagination", {
-                    attrs: { data: _vm.roles },
+                    attrs: { data: _vm.memos },
                     on: { "pagination-change-page": _vm.getResults }
                   })
                 ],
@@ -63680,10 +63743,10 @@ var render = function() {
       {
         staticClass: "modal fade",
         attrs: {
-          id: "addNewRole",
+          id: "addNewMemo",
           tabindex: "-1",
           role: "dialog",
-          "aria-labelledby": "addNewRoleLabel",
+          "aria-labelledby": "addNewMemoLabel",
           "aria-hidden": "true"
         }
       },
@@ -63691,7 +63754,7 @@ var render = function() {
         _c(
           "div",
           {
-            staticClass: "modal-dialog modal-dialog-centered",
+            staticClass: "modal-dialog modal-dialog-centered modal-lg",
             attrs: { role: "document" }
           },
           [
@@ -63709,9 +63772,9 @@ var render = function() {
                       }
                     ],
                     staticClass: "modal-title",
-                    attrs: { id: "addNewRoleLabel" }
+                    attrs: { id: "addNewMemoLabel" }
                   },
-                  [_vm._v("New Role")]
+                  [_vm._v("New Memo")]
                 ),
                 _vm._v(" "),
                 _c(
@@ -63726,9 +63789,9 @@ var render = function() {
                       }
                     ],
                     staticClass: "modal-title",
-                    attrs: { id: "addNewRoleLabel" }
+                    attrs: { id: "addNewMemoLabel" }
                   },
-                  [_vm._v("Update Role")]
+                  [_vm._v("Update Memo")]
                 ),
                 _vm._v(" "),
                 _vm._m(1)
@@ -63740,7 +63803,7 @@ var render = function() {
                   on: {
                     submit: function($event) {
                       $event.preventDefault()
-                      _vm.editmode ? _vm.updateRole() : _vm.createRole()
+                      _vm.editmode ? _vm.updateMemo() : _vm.createMemo()
                     }
                   }
                 },
@@ -63755,30 +63818,30 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.form.name,
-                              expression: "form.name"
+                              value: _vm.form.title,
+                              expression: "form.title"
                             }
                           ],
                           staticClass: "form-control",
-                          class: { "is-invalid": _vm.form.errors.has("name") },
+                          class: { "is-invalid": _vm.form.errors.has("title") },
                           attrs: {
                             type: "text",
-                            name: "name",
-                            placeholder: "Name"
+                            name: "title",
+                            placeholder: "Title"
                           },
-                          domProps: { value: _vm.form.name },
+                          domProps: { value: _vm.form.title },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
                                 return
                               }
-                              _vm.$set(_vm.form, "name", $event.target.value)
+                              _vm.$set(_vm.form, "title", $event.target.value)
                             }
                           }
                         }),
                         _vm._v(" "),
                         _c("has-error", {
-                          attrs: { form: _vm.form, field: "name" }
+                          attrs: { form: _vm.form, field: "title" }
                         })
                       ],
                       1
@@ -63788,63 +63851,64 @@ var render = function() {
                       "div",
                       { staticClass: "form-group" },
                       [
+                        _c("editor", {
+                          staticClass: "form-control",
+                          class: { "is-invalid": _vm.form.errors.has("body") },
+                          attrs: {
+                            name: "body",
+                            init: {
+                              path_absolute: "",
+                              selector: "editor[name=body]",
+                              plugins: [
+                                "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+                                "searchreplace wordcount visualblocks visualchars code fullscreen",
+                                "insertdatetime media nonbreaking save table contextmenu directionality",
+                                "emoticons template paste textcolor colorpicker textpattern"
+                              ],
+                              toolbar:
+                                "createMemoinsertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media",
+                              relative_urls: false,
+                              height: 400,
+                              file_browser_callback: _vm.file_browser_callback
+                            }
+                          },
+                          model: {
+                            value: _vm.form.body,
+                            callback: function($$v) {
+                              _vm.$set(_vm.form, "body", $$v)
+                            },
+                            expression: "form.body"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("has-error", {
+                          attrs: { form: _vm.form, field: "body" }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("div", { staticClass: "input-group" }, [
+                        _vm._m(2),
+                        _vm._v(" "),
                         _c("input", {
                           directives: [
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.form.code,
-                              expression: "form.code"
+                              value: _vm.form.featureimage,
+                              expression: "form.featureimage"
                             }
                           ],
                           staticClass: "form-control",
-                          class: { "is-invalid": _vm.form.errors.has("code") },
                           attrs: {
+                            placeholder: "Feature Image",
+                            id: "thumbnail",
                             type: "text",
-                            name: "code",
-                            placeholder: "Code"
+                            name: "filepath"
                           },
-                          domProps: { value: _vm.form.code },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(_vm.form, "code", $event.target.value)
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("has-error", {
-                          attrs: { form: _vm.form, field: "code" }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "form-group" },
-                      [
-                        _c("textarea", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.form.description,
-                              expression: "form.description"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          class: {
-                            "is-invalid": _vm.form.errors.has("description")
-                          },
-                          attrs: {
-                            name: "description",
-                            id: "description",
-                            placeholder: "Short description for role (Optional)"
-                          },
-                          domProps: { value: _vm.form.description },
+                          domProps: { value: _vm.form.featureimage },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
@@ -63852,19 +63916,22 @@ var render = function() {
                               }
                               _vm.$set(
                                 _vm.form,
-                                "description",
+                                "featureimage",
                                 $event.target.value
                               )
                             }
                           }
-                        }),
-                        _vm._v(" "),
-                        _c("has-error", {
-                          attrs: { form: _vm.form, field: "description" }
                         })
-                      ],
-                      1
-                    )
+                      ]),
+                      _vm._v(" "),
+                      _c("img", {
+                        staticStyle: {
+                          "margin-top": "15px",
+                          "max-height": "100px"
+                        },
+                        attrs: { id: "holder", src: "img/logo.png" }
+                      })
+                    ])
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "modal-footer" }, [
@@ -63926,13 +63993,11 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("tr", [
-      _c("th", [_vm._v("ID")]),
+      _c("th", [_vm._v("Title")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Name")]),
+      _c("th", [_vm._v("Created by")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Code")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Description")]),
+      _c("th", [_vm._v("Date Created")]),
       _vm._v(" "),
       _c("th", [_vm._v("Modify")])
     ])
@@ -63953,6 +64018,28 @@ var staticRenderFns = [
       },
       [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "input-group-btn" }, [
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-primary",
+          attrs: {
+            id: "lfm",
+            "data-input": "thumbnail",
+            "data-preview": "holder"
+          }
+        },
+        [
+          _c("i", { staticClass: "fas fa-images" }),
+          _vm._v(" Choose\n                            ")
+        ]
+      )
+    ])
   }
 ]
 render._withStripped = true
@@ -82587,9 +82674,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Post_vue_vue_type_template_id_5e8280ea___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Post.vue?vue&type=template&id=5e8280ea& */ "./resources/js/components/Post.vue?vue&type=template&id=5e8280ea&");
 /* harmony import */ var _Post_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Post.vue?vue&type=script&lang=js& */ "./resources/js/components/Post.vue?vue&type=script&lang=js&");
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Post_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Post_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _Post_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Post.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/Post.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -82597,7 +82682,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _Post_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _Post_vue_vue_type_template_id_5e8280ea___WEBPACK_IMPORTED_MODULE_0__["render"],
   _Post_vue_vue_type_template_id_5e8280ea___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -82626,22 +82711,6 @@ component.options.__file = "resources/js/components/Post.vue"
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Post_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Post.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Post.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Post_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/Post.vue?vue&type=style&index=0&lang=css&":
-/*!***************************************************************************!*\
-  !*** ./resources/js/components/Post.vue?vue&type=style&index=0&lang=css& ***!
-  \***************************************************************************/
-/*! no static exports found */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Post_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./Post.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Post.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Post_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Post_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Post_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Post_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Post_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
