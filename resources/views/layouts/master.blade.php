@@ -390,17 +390,27 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </div>
         <!-- ./wrapper -->
         <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+        {{-- <script src="../vendor/laravel-filemanager/js/stand-alone-button.js"></script> --}}
+
         @auth
         <script>
             window.user = @json(auth()->user());
             let route_prefix = '/laravel-filemanager';
             window.tinymce = tinymce;
+            // var lfm = function(options, cb) {
+            //     var route_prefix = (options && options.prefix) ? options.prefix : '/laravel-filemanager';
+            //     window.open(route_prefix + '?type=' + options.type || 'file', 'FileManager', 'width=900,height=600');
+            //     window.SetUrl = cb;
+            // }
         </script>
         @endauth
 
     </body>
     <script src="/js/app.js"></script>
-
+    {{-- <script>
+            {!! \File::get(base_path('vendor/unisharp/laravel-filemanager/public/js/lfm.js')) !!}
+    </script> --}}
+    {{-- <script>$('#lfm').filemanager('image');</script> --}}
     <!-- TinyMCE init -->
     {{-- <script src="//cdn.tinymce.com/4/tinymce.min.js"></script> --}}
     {{-- <script>

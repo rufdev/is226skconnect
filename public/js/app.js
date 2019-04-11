@@ -2865,6 +2865,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2882,11 +2910,24 @@ __webpack_require__.r(__webpack_exports__);
       form: new Form({
         id: '',
         title: '',
-        body: ''
+        body: '',
+        featureimage: ''
       })
     };
   },
   methods: {
+    // openFileManager () {
+    //     // lfm({type: 'image', prefix: '/laravel-filemanager'}, function(lfmItems, path) {
+    //     //     lfmItems.forEach(function (lfmItem) {
+    //     //         console.log(lfmItem.url)
+    //     //         // context.invoke('insertImage', lfmItem.url);
+    //     //     });
+    //     // });
+    //     // return false;
+    //     // lfm({type: 'image', prefix: '/laravel-filemanager'}, function(url, path) {
+    //     //     context.invoke('insertImage', url);
+    //     // });
+    // },
     file_browser_callback: function file_browser_callback(field_name, url, type, win) {
       var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
       var y = window.innerHeight || document.documentElement.clientHeight || document.getElementsByTagName('body')[0].clientHeight;
@@ -2918,12 +2959,15 @@ __webpack_require__.r(__webpack_exports__);
     newPost: function newPost() {
       this.editmode = false;
       this.form.reset();
+      $('#lfm').filemanager('image');
     },
     editPost: function editPost(post) {
       this.editmode = true;
       this.form.reset();
       $('#addNewPost').modal('show');
       this.form.fill(post);
+      $('#holder').attr('src', this.form.featureimage);
+      $('#lfm').filemanager('image');
     },
     loadPost: function loadPost() {
       var _this2 = this;
@@ -2939,6 +2983,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       this.$Progress.start();
+      this.form.featureimage = $('#thumbnail').val();
       this.form.put('api/post/' + this.form.id).then(function () {
         $('#addNewPost').modal('hide');
         swal.fire('Updated!', 'Information has been updated.', 'success');
@@ -2977,6 +3022,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this5 = this;
 
       this.$Progress.start();
+      this.form.featureimage = $('#thumbnail').val();
       this.form.post('api/post').then(function () {
         $('#addNewPost').modal('hide');
         Fire.$emit('AfterCreate');
@@ -3004,33 +3050,6 @@ __webpack_require__.r(__webpack_exports__);
     Fire.$on('AfterCreate', function () {
       _this6.loadPost();
     });
-    var editor_config = {
-      path_absolute: '',
-      selector: 'editor[name=body]',
-      plugins: ['link image'],
-      relative_urls: false,
-      height: 129,
-      file_browser_callback: function file_browser_callback(field_name, url, type, win) {
-        var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
-        var y = window.innerHeight || document.documentElement.clientHeight || document.getElementsByTagName('body')[0].clientHeight;
-        var cmsURL = editor_config.path_absolute + route_prefix + '?field_name=' + field_name;
-
-        if (type == 'image') {
-          cmsURL = cmsURL + '&type=Images';
-        } else {
-          cmsURL = cmsURL + '&type=Files';
-        }
-
-        tinyMCE.activeEditor.windowManager.open({
-          file: cmsURL,
-          title: 'Filemanager',
-          width: x * 0.8,
-          height: y * 0.8,
-          resizable: 'yes',
-          close_previous: 'no'
-        });
-      }
-    }; // tinymce.init(editor_config);
   }
 });
 
@@ -64498,7 +64517,14 @@ var render = function() {
                             init: {
                               path_absolute: "",
                               selector: "editor[name=body]",
-                              plugins: ["link image"],
+                              plugins: [
+                                "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+                                "searchreplace wordcount visualblocks visualchars code fullscreen",
+                                "insertdatetime media nonbreaking save table contextmenu directionality",
+                                "emoticons template paste textcolor colorpicker textpattern"
+                              ],
+                              toolbar:
+                                "createPostinsertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media",
                               relative_urls: false,
                               height: 400,
                               file_browser_callback: _vm.file_browser_callback
@@ -64518,7 +64544,52 @@ var render = function() {
                         })
                       ],
                       1
-                    )
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("div", { staticClass: "input-group" }, [
+                        _vm._m(2),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.featureimage,
+                              expression: "form.featureimage"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            placeholder: "Feature Image",
+                            id: "thumbnail",
+                            type: "text",
+                            name: "filepath"
+                          },
+                          domProps: { value: _vm.form.featureimage },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.form,
+                                "featureimage",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("img", {
+                        staticStyle: {
+                          "margin-top": "15px",
+                          "max-height": "100px"
+                        },
+                        attrs: { id: "holder", src: "img/logo.png" }
+                      })
+                    ])
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "modal-footer" }, [
@@ -64605,6 +64676,28 @@ var staticRenderFns = [
       },
       [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "input-group-btn" }, [
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-primary",
+          attrs: {
+            id: "lfm",
+            "data-input": "thumbnail",
+            "data-preview": "holder"
+          }
+        },
+        [
+          _c("i", { staticClass: "fas fa-images" }),
+          _vm._v(" Choose\n                            ")
+        ]
+      )
+    ])
   }
 ]
 render._withStripped = true
@@ -82023,6 +82116,8 @@ try {
   __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
 
   __webpack_require__(/*! admin-lte */ "./node_modules/admin-lte/dist/js/adminlte.min.js");
+
+  __webpack_require__(/*! ../../vendor/unisharp/laravel-filemanager/public/js/lfm */ "./vendor/unisharp/laravel-filemanager/public/js/lfm.js");
 } catch (e) {}
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -83044,6 +83139,38 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./vendor/unisharp/laravel-filemanager/public/js/lfm.js":
+/*!**************************************************************!*\
+  !*** ./vendor/unisharp/laravel-filemanager/public/js/lfm.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function ($) {
+  $.fn.filemanager = function (type, options) {
+    type = type || 'file';
+    this.on('click', function (e) {
+      var route_prefix = options && options.prefix ? options.prefix : '/laravel-filemanager';
+      localStorage.setItem('target_input', $(this).data('input'));
+      localStorage.setItem('target_preview', $(this).data('preview'));
+      window.open(route_prefix + '?type=' + type, 'FileManager', 'width=900,height=600');
+
+      window.SetUrl = function (url, file_path) {
+        //set the value of the desired input to image url
+        var target_input = $('#' + localStorage.getItem('target_input'));
+        target_input.val(file_path).trigger('change'); //set or change the preview image src
+
+        var target_preview = $('#' + localStorage.getItem('target_preview'));
+        target_preview.attr('src', url).trigger('change');
+      };
+
+      return false;
+    });
+  };
+})(jQuery);
 
 /***/ }),
 

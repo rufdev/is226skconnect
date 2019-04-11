@@ -81,8 +81,12 @@
                             path_absolute : '',
                             selector: 'editor[name=body]',
                             plugins: [
-                                'link image'
+                                'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+                                'searchreplace wordcount visualblocks visualchars code fullscreen',
+                                'insertdatetime media nonbreaking save table contextmenu directionality',
+                                'emoticons template paste textcolor colorpicker textpattern'
                             ],
+                            toolbar: 'createPostinsertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media',
                             relative_urls: false,
                             height: 400,
                             file_browser_callback : file_browser_callback
@@ -90,6 +94,30 @@
                         </editor>
 
                         <has-error :form="form" field="body"></has-error>
+                    </div>
+                    <div class="form-group">
+                        <!-- <div class="input-group">
+                        <span class="input-group-btn">
+                            <a id="lfm" data-input="featureimage" data-preview="holder" class="btn btn-primary">
+                            <i class="fas fa-images"></i> Choose
+                            </a>
+                        </span>
+                       <input type="text" class="form-control" v-model="form.featureimage">
+                        </div>
+                        <img class="mt-3" :src="form.featureimage" /> -->
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
+                                <i class="fas fa-images"></i> Choose
+                                </a>
+                            </span>
+                            <input v-model="form.featureimage"
+                                placeholder="Feature Image"
+                                class="form-control"
+                                id="thumbnail"
+                                type="text" name="filepath" >
+                        </div>
+                        <img id="holder" style="margin-top:15px;max-height:100px;" src="img/logo.png">
                     </div>
 
                 </div>
@@ -126,11 +154,24 @@
                     id:'',
                     title : '',
                     body : '',
+                    featureimage : '',
                 })
 
             }
         },
         methods:{
+            // openFileManager () {
+            //     // lfm({type: 'image', prefix: '/laravel-filemanager'}, function(lfmItems, path) {
+            //     //     lfmItems.forEach(function (lfmItem) {
+            //     //         console.log(lfmItem.url)
+            //     //         // context.invoke('insertImage', lfmItem.url);
+            //     //     });
+            //     // });
+            //     // return false;
+            //     // lfm({type: 'image', prefix: '/laravel-filemanager'}, function(url, path) {
+            //     //     context.invoke('insertImage', url);
+            //     // });
+            // },
             file_browser_callback(field_name, url, type, win) {
                 var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
                 var y = window.innerHeight|| document.documentElement.clientHeight|| document.getElementsByTagName('body')[0].clientHeight;
@@ -150,6 +191,8 @@
                     resizable : "yes",
                     close_previous : "no"
                 });
+
+
             },
             getResults(page = 1) {
                 axios.get('api/post?page=' + page)
@@ -160,12 +203,16 @@
             newPost(){
                 this.editmode = false;
                 this.form.reset();
+                $('#lfm').filemanager('image');
             },
             editPost(post){
+
                 this.editmode = true;
                 this.form.reset();
                 $('#addNewPost').modal('show');
                 this.form.fill(post);
+                 $('#holder').attr('src',this.form.featureimage);
+                $('#lfm').filemanager('image');
 
             },
             loadPost(){
@@ -176,6 +223,7 @@
             },
             updatePost(){
                 this.$Progress.start();
+                this.form.featureimage =  $('#thumbnail').val();
                 this.form.put('api/post/'+this.form.id)
                 .then(() => {
                     $('#addNewPost').modal('hide');
@@ -219,6 +267,7 @@
             },
             createPost(){
                 this.$Progress.start();
+                this.form.featureimage =  $('#thumbnail').val();
                 this.form.post('api/post')
                 .then(()=>{
                     $('#addNewPost').modal('hide');
@@ -250,37 +299,7 @@
             Fire.$on('AfterCreate',() => {
                 this.loadPost();
             });
-            var editor_config = {
-                path_absolute : '',
-                selector: 'editor[name=body]',
-                plugins: [
-                    'link image'
-                ],
-                relative_urls: false,
-                height: 129,
-                file_browser_callback : function(field_name, url, type, win) {
-                    var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
-                    var y = window.innerHeight|| document.documentElement.clientHeight|| document.getElementsByTagName('body')[0].clientHeight;
 
-                    var cmsURL = editor_config.path_absolute + route_prefix + '?field_name=' + field_name;
-                    if (type == 'image') {
-                    cmsURL = cmsURL + '&type=Images';
-                    } else {
-                    cmsURL = cmsURL + '&type=Files';
-                    }
-
-                    tinyMCE.activeEditor.windowManager.open({
-                    file : cmsURL,
-                    title : 'Filemanager',
-                    width : x * 0.8,
-                    height : y * 0.8,
-                    resizable : 'yes',
-                    close_previous : 'no'
-                    });
-                }
-                };
-
-            // tinymce.init(editor_config);
         }
     }
 

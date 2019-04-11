@@ -19,6 +19,7 @@ try {
 
     require('bootstrap');
     require('admin-lte');
+    require('../../vendor/unisharp/laravel-filemanager/public/js/lfm');
 
 } catch (e) {}
 
