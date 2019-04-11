@@ -60,7 +60,8 @@
       <script src="{{ URL::asset('js/countdown.js') }}"></script>
       <script src="{{ URL::asset('js/collapse.js') }}"></script>
       <script src="{{ URL::asset('js/moment.js') }}"></script>
-      <script src="{{ URL::asset('jsjs/main.js') }}"></script>
+      <script src="{{ URL::asset('js/main.js') }}"></script>
       <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2&appId=1554820474822918&autoLogAppEvents=1"></script>
+
    </body>
 </html>

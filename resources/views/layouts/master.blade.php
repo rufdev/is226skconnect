@@ -11,6 +11,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>SK Connect</title>
         <link rel="stylesheet" href="/css/app.css" />
+
     </head>
     <body class="hold-transition sidebar-mini">
         <div class="wrapper" id="app">
@@ -389,12 +390,52 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </footer>
         </div>
         <!-- ./wrapper -->
+        <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
         @auth
         <script>
             window.user = @json(auth()->user());
+            let route_prefix = '/laravel-filemanager';
+            window.tinymce = tinymce;
         </script>
         @endauth
 
-        <script src="/js/app.js"></script>
     </body>
-</html>
+    <script src="/js/app.js"></script>
+
+    <!-- TinyMCE init -->
+    {{-- <script src="//cdn.tinymce.com/4/tinymce.min.js"></script> --}}
+    {{-- <script>
+        var editor_config = {
+        path_absolute : "",
+        selector: "textarea[name=tm]",
+        plugins: [
+            "link image"
+        ],
+        relative_urls: false,
+        height: 129,
+        file_browser_callback : function(field_name, url, type, win) {
+            var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
+            var y = window.innerHeight|| document.documentElement.clientHeight|| document.getElementsByTagName('body')[0].clientHeight;
+
+            var cmsURL = editor_config.path_absolute + route_prefix + '?field_name=' + field_name;
+            if (type == 'image') {
+            cmsURL = cmsURL + "&type=Images";
+            } else {
+            cmsURL = cmsURL + "&type=Files";
+            }
+
+            tinyMCE.activeEditor.windowManager.open({
+            file : cmsURL,
+            title : 'Filemanager',
+            width : x * 0.8,
+            height : y * 0.8,
+            resizable : "yes",
+            close_previous : "no"
+            });
+        }
+        };
+
+        tinymce.init(editor_config);
+    </script>
+
+</html> --}}

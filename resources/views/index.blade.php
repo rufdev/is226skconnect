@@ -108,6 +108,7 @@
                            </section>
                         </div>
                     </div>
+
                     @include('layouts.sidebar')
 
 @endsection

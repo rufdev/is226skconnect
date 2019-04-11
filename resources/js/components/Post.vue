@@ -1,6 +1,3 @@
-@include('ckfinder::setup');
-<script type="text/javascript" src="/js/ckfinder/ckfinder.js"></script>
-<script>CKFinder.config( { connectorPath: '/ckfinder/connector' } );</script>
 <template>
     <div class="container">
        <div class="row mt-3" v-if="$gate.isAdmin() || $gate.isSKAdmin()">
@@ -51,7 +48,7 @@
         </div>
         <!-- Modal -->
         <div class="modal fade" id="addNewPost" tabindex="-1" role="dialog" aria-labelledby="addNewPostLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
                 <div class="modal-header">
                     <h5 v-show="!editmode" class="modal-title" id="addNewPostLabel">New Post</h5>
@@ -68,7 +65,32 @@
                             class="form-control" :class="{ 'is-invalid': form.errors.has('title') }">
                         <has-error :form="form" field="title"></has-error>
                     </div>
-                    <ckeditor :editor="editor" v-model="form.body" :config="editorConfig"></ckeditor>
+                    <div class="form-group">
+                        <!-- <textarea v-model="form.body" name="body" id="article-editor"
+                        class="form-control" :class="{ 'is-invalid': form.errors.has('body') }"></textarea> -->
+                        <!-- <ckeditor :editor="editor" v-model="form.body" :config="editorConfig"></ckeditor> -->
+                       <!-- <editor v-model="form.body" class="form-control" :class="{ 'is-invalid': form.errors.has('body') }" :init="{path_absolute : '',
+                        plugins: [
+                            'link image'
+                        ],
+                        relative_urls: false,
+                        height: 129, file_browser_callback: file_browser_callback()}"></editor> -->
+                       <!-- <textarea v-model="form.body" name="body" class="form-control" :class="{ 'is-invalid': form.errors.has('body') } "></textarea> -->
+                        <!-- <textarea id="my-editor" name="content" v-model="form.body"  class="form-control my-editor" :class="{ 'is-invalid': form.errors.has('body') }"></textarea> -->
+                        <editor v-model="form.body" class="form-control" :class="{ 'is-invalid': form.errors.has('body') }" name="body" :init="{
+                            path_absolute : '',
+                            selector: 'editor[name=body]',
+                            plugins: [
+                                'link image'
+                            ],
+                            relative_urls: false,
+                            height: 400,
+                            file_browser_callback : file_browser_callback
+                        }" >
+                        </editor>
+
+                        <has-error :form="form" field="body"></has-error>
+                    </div>
 
                 </div>
                 <div class="modal-footer">
@@ -83,29 +105,52 @@
     </div>
 </template>
 
+
 <script>
+
     export default {
         data() {
             return {
-                editor: ClassicEditor,
-                editorConfig: {
-                    // plugins: [ CKFinder],
-                    // toolbar: [ 'ckfinder'],
-                    ckfinder:{
-                        uploadUrl: '/ckfinder/connector?command=QuickUpload&type=Files&responseType=json'
-                    }
-                },
+                // editor: ClassicEditor,
+                // editorConfig: {
+                //     // plugins: [ CKFinder],
+                //     // toolbar: [ 'ckfinder'],
+                //     ckfinder:{
+                //         // uploadUrl: '/laravel-filemanager/upload?command=QuickUpload&type=Files&responseType=json'
+                //         uploadUrl: '/laravel-filemanager/upload?type=Images&_token=' + $('meta[name="csrf-token"]').attr('content')
+                //     }
+                // },
                 editmode : false,
                 posts : {},
                 form: new Form({
                     id:'',
                     title : '',
-                    body : '<p>Write your content here.</p>',
+                    body : '',
                 })
 
             }
         },
         methods:{
+            file_browser_callback(field_name, url, type, win) {
+                var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
+                var y = window.innerHeight|| document.documentElement.clientHeight|| document.getElementsByTagName('body')[0].clientHeight;
+
+                var cmsURL = '/laravel-filemanager?field_name=' + field_name;
+                if (type == 'image') {
+                cmsURL = cmsURL + "&type=Images";
+                } else {
+                cmsURL = cmsURL + "&type=Files";
+                }
+
+                tinyMCE.activeEditor.windowManager.open({
+                    file : cmsURL,
+                    title : 'Filemanager',
+                    width : x * 0.8,
+                    height : y * 0.8,
+                    resizable : "yes",
+                    close_previous : "no"
+                });
+            },
             getResults(page = 1) {
                 axios.get('api/post?page=' + page)
                 .then(response => {
@@ -121,6 +166,7 @@
                 this.form.reset();
                 $('#addNewPost').modal('show');
                 this.form.fill(post);
+
             },
             loadPost(){
                 if(this.$gate.isAdmin() || this.$gate.isSKAdmin()){
@@ -204,9 +250,43 @@
             Fire.$on('AfterCreate',() => {
                 this.loadPost();
             });
+            var editor_config = {
+                path_absolute : '',
+                selector: 'editor[name=body]',
+                plugins: [
+                    'link image'
+                ],
+                relative_urls: false,
+                height: 129,
+                file_browser_callback : function(field_name, url, type, win) {
+                    var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
+                    var y = window.innerHeight|| document.documentElement.clientHeight|| document.getElementsByTagName('body')[0].clientHeight;
+
+                    var cmsURL = editor_config.path_absolute + route_prefix + '?field_name=' + field_name;
+                    if (type == 'image') {
+                    cmsURL = cmsURL + '&type=Images';
+                    } else {
+                    cmsURL = cmsURL + '&type=Files';
+                    }
+
+                    tinyMCE.activeEditor.windowManager.open({
+                    file : cmsURL,
+                    title : 'Filemanager',
+                    width : x * 0.8,
+                    height : y * 0.8,
+                    resizable : 'yes',
+                    close_previous : 'no'
+                    });
+                }
+                };
+
+            // tinymce.init(editor_config);
         }
     }
+
 </script>
 <style>
 .ck-content { height:500px; }
 </style>
+
+

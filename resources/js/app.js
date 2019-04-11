@@ -12,6 +12,7 @@ import { Form, HasError, AlertError } from 'vform';
 
 import Gate from './Gate';
 Vue.prototype.$gate = new Gate(window.user);
+// Vue.prototype.$tinymce = new Gate(window.tinyMCE);
 
 
 import Swal from 'sweetalert2'
@@ -109,11 +110,52 @@ Vue.component('pagination', require('laravel-vue-pagination'));
 import CKEditor from '@ckeditor/ckeditor5-vue';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
-// import CKFinder from '@ckeditor/ckeditor5-ckfinder/src/ckfinder';
-
 Vue.use( CKEditor );
 window.ClassicEditor = ClassicEditor;
-// window.CKFinder = CKFinder;
+
+// import Editor from '@tinymce/tinymce-vue';
+// window.editor = Editor;
+// var editor_config = {
+//     path_absolute : "",
+//     selector: "textarea[name=body]",
+//     skin_url: "skins/lightgray",
+//     plugins: [
+//         "image link"
+//     ],
+//     relative_urls: false,
+//     height: 129,
+//     file_browser_callback : function(field_name, url, type, win) {
+//         var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
+//         var y = window.innerHeight|| document.documentElement.clientHeight|| document.getElementsByTagName('body')[0].clientHeight;
+
+//         var cmsURL = editor_config.path_absolute + route_prefix + '?field_name=' + field_name;
+//         if (type == 'image') {
+//         cmsURL = cmsURL + "&type=Images";
+//         } else {
+//         cmsURL = cmsURL + "&type=Files";
+//         }
+
+//         tinyMCE.activeEditor.windowManager.open({
+//         file : cmsURL,
+//         title : 'Filemanager',
+//         width : x * 0.8,
+//         height : y * 0.8,
+//         resizable : "yes",
+//         close_previous : "no"
+//         });
+//     }
+//     };
+
+//     Editor.init(editor_config);
+Vue.component('editor', require('@tinymce/tinymce-vue').default);
+
+// import Tinymce from 'tinymce/tinymce.min';
+// window.tinymce = Tinymce;
+// import 'tinymce/themes/modern/theme';
+// import 'tinymce/plugins/paste/plugin';
+// import 'tinymce/plugins/link/plugin';
+// import 'tinymce/plugins/image/plugin';
+// import 'tinymce/plugins/autoresize/plugin';
 
 const app = new Vue({
     el: '#app',
@@ -121,11 +163,16 @@ const app = new Vue({
     data:{
         search: ''
     },
+    // components: {
+    // 'editor': Editor // <- Important part
+    // },
     methods:{
         searchgrid: _.debounce(() => {
             Fire.$emit('searching');
         },1000)
     }
 });
+
+
 
 

@@ -19,6 +19,7 @@ try {
 
     require('bootstrap');
     require('admin-lte');
+
 } catch (e) {}
 
 /**
@@ -28,6 +29,10 @@ try {
  */
 
 window.axios = require('axios');
+// window.tinymce = require('tinymce');
+// require('tinymce/themes/modern/theme');
+// require('tinymce/plugins/paste');
+// require('tinymce/plugins/link');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
