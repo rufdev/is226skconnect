@@ -49,6 +49,7 @@ let routes = [
     { path: '/post', component: require('./components/Post.vue').default },
     { path: '/memo', component: require('./components/Memo.vue').default },
     { path: '/announcement', component: require('./components/Announcement.vue').default },
+    { path: '/filemanagement', component: require('./components/FileManagement.vue').default },
     { path: '*', component: require('./components/NotFound.vue').default }
 
 ]

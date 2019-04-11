@@ -289,6 +289,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </p>
                                 </router-link>
                             </li>
+                            <li class="nav-item">
+                                <router-link to="/filemanagement" class="nav-link">
+                                    <i class="nav-icon fas fa-folder"></i>
+                                    <p>
+                                        File Management
+                                    </p>
+                                </router-link>
+                            </li>
                             @canany(['isAdmin', 'isSKAdmin'])
                             <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
