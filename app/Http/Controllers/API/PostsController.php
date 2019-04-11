@@ -99,7 +99,7 @@ class PostsController extends Controller
         if ($search = \Request::get('q')) {
             $posts = Post::where(function($query) use ($search){
                 $query->where('name','LIKE',"%$search%")
-                        ->orWhere('content','LIKE',"%$search%");
+                        ->orWhere('body','LIKE',"%$search%");
             })->paginate(20);
         }else{
             $posts = Post::latest()->paginate(5);

@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Passport\HasApiTokens;
 
-class Post extends Model
+class Memo extends Model
 {
     use HasApiTokens;
 
