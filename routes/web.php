@@ -16,6 +16,7 @@
 // });
 
 Route::get('/', 'IndexController@index');
+Route::get('/post/{id}', 'IndexController@post');
 
 Auth::routes();
 

@@ -9,9 +9,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta http-equiv="x-ua-compatible" content="ie=edge" />
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <title>SK Connect</title>
+        <title>SK Connect - Dashboard</title>
         <link rel="stylesheet" href="/css/app.css" />
-
+        <link rel="icon" type="image/png" href="{{ URL::asset('img/sklogo.png') }}">
     </head>
     <body class="hold-transition sidebar-mini">
         <div class="wrapper" id="app">
@@ -379,13 +379,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <footer class="main-footer">
                 <!-- To the right -->
                 <div class="float-right d-none d-sm-inline">
-                    Anything you want
+                    Administrator Panel
                 </div>
                 <!-- Default to the left -->
                 <strong
-                    >Copyright &copy; 2014-2018
-                    <a href="https://adminlte.io">AdminLTE.io</a>.</strong
-                >
+                    >Copyright &copy; 2019-2020
+                    SK Connect
                 All rights reserved.
             </footer>
         </div>

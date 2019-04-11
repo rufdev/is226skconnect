@@ -10,7 +10,7 @@ class Post extends Model
     use HasApiTokens;
 
     protected $fillable = [
-        'title', 'body', 'user_id'
+        'title', 'body', 'user_id', 'feature_img', 'url'
     ];
 
     public function user(){

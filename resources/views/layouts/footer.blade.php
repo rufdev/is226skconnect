@@ -5,7 +5,7 @@
             <div class="tg-signupbox">
                <div class="container">
                   <div class="tg-signuptextbox">
-                     <h3>Free Signup!</h3>
+                     <h3>Signup to be Updated!</h3>
                      <div class="tg-description">
                         <p>Subscribe Monthly Newsletter &amp; Get Latest New &amp; Updates.</p>
                      </div>
@@ -30,30 +30,23 @@
                               </div>
                               <ul class="tg-infolist">
                                  <li>
-                                    <i class="icon-location"></i>
-                                    <address>Abc, xyz street London, HG521A</address>
+                                    <i class="glyphicon glyphicon-home"></i>
+                                    <address> Antipolo Government City Hall, Antipolo City</address>
                                  </li>
                                  <li>
-                                    <i class="icon-phone-handset"></i>
-                                    <span>0800 - 1234 - 562 - 6</span>
+                                    <i class="glyphicon glyphicon-phone"></i>
+                                    <span> +63910-096-3298</span>
                                  </li>
                                  <li>
-                                    <i class="icon-printer"></i>
-                                    <span>+4 1234 567 - 9</span>
-                                 </li>
-                                 <li>
-                                    <a href="mailto:query@domain.com">
-                                    <i class="icon-envelope"></i>
-                                    <span>query@domain.com</span>
+                                    <a href="m.me/AntipoloCityYouth" target="_blank">
+                                    <i class="glyphicon glyphicon-envelope"></i>
+                                    <span> Antipolo Youth Chat</span>
                                     </a>
                                  </li>
                               </ul>
                               <ul class="tg-socialicons">
-                                 <li class="tg-facebook"><a href=""><i class="fa fa-facebook"></i></a></li>
-                                 <li class="tg-twitter"><a href=""><i class="fa fa-twitter"></i></a></li>
-                                 <li class="tg-linkedin"><a href=""><i class="fa fa-linkedin"></i></a></li>
-                                 <li class="tg-googleplus"><a href=""><i class="fa fa-google-plus"></i></a></li>
-                                 <li class="tg-rss"><a href=""><i class="fa fa-rss"></i></a></li>
+                                 <li class="tg-facebook"><a href="https://www.facebook.com/pg/AntipoloCityYouth" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                 <li class="tg-twitter"><a href="https://twitter.com/AntipoloCityGov" target="_blank"><i class="fa fa-twitter"></i></a></li>
                               </ul>
                            </div>
                         </div>
@@ -71,27 +64,14 @@
                      <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
                         <div class="tg-widget tg-widgetcoursecategories">
                            <div class="tg-widgettitle">
-                              <h3>Course Categories</h3>
+                              <h3>Recent Posts</h3>
                            </div>
                            <div class="tg-widgetcontent">
+                            @foreach ($recentposts as $recent)
                               <ul>
-                                 <li><a href="">Perspiciatis ate</a></li>
-                                 <li><a href="">Aomnis isteat</a></li>
-                                 <li><a href="">Canatus error</a></li>
-                                 <li><a href="">Voluptatem clu</a></li>
-                                 <li><a href="">Commodo</a></li>
-                                 <li><a href="">Consequat</a></li>
-                                 <li><a href="">Duis aute</a></li>
-                                 <li><a href="">Aincididunt</a></li>
-                                 <li><a href="">Alter veritatis</a></li>
-                                 <li><a href="">Tempora Incid</a></li>
-                                 <li><a href="">Dolore Magnam</a></li>
-                                 <li><a href="">Aliquam Quaerat</a></li>
-                                 <li><a href="">Quisquam</a></li>
-                                 <li><a href="">Voluptatem</a></li>
-                                 <li><a href="">Aliquip</a></li>
-                                 <li><a href="">Adipisicing</a></li>
+                                 <li><a href="/post/{{ $recent->id }}" target="_blank">{{ $recent->title }}</a></li>
                               </ul>
+                              @endforeach
                            </div>
                         </div>
                      </div>
@@ -114,13 +94,13 @@
                <div class="container">
                   <div class="row">
                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <span class="tg-copyright">Copyright &copy; 2019
+                        <span class="tg-copyright">Copyright &copy; {{ now()->year }}
                         SK Federation of Antipolo City Government. All Rights Reserved</span>
                         <nav class="tg-addnav">
                            <ul>
-                              <li><a href="">Privacy Policy</a></li>
-                              <li><a href="">Term and Conditions</a></li>
-                              <li><a href="">Contact</a></li>
+                              <li><a href="http://nyc.gov.ph/sangguniangkabataan/" target="_blank">Privacy Policy</a></li>
+                              <li><a href="http://nyc.gov.ph/sangguniangkabataan/" target="_blank">Term and Conditions</a></li>
+                              <li><a href="/contact">Contact</a></li>
                            </ul>
                         </nav>
                      </div>

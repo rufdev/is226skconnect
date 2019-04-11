@@ -55,60 +55,41 @@
                                  <div class="clearfix"></div>
                            </section>
                            <section class="tg-sectionspace tg-haslayout">
-                           <div class="tg-latestnews">
-                           <div class="tg-borderheading">
-                           <h2>Latest Blogs for Inspiration</h2>
-                           </div>
-                           <div class="row">
-                           <ul class="small-grid">
-                           <li class="col-md-4 col-sm-3" style="list-style: none;">
-                           <div class="small-post" >
-                           <figure class="tg-featuredimg">
-                           <a href="http://52.220.57.1/blog/post:slug">
-                           <img src="http://52.220.57.1/storage/app/uploads/public/5c9/4db/97d/5c94db97de486625688101.jpg" alt="" style="width:275px; height:183px;"> </a>
-                           </figure>
-                           <div class="cp-post-content">
-                           <h3><a href="http://52.220.57.1/blog/post:slug">First Blog Evah</a></h3>
-                           honesty, integrity and respect!
-                           <a href="http://52.220.57.1/blog/post:slug">Read More...</a>
-                           </div>
-                           </div>
-                           </li>
-                           <li class="col-md-4 col-sm-3" style="list-style: none;">
-                           <div class="small-post" >
-                           <figure class="tg-featuredimg">
-                           <a href="http://52.220.57.1/blog/post:slug">
-                           <img src="http://52.220.57.1/storage/app/uploads/public/5c9/4db/f71/5c94dbf71a7cf880372072.png" alt="" style="width:275px; height:183px;"> </a>
-                           </figure>
-                           <div class="cp-post-content">
-                           <h3><a href="http://52.220.57.1/blog/post:slug">Second Blog Ever</a></h3>
-                           <a href="http://52.220.57.1/blog/post:slug">Read More...</a>
-                           </div>
-                           </div>
-                           </li>
-                           <li class="col-md-4 col-sm-3" style="list-style: none;">
-                           <div class="small-post" >
-                           <figure class="tg-featuredimg">
-                           <a href="http://52.220.57.1/blog/post:slug">
-                           <img src="http://52.220.57.1/storage/app/uploads/public/5c9/4d9/5e0/5c94d95e0c735965750170.jpg" alt="" style="width:275px; height:183px;"> </a>
-                           </figure>
-                           <div class="cp-post-content">
-                           <h3><a href="http://52.220.57.1/blog/post:slug">Welcome to SK!</a></h3>
-                           sawadee
-                           <a href="http://52.220.57.1/blog/post:slug">Read More...</a>
-                           </div>
-                           </div>
-                           </li>
-                           </ul>
-                           </div>
-                           <div class="tg-btnsbox">
-                           <a class="tg-btn" href="/blog">view all blogs</a>
-                           </div>
-                           </div>
+                                <div class="tg-latestnews">
+                                <div class="tg-borderheading">
+                                <h2>Latest Blogs for Inspiration</h2>
+                                </div>
+                                <div class="row">
+                                <ul class="small-grid">
+
+                                @foreach ($posts as $post)
+                                    <li class="col-md-4 col-sm-3" style="list-style: none; overflow:hidden;">
+                                    <div class="small-post" >
+                                        <figure class="tg-featuredimg">
+                                            <a href="">
+                                            <img src="{{ url('/img/'.$post->feature_img) }}" alt="" style="width:275px; height:183px;"> </a>
+                                        </figure>
+                                        <div class="cp-post-content">
+                                        <h3><a href="">{{ $post->title}}</a></h3>
+                                        <div> {!! str_limit($post->body, 100) !!} </div>
+                                        <a href="/post/{{ $post->id }}">Read More...</a>
+                                        </div>
+                                    </div>
+                                    </li>
+                                @endforeach
+
+                                <div class="tg-btnsbox">
+                                <a class="tg-btn" href="/blog">view all blogs</a>
+                                </div>
+                                </div>
                            </section>
                         </div>
                     </div>
 
                     @include('layouts.sidebar')
 
+@endsection
+
+@section('footer')
+    @include('layouts.footer')
 @endsection
