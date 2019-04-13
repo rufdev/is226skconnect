@@ -15,7 +15,7 @@
                            <section class="tg-sectionspace tg-haslayout">
                               <div class="tg-shortcode tg-welcomeandgreeting">
                                  <figure>
-                                    <img src="http://52.220.57.1/themes/skconnect/assets/images/thePresident.jpg" alt="Rodrigo Duterte">
+                                    <img src="{{ url(''.'/img/thePresident.jpg') }}" alt="Rodrigo Duterte">
                                  </figure>
                                  <div class="tg-shortcodetextbox">
                                     <h2>Mabuhay SK Federation of Antipolo</h2>

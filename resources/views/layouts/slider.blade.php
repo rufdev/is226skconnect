@@ -18,7 +18,7 @@ Home Slider Start
                                                 var options = {
                                             $FillMode: 0,
                                             $AutoPlay: true,
-                                            $AutoPlayInterval: 2000, 
+                                            $AutoPlayInterval: 2000,
                                             $PauseOnHover: 1,
                                             $ArrowKeyNavigation: true,
                                             $SlideDuration: 500,
@@ -26,18 +26,18 @@ Home Slider Start
                                             $SlideSpacing: 0,
                                             $DragOrientation: 1,
                                             $PlayOrientation: 1,
-                                            $DisplayPieces: 1, 
+                                            $DisplayPieces: 1,
                                             $ParkingPosition: 0,
                                             $UISearchMode: 1,
-                                    
+
                                                         $SlideshowOptions: {
                                                 $Class: $JssorSlideshowRunner$,
                                                 $Transitions: _SlideshowTransitions,
-                                                $TransitionsOrder: 0,    
-                                                $ShowLink: false       
+                                                $TransitionsOrder: 0,
+                                                $ShowLink: false
                                             },
-                                                        $BulletNavigatorOptions: { 
-                                                $Class: $JssorBulletNavigator$, 
+                                                        $BulletNavigatorOptions: {
+                                                $Class: $JssorBulletNavigator$,
                                                 $ChanceToShow: 2,
                                                 $AutoCenter: 1,
                                                 $Orientation: 1,
@@ -46,17 +46,17 @@ Home Slider Start
                                                 $Steps: 1,
                                                 $Lanes: 1
                                             },
-                                    
-                                            $ArrowNavigatorOptions: { 
+
+                                            $ArrowNavigatorOptions: {
                                                 $Class: $JssorArrowNavigator$,
                                                 $ChanceToShow: 1,
                                                 $AutoCenter: 2,
                                                 $Steps: 1
                                             }
                                         };
-                                    
+
                                         var jssor_slider1 = new $JssorSlider$("slider", options);
-                                    
+
                                         function ScaleSlider() {
                                             var bodyWidth = document.body.clientWidth;
                                             var parentWidth = jssor_slider1.$Elmt.parentNode.clientWidth;
@@ -66,10 +66,10 @@ Home Slider Start
                                             else
                                                 $JssorUtils$.$Delay(ScaleSlider, 30);
                                         }
-                                    
+
                                         ScaleSlider();
                                         $JssorUtils$.$AddEvent(window, "load", ScaleSlider);
-                                    
+
                                         if (!navigator.userAgent.match(/(iPhone|iPod|iPad|BlackBerry|IEMobile)/)) {
                                             $JssorUtils$.$OnWindowResize(window, ScaleSlider);
                                         }
@@ -85,22 +85,22 @@ Home Slider Start
                                  <!-- Slides Container -->
                                  <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 1300px; height: 500px; overflow: hidden;">
                                     <div>
-                                       <img u="image" src="http://52.220.57.1/storage/app/uploads/public/5c9/24c/882/5c924c882eede148257405.jpg" />
+                                       <img u="image" src="{{ url(''.'img/skheader.png') }}" />
                                     </div>
                                     <div>
-                                       <img u="image" src="http://52.220.57.1/storage/app/uploads/public/5c9/24c/895/5c924c8950ec7063673072.jpg" />
+                                       <img u="image" src="{{ url(''.'img/forthefilipinoyouth.jpg') }}" />
                                     </div>
                                     <div>
-                                       <img u="image" src="http://52.220.57.1/storage/app/uploads/public/5c9/24c/88a/5c924c88a97ec030369813.jpg" />
+                                        <img u="image" src="{{ url(''.'img/hands.jpg') }}" />
                                     </div>
                                     <div>
-                                       <img u="image" src="http://52.220.57.1/storage/app/uploads/public/5c9/25e/e00/5c925ee00b3be369530417.jpg" />
+                                       <img u="image" src="{{ url(''.'img/youthprogram.jpg') }}"  />
                                     </div>
                                     <div>
-                                       <img u="image" src="http://52.220.57.1/storage/app/uploads/public/5c9/4f6/3a5/5c94f63a55ca1803402254.png" />
+                                        <img u="image" src="{{ url(''.'img/youthservice.jpg') }}"  />
                                     </div>
                                     <div>
-                                       <img u="image" src="http://52.220.57.1/storage/app/uploads/public/5c9/4f6/8fb/5c94f68fba906471725919.jpg" />
+                                       <img u="image" src="{{ url(''.'img/antipoloys.jpg') }}" />
                                     </div>
                                  </div>
                                  <!-- Bullet Navigator Skin Begin -->
@@ -120,7 +120,7 @@ Home Slider Start
                                     });
                                  </script>
                               </div>
-                              </p> 
+                              </p>
                               <figcaption class="tg-slidercontent">
                                  <div class="tg-slidercontentbox">
                                     <!-- <a class="tg-btn" href="javascript:void(0);">read more</a> -->
