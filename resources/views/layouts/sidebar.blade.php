@@ -3,7 +3,7 @@
 *************************************-->
 <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
     <aside id="tg-sidebar" class="tg-sidebar">
-       <div class="tg-widget">
+       {{-- <div class="tg-widget">
           <div class="tg-widgetcontent">
              <form class="tg-formtheme tg-formsearch" action="http://52.220.57.1/search-results" method="get">
                 <fieldset>
@@ -12,23 +12,22 @@
                 </fieldset>
              </form>
           </div>
-       </div>
+       </div> --}}
        <div class="tg-widget tg-widgetnoticeboard">
           <div class="tg-widgettitle">
-             <h3><b>Notice Board</b></h3>
+             <h3><b>Memo Circulars</b></h3>
           </div>
           <div class="tg-widgetcontent">
              <ul>
-                <li>
-                   <a href="">Adipisicing elit sed dotas eiusmod tempor incididunt utae labore etiat dolore magna aliqua enim ad minim veniam.</a>
-                </li>
-                <li>
-                   <a href="">Labore etiat dolore magna aliqua enim ad minim veniam.</a>
-                </li>
-                <li>
-                   <a href="">Duis aute irure dolor in reprehenderit.</a>
-                </li>
+                @foreach ($memos as $memo)
+                    <li>
+                    <a href="memo/{{ $memo->id }}">{{ $memo->title }}</a>
+                    </li>
+                @endforeach
              </ul>
+             <div class="tg-btnsbox">
+                    <a class="tg-btn" href="/memos">View All Memos</a>
+                 </div>
           </div>
        </div>
        <div class="tg-widget tg-widgetadmissionform">
@@ -47,7 +46,7 @@
           <div class="tg-widgetcontent">
              <ul>
                 <li>
-                   <a href="">
+                   <a href="" download>
                    <i class="fa fa-paperclip"></i>
                    <span>Prospectus</span>
                    </a>

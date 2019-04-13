@@ -6,7 +6,7 @@
 <div class="container">
   <h1>   {{ $post->title }} </h1>
   <h5> Published: {{ $post->created_at->format('m-d-y') }} </h5>
-  <img src="{{ url('/img/'.$post->feature_img) }}">
+  <img src="{{ url(''.$post->featureimage) }}" style="width:50%; height:50%;">
   <p>  {!! $post->body !!} </p>
 </div>
 <br>
@@ -16,3 +16,4 @@
 @section('footer')
     @include('layouts.footer')
 @endsection
+N

@@ -35,52 +35,52 @@
                            </section>
                            <section class="tg-sectionspace tg-haslayout">
                               <div class="tg-borderheading">
-                                 <h2>Latest Announcements/Events</h2>
+                                 <h2><hr>Latest Announcements/Events</hr></h2>
                               </div>
                               <div class="tg-events">
+                                @foreach ($announcements as $announcement)
                                  <article class="tg-themepost tg-themepostleftimg">
                                     <figure class="tg-featuredimg">
-                                       <a href="http://52.220.57.1/blog/post:slug">
-                                       <img src="http://52.220.57.1/storage/app/uploads/public/5c9/4d9/5e0/5c94d95e0c735965750170.jpg" alt="" style="width:275px; height:183px;"> </a>
-                                       </a>
+                                            <a href="/announce/{{ $announcement->id }}">
+                                            <img src="{{ url(''.$announcement->featureimage) }}" alt="" style="width:275px; height:183px;"> </a>
                                     </figure>
                                     <div class="tg-themepostcontent">
-                                       <h3><a href="http://52.220.57.1/blog/post:slug">Welcome to SK!</a></h3>
-                                       sawadee
+                                    <h3><a href="/announce/{{ $announcement->id }}"> {{ $announcement->title }}</a></h3>
+                                       <div> <p style="font-size: 12pt!important"> {!! str_limit($announcement->body, 100) !!} </p> </div>
                                        <div class="tg-btnsbox">
-                                          <a class="tg-btn" href="">read more</a>
+                                          <a class="tg-btn" href="/announce/{{ $announcement->id }}">Read More</a>
                                        </div>
                                     </div>
                                  </article>
+                                 @endforeach
                                  <div class="clearfix"></div>
                            </section>
+
+
                            <section class="tg-sectionspace tg-haslayout">
                                 <div class="tg-latestnews">
                                 <div class="tg-borderheading">
-                                <h2>Latest Blogs for Inspiration</h2>
+                                <h2><hr>Latest Blogs for Inspiration</hr></h2>
                                 </div>
                                 <div class="row">
                                 <ul class="small-grid">
 
-                                @foreach ($posts as $post)
-                                    <li class="col-md-4 col-sm-3" style="list-style: none; overflow:hidden;">
-                                    <div class="small-post" >
-                                        <figure class="tg-featuredimg">
-                                            <a href="">
-                                            <img src="{{ url('/img/'.$post->feature_img) }}" alt="" style="width:275px; height:183px;"> </a>
-                                        </figure>
-                                        <div class="cp-post-content">
-                                        <h3><a href="">{{ $post->title}}</a></h3>
-                                        <div> {!! str_limit($post->body, 100) !!} </div>
-                                        <a href="/post/{{ $post->id }}">Read More...</a>
+                                    @foreach ($posts as $post)
+                                        <li class="col-md-4 col-sm-3" style="list-style: none; overflow:hidden;">
+                                        <div class="small-post" >
+                                            <figure class="tg-featuredimg">
+                                                <a href="/post/{{ $post->id }}"">
+                                                <img src="{{ url(''.$post->featureimage) }}" alt="" style="width:275px; height:183px;"> </a>
+                                            </figure>
+                                            <div class="cp-post-content">
+                                            <h3><a href="">{{ $post->title}}</a></h3>
+                                            <div> <p style="font-size: 12pt!important"> {!! str_limit($post->body, 100) !!} </p> </div>
+                                                <a href="/post/{{ $post->id }}">Read More</a>
+                                            </div>
                                         </div>
-                                    </div>
-                                    </li>
-                                @endforeach
+                                        </li>
+                                    @endforeach
 
-                                <div class="tg-btnsbox">
-                                <a class="tg-btn" href="/blog">view all blogs</a>
-                                </div>
                                 </div>
                            </section>
                         </div>

@@ -23,19 +23,15 @@
                               <div id="tg-navigation" class="collapse navbar-collapse tg-navigation">
                                  <ul>
                                     <li class="menu-item"><a href="/">Home</a></li>
-                                    <li><a href="">About Us</a></li>
+                                    <li><a href="/about">About Us</a></li>
                                     <li class="menu-item">
-                                       <a href="">Events</a>
+                                       <a href="/events">Events</a>
                                     </li>
-                                    <li class="menu-item-has-children">
-                                       <a href="">Blog</a>
-                                       <ul class="sub-menu">
-                                          <li><a href="">Blog</a></li>
-                                          <li><a href="">Blog detail</a></li>
-                                       </ul>
+                                    <li class="menu-item">
+                                       <a href="/blog">Blog</a>
                                     </li>
-                                    <li class="menu-item"><a href="">Downloads</a></li>
-                                    <li class="menu-item"><a href="">Contact</a></li>
+                                    <li class="menu-item"><a href="/downloads">Downloads</a></li>
+                                    <li class="menu-item"><a href="#contact">Contact</a></li>
                                     <li class="menu-item"><a class="btn btn-primary"  role="button" href="{{ route('login') }}">Login</a></li>
                                     </ul>
                         </div>

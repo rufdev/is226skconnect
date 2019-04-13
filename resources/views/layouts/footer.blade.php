@@ -24,7 +24,9 @@
                      <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
                         <div class="tg-widget tg-widgetcompanyinfo">
                            <div class="tg-widgetcontent">
-                              <strong class="tg-logo">Contact Us</strong>
+                            <a name="contact">
+                                <strong class="tg-logo">Contact Us</strong>
+                            </a>
                               <div class="tg-description">
                                  <p>You may contact us in the following details below:</p>
                               </div>
