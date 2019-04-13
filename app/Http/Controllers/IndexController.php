@@ -15,9 +15,10 @@ class IndexController extends Controller
         $posts = Post::orderBy('created_at', 'DESC')->take(3)->get();
         $announcements = Announcement::orderBy('created_at', 'DESC')->take(3)->get();
         $memos = Memo::orderBy('created_at', 'DESC')->take(3)->get();
+        $downloads = Memo::orderBy('created_at', 'DESC')->take(3)->get();
         $recentposts = Post::orderBy('created_at', 'DESC')->take(10)->get();
 
-        return view('index', compact('posts', 'announcements' ,'memos' ,'recentposts'));
+        return view('index', compact('posts', 'announcements' ,'memos' ,'recentposts', 'downloads'));
 
     }
 
@@ -40,6 +41,13 @@ class IndexController extends Controller
         $memo = Memo::find($id);
         $recentposts = Post::orderBy('created_at', 'DESC')->take(10)->get();
         return view('memo', compact('memo','recentposts'));
+    }
+
+    public function download($id)
+    {
+        $download = Memo::find($id);
+        $recentposts = Post::orderBy('created_at', 'DESC')->take(10)->get();
+        return view('download', compact('download','recentposts'));
     }
 
     public function events()
@@ -72,7 +80,7 @@ class IndexController extends Controller
     public function downloads()
     {
         $recentposts = Post::orderBy('created_at', 'DESC')->take(10)->get();
-        //$download = Memo::orderBy('created_at', 'DESC')->get();
-        return view('downloads', compact('recentposts'));
+        $downloads = Memo::orderBy('created_at', 'DESC')->get();
+        return view('downloads', compact('downloads', 'recentposts'));
     }
 }

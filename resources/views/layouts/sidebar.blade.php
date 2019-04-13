@@ -45,36 +45,14 @@
           </div>
           <div class="tg-widgetcontent">
              <ul>
+            @foreach($downloads as $download)
                 <li>
-                   <a href="" download>
+                <a href="/download/{{ $download->id }}" download>
                    <i class="fa fa-paperclip"></i>
-                   <span>Prospectus</span>
+                    {{ $download->title }}
                    </a>
                 </li>
-                <li>
-                   <a href="">
-                   <i class="fa fa-map-signs"></i>
-                   <span>Admission Guide</span>
-                   </a>
-                </li>
-                <li>
-                   <a href="">
-                   <i class="fa fa-list-ul"></i>
-                   <span>Merit List 2017</span>
-                   </a>
-                </li>
-                <li>
-                   <a href="">
-                   <i class="fa fa-calendar-check-o "></i>
-                   <span>Examination Date Sheet</span>
-                   </a>
-                </li>
-                <li>
-                   <a href="">
-                   <i class="fa fa-bookmark-o"></i>
-                   <span>Examination Guide 2017</span>
-                   </a>
-                </li>
+            @endforeach
              </ul>
           </div>
        </div>
