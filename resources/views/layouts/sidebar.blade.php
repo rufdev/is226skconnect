@@ -39,23 +39,6 @@
              <iframe width="300" height="200" src="https://www.youtube.com/embed/-KMEf6-zMUA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
        </div>
-       <div class="tg-widget tg-widgetdownload">
-          <div class="tg-widgettitle">
-             <h3><b>Downloads</b></h3>
-          </div>
-          <div class="tg-widgetcontent">
-             <ul>
-            @foreach($downloads as $download)
-                <li>
-                <a href="/download/{{ $download->id }}" download>
-                   <i class="fa fa-paperclip"></i>
-                    {{ $download->title }}
-                   </a>
-                </li>
-            @endforeach
-             </ul>
-          </div>
-       </div>
     </aside>
  </div>
 <!--************************************

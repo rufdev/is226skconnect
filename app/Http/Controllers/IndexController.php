@@ -14,11 +14,10 @@ class IndexController extends Controller
         //Get only three latest blogs for the homepage
         $posts = Post::orderBy('created_at', 'DESC')->take(3)->get();
         $announcements = Announcement::orderBy('created_at', 'DESC')->take(3)->get();
-        $memos = Memo::orderBy('created_at', 'DESC')->take(3)->get();
-        $downloads = Memo::orderBy('created_at', 'DESC')->take(3)->get();
+        $memos = Memo::where('category', '=', 'public')->orderBy('created_at', 'DESC')->take(3)->get();
         $recentposts = Post::orderBy('created_at', 'DESC')->take(10)->get();
 
-        return view('index', compact('posts', 'announcements' ,'memos' ,'recentposts', 'downloads'));
+        return view('index', compact('posts', 'announcements' ,'memos' ,'recentposts'));
 
     }
 
@@ -73,14 +72,8 @@ class IndexController extends Controller
     public function memos()
     {
         $recentposts = Post::orderBy('created_at', 'DESC')->take(10)->get();
-        $memos = Memo::orderBy('created_at', 'DESC')->get();
+        $memos = Memo::where('category', '=', 'public')->orderBy('created_at', 'DESC')->take(3)->get();
         return view('memos', compact('memos','recentposts'));
     }
 
-    public function downloads()
-    {
-        $recentposts = Post::orderBy('created_at', 'DESC')->take(10)->get();
-        $downloads = Memo::orderBy('created_at', 'DESC')->get();
-        return view('downloads', compact('downloads', 'recentposts'));
-    }
 }

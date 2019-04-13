@@ -19,12 +19,10 @@ Route::get('/', 'IndexController@index');
 Route::get('/post/{id}', 'IndexController@post');
 Route::get('/announcement/{id}', 'IndexController@announcement');
 Route::get('/memo/{id}', 'IndexController@memo');
-Route::get('/download/{id}', 'IndexController@download');
 Route::get('/events', 'IndexController@events');
 Route::get('/about', 'IndexController@about');
 Route::get('/blog', 'IndexController@blog');
 Route::get('/memos', 'IndexController@memos');
-Route::get('/downloads', 'IndexController@downloads');
 
 
 Auth::routes();

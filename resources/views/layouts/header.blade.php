@@ -30,7 +30,7 @@
                                     <li class="menu-item">
                                        <a href="/blog">Blog</a>
                                     </li>
-                                    <li class="menu-item"><a href="/downloads">Downloads</a></li>
+                                    <li class="menu-item"><a href="/memos">Memos</a></li>
                                     <li class="menu-item"><a href="#contact">Contact</a></li>
                                     <li class="menu-item"><a class="btn btn-primary"  role="button" href="{{ route('login') }}">Login</a></li>
                                     </ul>
