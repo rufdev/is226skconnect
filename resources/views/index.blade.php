@@ -41,14 +41,14 @@
                                 @foreach ($announcements as $announcement)
                                  <article class="tg-themepost tg-themepostleftimg">
                                     <figure class="tg-featuredimg">
-                                            <a href="/announce/{{ $announcement->id }}">
+                                            <a href="/announcement/{{ $announcement->id }}">
                                             <img src="{{ url(''.$announcement->featureimage) }}" alt="" style="width:275px; height:183px;"> </a>
                                     </figure>
                                     <div class="tg-themepostcontent">
-                                    <h3><a href="/announce/{{ $announcement->id }}"> {{ $announcement->title }}</a></h3>
+                                    <h3><a href="/announcement/{{ $announcement->id }}"> {{ $announcement->title }}</a></h3>
                                        <div> <p style="font-size: 12pt!important"> {!! str_limit($announcement->body, 100) !!} </p> </div>
                                        <div class="tg-btnsbox">
-                                          <a class="tg-btn" href="/announce/{{ $announcement->id }}">Read More</a>
+                                          <a class="tg-btn" href="/announcement/{{ $announcement->id }}">Read More</a>
                                        </div>
                                     </div>
                                  </article>
