@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-       <div class="row mt-3" v-if="$gate.isAdmin() || $gate.isSKAdmin() || $gate.isSKMember()">
+       <div class="row mt-3" v-if="$gate.isAdmin() || $gate.isSKAdmin() || this.$gate.isSKMember()">
           <div class="col-12">
             <div class="card">
             <div class="card-header">
@@ -43,7 +43,7 @@
             <!-- /.card -->
           </div>
         </div>
-        <div v-if="!($gate.isAdmin() || $gate.isSKAdmin() || $gate.isSKMember())">
+        <div v-if="!($gate.isAdmin() || $gate.isSKAdmin() || this.$gate.isSKMember())">
             <not-found></not-found>
         </div>
         <!-- Modal -->
@@ -96,15 +96,6 @@
                         <has-error :form="form" field="body"></has-error>
                     </div>
                     <div class="form-group">
-                        <!-- <div class="input-group">
-                        <span class="input-group-btn">
-                            <a id="lfm" data-input="featureimage" data-preview="holder" class="btn btn-primary">
-                            <i class="fas fa-images"></i> Choose
-                            </a>
-                        </span>
-                       <input type="text" class="form-control" v-model="form.featureimage">
-                        </div>
-                        <img class="mt-3" :src="form.featureimage" /> -->
                         <div class="input-group">
                             <span class="input-group-btn">
                                 <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
@@ -195,7 +186,9 @@
 
             },
             loadPost(){
-                axios.get('api/post').then(({data}) => (this.posts = data));
+                if(this.$gate.isAdmin() || this.$gate.isSKAdmin() || this.$gate.isSKMember()){
+                    axios.get('api/post').then(({data}) => (this.posts = data));
+                }
             },
             updatePost(){
                 this.$Progress.start();

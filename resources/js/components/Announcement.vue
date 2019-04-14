@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-       <div class="row mt-3" v-if="$gate.isAdmin() || $gate.isSKAdmin() || $gate.isSKMember()">
+       <div class="row mt-3" v-if="$gate.isAdmin() || $gate.isSKAdmin()">
           <div class="col-12">
             <div class="card">
             <div class="card-header">
@@ -44,7 +44,7 @@
             <!-- /.card -->
           </div>
         </div>
-        <div v-if="!($gate.isAdmin() || $gate.isSKAdmin() || $gate.isSKMember())">
+        <div v-if="!($gate.isAdmin() || $gate.isSKAdmin())">
             <not-found></not-found>
         </div>
         <!-- Modal -->
@@ -191,7 +191,9 @@
 
             },
             loadAnnouncement(){
-                axios.get('api/announcement').then(({data}) => (this.announcements = data));
+                if(this.$gate.isAdmin() || this.$gate.isSKAdmin()){
+                    axios.get('api/announcement').then(({data}) => (this.announcements = data));
+                }
 
             },
             updateAnnouncement(){

@@ -2369,10 +2369,12 @@ __webpack_require__.r(__webpack_exports__);
     loadAnnouncement: function loadAnnouncement() {
       var _this2 = this;
 
-      axios.get('api/announcement').then(function (_ref) {
-        var data = _ref.data;
-        return _this2.announcements = data;
-      });
+      if (this.$gate.isAdmin() || this.$gate.isSKAdmin()) {
+        axios.get('api/announcement').then(function (_ref) {
+          var data = _ref.data;
+          return _this2.announcements = data;
+        });
+      }
     },
     updateAnnouncement: function updateAnnouncement() {
       var _this3 = this;
@@ -2910,10 +2912,12 @@ __webpack_require__.r(__webpack_exports__);
     loadMemo: function loadMemo() {
       var _this2 = this;
 
-      axios.get('api/memo').then(function (_ref) {
-        var data = _ref.data;
-        return _this2.memos = data;
-      });
+      if (this.$gate.isAdmin() || this.$gate.isSKAdmin()) {
+        axios.get('api/memo').then(function (_ref) {
+          var data = _ref.data;
+          return _this2.memos = data;
+        });
+      }
     },
     updateMemo: function updateMemo() {
       var _this3 = this;
@@ -3155,15 +3159,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3222,10 +3217,12 @@ __webpack_require__.r(__webpack_exports__);
     loadPost: function loadPost() {
       var _this2 = this;
 
-      axios.get('api/post').then(function (_ref) {
-        var data = _ref.data;
-        return _this2.posts = data;
-      });
+      if (this.$gate.isAdmin() || this.$gate.isSKAdmin() || this.$gate.isSKMember()) {
+        axios.get('api/post').then(function (_ref) {
+          var data = _ref.data;
+          return _this2.posts = data;
+        });
+      }
     },
     updatePost: function updatePost() {
       var _this3 = this;
@@ -63221,7 +63218,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _vm.$gate.isAdmin() || _vm.$gate.isSKAdmin() || _vm.$gate.isSKMember()
+    _vm.$gate.isAdmin() || _vm.$gate.isSKAdmin()
       ? _c("div", { staticClass: "row mt-3" }, [
           _c("div", { staticClass: "col-12" }, [
             _c("div", { staticClass: "card" }, [
@@ -63321,7 +63318,7 @@ var render = function() {
         ])
       : _vm._e(),
     _vm._v(" "),
-    !(_vm.$gate.isAdmin() || _vm.$gate.isSKAdmin() || _vm.$gate.isSKMember())
+    !(_vm.$gate.isAdmin() || _vm.$gate.isSKAdmin())
       ? _c("div", [_c("not-found")], 1)
       : _vm._e(),
     _vm._v(" "),
@@ -64044,7 +64041,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _vm.$gate.isAdmin() || _vm.$gate.isSKAdmin() || _vm.$gate.isSKMember()
+    _vm.$gate.isAdmin() || _vm.$gate.isSKAdmin()
       ? _c("div", { staticClass: "row mt-3" }, [
           _c("div", { staticClass: "col-12" }, [
             _c("div", { staticClass: "card" }, [
@@ -64144,7 +64141,7 @@ var render = function() {
         ])
       : _vm._e(),
     _vm._v(" "),
-    !(_vm.$gate.isAdmin() || _vm.$gate.isSKAdmin() || _vm.$gate.isSKMember())
+    !(_vm.$gate.isAdmin() || _vm.$gate.isSKAdmin())
       ? _c("div", [_c("not-found")], 1)
       : _vm._e(),
     _vm._v(" "),
@@ -64924,7 +64921,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _vm.$gate.isAdmin() || _vm.$gate.isSKAdmin() || _vm.$gate.isSKMember()
+    _vm.$gate.isAdmin() || _vm.$gate.isSKAdmin() || this.$gate.isSKMember()
       ? _c("div", { staticClass: "row mt-3" }, [
           _c("div", { staticClass: "col-12" }, [
             _c("div", { staticClass: "card" }, [
@@ -65020,7 +65017,7 @@ var render = function() {
         ])
       : _vm._e(),
     _vm._v(" "),
-    !(_vm.$gate.isAdmin() || _vm.$gate.isSKAdmin() || _vm.$gate.isSKMember())
+    !(_vm.$gate.isAdmin() || _vm.$gate.isSKAdmin() || this.$gate.isSKMember())
       ? _c("div", [_c("not-found")], 1)
       : _vm._e(),
     _vm._v(" "),
