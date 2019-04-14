@@ -32,7 +32,12 @@
                                     </li>
                                     <li class="menu-item"><a href="/memos">Memos</a></li>
                                     <li class="menu-item"><a href="#contact">Contact</a></li>
-                                    <li class="menu-item"><a class="btn btn-primary"  role="button" href="{{ route('login') }}">Login</a></li>
+
+                                    @if(Auth::check())
+                                        <li class="menu-item"><a class="btn btn-primary"  role="button" href="{{ route('login') }}">Login</a></li>
+                                    @else
+                                       <li class="menu-item"><a class="btn btn-primary"  role="button" href="/home">Dashboard</a></li>
+                                    @endif
                                     </ul>
                         </div>
                     </nav>

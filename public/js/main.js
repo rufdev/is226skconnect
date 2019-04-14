@@ -129,8 +129,8 @@ jQuery(document).on('ready', function() {
 			'<span class="tg-btnarrownext"><i class="lnr lnr-arrow-right"></i></span>'
 		],
 	});*/
-	
-	
+
+
 	/* -------------------------------------
 			LATEST NEWS SLIDER
 	-------------------------------------- */
@@ -171,8 +171,8 @@ jQuery(document).on('ready', function() {
 			}
 		}
 	});
-	
-	
+
+
 	/* -------------------------------------
 			PRETTY PHOTO GALLERY
 	-------------------------------------- */
@@ -257,26 +257,6 @@ jQuery(document).on('ready', function() {
 			992 : {
 				items:5,
 				nav:true,
-			}
-		}
-	});
-	/* -------------------------------------
-			Google Map
-	-------------------------------------- */
-	var _tg_campuslocation = jQuery(".tg-campuslocation");
-	_tg_campuslocation.gmap3({
-		marker: {
-			address: "1600 Elizabeth St, Melbourne, Victoria, Australia",
-			options: {
-				title: "Campus Name",
-				icon: "images/campuslocationmarker.png",
-			}
-		},
-		map: {
-			options: {
-				zoom: 16,
-				scrollwheel: false,
-				disableDoubleClickZoom: true,
 			}
 		}
 	});
@@ -394,26 +374,6 @@ jQuery(document).on('ready', function() {
 			));
 		});
 	}
-	/* -------------------------------------
-			Google Map
-	-------------------------------------- */
-	var _tg_eventlocation = jQuery(".tg-eventlocation");
-	_tg_eventlocation.gmap3({
-		marker: {
-			address: "1600 Elizabeth St, Melbourne, Victoria, Australia",
-			options: {
-				title: "Event Detail",
-				icon: "images/locationmarker.png",
-			}
-		},
-		map: {
-			options: {
-				zoom: 16,
-				scrollwheel: false,
-				disableDoubleClickZoom: true,
-			}
-		}
-	});
 	/* -------------------------------------
 			ADDMISSION SLIDER
 	-------------------------------------- */
@@ -567,26 +527,6 @@ jQuery(document).on('ready', function() {
 		+ '<div class="tg-counter"><div class="tg-counterbox"><span>%H</span><span>hours</span></div></div>'
 		+ '<div class="tg-counter"><div class="tg-counterbox"><span>%M</span><span>minutes</span></div></div>'
 		+ '<div class="tg-counter"><div class="tg-counterbox"><span>%S</span><span>seconds</span></div></div>'));
-	});
-	/* -------------------------------------
-			Google Map
-	-------------------------------------- */
-	var _tg_officelocation = jQuery("#tg-officelocation");
-	_tg_officelocation.gmap3({
-		marker: {
-			address: "1600 Elizabeth St, Melbourne, Victoria, Australia",
-			options: {
-				title: "Event Detail",
-				icon: "images/locationmarker.png",
-			}
-		},
-		map: {
-			options: {
-				zoom: 20,
-				scrollwheel: false,
-				disableDoubleClickZoom: true,
-			}
-		}
 	});
 	/* -------------------------------------
 			TICKER SLIDER

@@ -52,10 +52,10 @@
       <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
       <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
       <script src="{{ URL::asset('js/jssor.slider.min.js') }}"></script>
-      <script src="{{ URL::asset('js/jquery-library.js)') }}"></script>
+      <script src="{{ URL::asset('js/jquery-library.js') }}"></script>
       <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
       <script src="{{ URL::asset('js/owl.carousel.min.js') }}"></script>
-      <script src="{{ URL::asset('jsjs/isotope.pkgd.js') }}"></script>
+      <script src="{{ URL::asset('js/isotope.pkgd.js') }}"></script>
       <script src="{{ URL::asset('js/prettyPhoto.js') }}"></script>
       <script src="{{ URL::asset('js/countdown.js') }}"></script>
       <script src="{{ URL::asset('js/collapse.js') }}"></script>
