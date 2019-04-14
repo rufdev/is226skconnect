@@ -63802,7 +63802,7 @@ var render = function() {
                         staticClass: "btn btn-primary",
                         attrs: { type: "submit" }
                       },
-                      [_vm._v("Ceate")]
+                      [_vm._v("Create")]
                     ),
                     _vm._v(" "),
                     _c(
@@ -65052,7 +65052,7 @@ var render = function() {
                         staticClass: "btn btn-primary",
                         attrs: { type: "submit" }
                       },
-                      [_vm._v("Ceate")]
+                      [_vm._v("Create")]
                     ),
                     _vm._v(" "),
                     _c(
@@ -65821,7 +65821,7 @@ var render = function() {
                         staticClass: "btn btn-primary",
                         attrs: { type: "submit" }
                       },
-                      [_vm._v("Ceate")]
+                      [_vm._v("Create")]
                     ),
                     _vm._v(" "),
                     _c(
@@ -66539,7 +66539,7 @@ var render = function() {
                         staticClass: "btn btn-primary",
                         attrs: { type: "submit" }
                       },
-                      [_vm._v("Ceate")]
+                      [_vm._v("Create")]
                     ),
                     _vm._v(" "),
                     _c(

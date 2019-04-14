@@ -48,9 +48,9 @@
             <!-- Main Sidebar Container -->
             <aside class="main-sidebar sidebar-dark-primary elevation-4">
                 <!-- Brand Logo -->
-                <a href="index3.html" class="brand-link">
+                <a href="/dashboard" class="brand-link">
                     <img
-                        src="./img/logo.png"
+                        src="{{ URL::asset('img/sklogo.png') }}"
                         alt="SK Logo"
                         class="brand-image img-circle elevation-3"
                         style="opacity: .8"
@@ -65,13 +65,13 @@
                         <div class="image">
                             @if(Auth::user()->photo)
                             <img
-                                src="./img/profile/{{Auth::user()->photo}}"
+                                src="{{ URL::asset('img/profile/'.Auth::user()->photo) }}"
                                 class="img-circle elevation-2"
                                 alt="User Image"
                             />
                             @else
                                 <img
-                                src="./img/sklogo.png"
+                                src="{{ URL::asset('img/sklogo.png') }}"
                                 class="img-circle elevation-2"
                                 alt="User Image"
                             />
