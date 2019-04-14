@@ -104,6 +104,7 @@
                                     </p>
                                 </router-link>
                             </li>
+                            @canany(['isAdmin', 'isSKAdmin'])
                             <li class="nav-item">
                                 <router-link to="/memo" class="nav-link">
                                     <i class="nav-icon fas fa-file"></i>
@@ -128,6 +129,7 @@
                                     </p>
                                 </router-link>
                             </li>
+                            @endcanany
                             @canany(['isAdmin', 'isSKAdmin'])
                             <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
