@@ -15,7 +15,9 @@
 //     return view('welcome');
 // });
 
+
 Route::get('/', 'IndexController@index');
+Route::get('/home', 'IndexController@index');
 Route::get('/post/{id}', 'IndexController@post');
 Route::get('/announcement/{id}', 'IndexController@announcement');
 Route::get('/memo/{id}', 'IndexController@memo');
@@ -26,8 +28,14 @@ Route::get('/memos', 'IndexController@memos');
 Route::get('/404', 'IndexController@error');
 
 
+
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('{path}','HomeController@index')->where('path','([A-z\d\-\/_.]+)?');
+
+// Route::any('{query}', function() {
+//     return redirect('/404');
+// })->where('query', '.*');
+
