@@ -2722,7 +2722,7 @@ __webpack_require__.r(__webpack_exports__);
     loadPosts: function loadPosts() {
       var _this9 = this;
 
-      axios.get('api/post').then(function (_ref6) {
+      axios.get('api/getallpost').then(function (_ref6) {
         var data = _ref6.data;
         return _this9.posts = data;
       });
@@ -66126,7 +66126,7 @@ var render = function() {
                             attrs: {
                               type: "password",
                               id: "password",
-                              placeholder: "Passport"
+                              placeholder: "Password"
                             },
                             domProps: { value: _vm.form.password },
                             on: {

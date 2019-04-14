@@ -227,7 +227,7 @@
                 axios.get('api/user').then(({data}) => (this.users = data));
             },
             loadPosts(){
-                axios.get('api/post').then(({data}) => (this.posts = data));
+                axios.get('api/getallpost').then(({data}) => (this.posts = data));
             },
             loadMemos(){
                 axios.get('api/memo').then(({data}) => (this.memos = data));

@@ -49,6 +49,7 @@ Route::get('findMemo','API\MemosController@search');
 Route::get('findAnnouncement','API\AnnouncementsController@search');
 
 Route::get('countPost','API\PostsController@count');
+Route::get('getallpost','API\PostsController@getallpost');
 Route::get('countMemo','API\MemosController@count');
 Route::get('countUser','API\UserController@count');
 Route::get('countAnnouncement','API\AnnouncementsController@count');
