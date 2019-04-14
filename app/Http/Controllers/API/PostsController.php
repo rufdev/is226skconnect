@@ -19,7 +19,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        if (\Gate::allows('isAdmin') || \Gate::allows('isSKAdmin')) {
+        if (\Gate::allows('isAdmin') || \Gate::allows('isSKAdmin') || \Gate::allows('isSKMember')) {
             $posts = Post::with(['user'])->latest()->paginate(5);
         }else{
             $posts = Post::with(['user'])->latest()->where('user_id',auth()->user()->id)->paginate(5);
@@ -114,7 +114,7 @@ class PostsController extends Controller
     }
 
     public function count(){
-        if (\Gate::allows('isAdmin') || \Gate::allows('isSKAdmin')) {
+        if (\Gate::allows('isAdmin') || \Gate::allows('isSKAdmin') || \Gate::allows('isSKMember')) {
             $count = Post::count();
         }else{
             $count = Post::where('user_id',auth()->user()->id)->count();

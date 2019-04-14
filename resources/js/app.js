@@ -73,6 +73,10 @@ Vue.filter('upText', function(text){
     return text.toUpperCase();
 });
 
+Vue.filter('strlimit', function(text){
+    return text.substring(0, 300) + "...";
+});
+
 Vue.filter('dateFormat', function(datecreated){
     return moment(datecreated).format('MMMM DD YYYY');
 });

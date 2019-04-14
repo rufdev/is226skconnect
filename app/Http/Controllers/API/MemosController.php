@@ -20,7 +20,7 @@ class MemosController extends Controller
      */
     public function index()
     {
-        if (\Gate::allows('isAdmin') || \Gate::allows('isSKAdmin')) {
+        if (\Gate::allows('isAdmin') || \Gate::allows('isSKAdmin') || \Gate::allows('isSKMember')) {
             $memos = Memo::with(['user'])->latest()->paginate(5);
         }else{
             $memos = Memo::with(['user'])->latest()->where('user_id',auth()->user()->id)->paginate(5);
@@ -139,7 +139,7 @@ class MemosController extends Controller
 
     }
     public function count(){
-        if (\Gate::allows('isAdmin') || \Gate::allows('isSKAdmin')) {
+        if (\Gate::allows('isAdmin') || \Gate::allows('isSKAdmin') || \Gate::allows('isSKMember')) {
             $count = Memo::count();
         }else{
             $count = Memo::where('user_id',auth()->user()->id)->count();

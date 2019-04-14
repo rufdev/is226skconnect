@@ -19,7 +19,7 @@ class AnnouncementsController extends Controller
      */
     public function index()
     {
-        if (\Gate::allows('isAdmin') || \Gate::allows('isSKAdmin')) {
+        if (\Gate::allows('isAdmin') || \Gate::allows('isSKAdmin') || \Gate::allows('isSKMember')) {
             $announcements = Announcement::with(['user'])->latest()->paginate(5);
 
         }else{
@@ -113,7 +113,7 @@ class AnnouncementsController extends Controller
 
     }
     public function count(){
-        if (\Gate::allows('isAdmin') || \Gate::allows('isSKAdmin')) {
+        if (\Gate::allows('isAdmin') || \Gate::allows('isSKAdmin') || \Gate::allows('isSKMember')) {
             $count = Announcement::count();
         }else{
             $count = Announcement::where('user_id',auth()->user()->id)->count();
