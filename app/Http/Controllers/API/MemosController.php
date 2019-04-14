@@ -117,6 +117,10 @@ class MemosController extends Controller
 
     }
     public function count(){
-        return Memo::count();
+        if (\Gate::allows('isAdmin') || \Gate::allows('isSKAdmin')) {
+            $count = Memo::count();
+        }else{
+            $count = Memo::where('user_id',auth()->user()->id)->count();
+        }
     }
 }
