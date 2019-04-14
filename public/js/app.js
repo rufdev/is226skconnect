@@ -3579,10 +3579,10 @@ __webpack_require__.r(__webpack_exports__);
         name: '',
         email: '',
         password: '',
-        type: '',
-        bio: '',
+        // type : '',
+        // bio : '',
         photo: '',
-        role: {}
+        role: []
       })
     };
   },
@@ -66082,54 +66082,6 @@ var render = function() {
                         "label",
                         {
                           staticClass: "col-sm-2 control-label",
-                          attrs: { for: "inputExperience" }
-                        },
-                        [_vm._v("Experience")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "col-sm-12" },
-                        [
-                          _c("textarea", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.form.bio,
-                                expression: "form.bio"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            class: { "is-invalid": _vm.form.errors.has("bio") },
-                            attrs: {
-                              id: "inputExperience",
-                              placeholder: "Experience"
-                            },
-                            domProps: { value: _vm.form.bio },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(_vm.form, "bio", $event.target.value)
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("has-error", {
-                            attrs: { form: _vm.form, field: "bio" }
-                          })
-                        ],
-                        1
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "form-group" }, [
-                      _c(
-                        "label",
-                        {
-                          staticClass: "col-sm-2 control-label",
                           attrs: { for: "photo" }
                         },
                         [_vm._v("Profile Photo")]
@@ -66241,7 +66193,7 @@ var staticRenderFns = [
               staticClass: "nav-link active show",
               attrs: { href: "#settings", "data-toggle": "tab" }
             },
-            [_vm._v("Sttings")]
+            [_vm._v("Profile")]
           )
         ])
       ])

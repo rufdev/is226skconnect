@@ -20,7 +20,7 @@
             <div class="card">
               <div class="card-header p-2">
                 <ul class="nav nav-pills">
-                  <li class="nav-item"><a class="nav-link active show" href="#settings" data-toggle="tab">Sttings</a></li>
+                  <li class="nav-item"><a class="nav-link active show" href="#settings" data-toggle="tab">Profile</a></li>
                 </ul>
               </div><!-- /.card-header -->
               <div class="card-body">
@@ -44,14 +44,14 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
 
                                 <div class="col-sm-12">
                                 <textarea  v-model="form.bio" class="form-control" id="inputExperience" placeholder="Experience" :class="{ 'is-invalid': form.errors.has('bio') }"></textarea>
                                     <has-error :form="form" field="bio"></has-error>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="form-group">
                                 <label for="photo" class="col-sm-2 control-label">Profile Photo</label>
                                 <div class="col-sm-12">
@@ -102,10 +102,10 @@
                     name : '',
                     email : '',
                     password : '',
-                    type : '',
-                    bio : '',
+                    // type : '',
+                    // bio : '',
                     photo : '',
-                    role: {}
+                    role: []
                 })
             }
         },
