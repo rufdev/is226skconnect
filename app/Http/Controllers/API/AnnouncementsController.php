@@ -114,6 +114,6 @@ class AnnouncementsController extends Controller
 
     }
     public function count(){
-        return Annoucnement::count();
+        return Announcement::count();
     }
 }
