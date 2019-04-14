@@ -2298,6 +2298,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2308,7 +2318,8 @@ __webpack_require__.r(__webpack_exports__);
         title: '',
         body: '',
         featureimage: '',
-        attachment: ''
+        attachment: '',
+        category: ''
       })
     };
   },
@@ -2368,12 +2379,10 @@ __webpack_require__.r(__webpack_exports__);
     loadAnnouncement: function loadAnnouncement() {
       var _this2 = this;
 
-      if (this.$gate.isAdmin() || this.$gate.isSKAdmin()) {
-        axios.get('api/announcement').then(function (_ref) {
-          var data = _ref.data;
-          return _this2.announcements = data;
-        });
-      }
+      axios.get('api/announcement').then(function (_ref) {
+        var data = _ref.data;
+        return _this2.announcements = data;
+      });
     },
     updateAnnouncement: function updateAnnouncement() {
       var _this3 = this;
@@ -2470,9 +2479,124 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
-    console.log('Component mounted.');
+  data: function data() {
+    return {
+      posts: 0,
+      memos: 0,
+      users: 0,
+      announcements: 0
+    };
+  },
+  methods: {
+    loadUsers: function loadUsers() {
+      var _this = this;
+
+      axios.get('api/countUser').then(function (_ref) {
+        var data = _ref.data;
+        return _this.users = data;
+      });
+    },
+    loadPosts: function loadPosts() {
+      var _this2 = this;
+
+      axios.get('api/countPost').then(function (_ref2) {
+        var data = _ref2.data;
+        return _this2.posts = data;
+      });
+    },
+    loadMemos: function loadMemos() {
+      var _this3 = this;
+
+      axios.get('api/countMemo').then(function (_ref3) {
+        var data = _ref3.data;
+        return _this3.memos = data;
+      });
+    },
+    loadAnnouncements: function loadAnnouncements() {
+      var _this4 = this;
+
+      axios.get('api/countAnnouncement').then(function (_ref4) {
+        var data = _ref4.data;
+        return _this4.announcements = data;
+      });
+    }
+  },
+  created: function created() {
+    if (this.$gate.isAdmin() || this.$gate.isSKAdmin()) {
+      this.loadUsers();
+    }
+
+    this.loadPosts();
+    this.loadMemos();
+    this.loadAnnouncements();
   }
 });
 
@@ -2714,6 +2838,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2724,7 +2859,8 @@ __webpack_require__.r(__webpack_exports__);
         title: '',
         body: '',
         featureimage: '',
-        attachment: ''
+        attachment: '',
+        category: ''
       })
     };
   },
@@ -2784,12 +2920,10 @@ __webpack_require__.r(__webpack_exports__);
     loadMemo: function loadMemo() {
       var _this2 = this;
 
-      if (this.$gate.isAdmin() || this.$gate.isSKAdmin()) {
-        axios.get('api/memo').then(function (_ref) {
-          var data = _ref.data;
-          return _this2.memos = data;
-        });
-      }
+      axios.get('api/memo').then(function (_ref) {
+        var data = _ref.data;
+        return _this2.memos = data;
+      });
     },
     updateMemo: function updateMemo() {
       var _this3 = this;
@@ -3043,15 +3177,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      // editor: ClassicEditor,
-      // editorConfig: {
-      //     // plugins: [ CKFinder],
-      //     // toolbar: [ 'ckfinder'],
-      //     ckfinder:{
-      //         // uploadUrl: '/laravel-filemanager/upload?command=QuickUpload&type=Files&responseType=json'
-      //         uploadUrl: '/laravel-filemanager/upload?type=Images&_token=' + $('meta[name="csrf-token"]').attr('content')
-      //     }
-      // },
       editmode: false,
       posts: {},
       form: new Form({
@@ -3063,18 +3188,6 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    // openFileManager () {
-    //     // lfm({type: 'image', prefix: '/laravel-filemanager'}, function(lfmItems, path) {
-    //     //     lfmItems.forEach(function (lfmItem) {
-    //     //         console.log(lfmItem.url)
-    //     //         // context.invoke('insertImage', lfmItem.url);
-    //     //     });
-    //     // });
-    //     // return false;
-    //     // lfm({type: 'image', prefix: '/laravel-filemanager'}, function(url, path) {
-    //     //     context.invoke('insertImage', url);
-    //     // });
-    // },
     file_browser_callback: function file_browser_callback(field_name, url, type, win) {
       var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
       var y = window.innerHeight || document.documentElement.clientHeight || document.getElementsByTagName('body')[0].clientHeight;
@@ -3119,12 +3232,10 @@ __webpack_require__.r(__webpack_exports__);
     loadPost: function loadPost() {
       var _this2 = this;
 
-      if (this.$gate.isAdmin() || this.$gate.isSKAdmin()) {
-        axios.get('api/post').then(function (_ref) {
-          var data = _ref.data;
-          return _this2.posts = data;
-        });
-      }
+      axios.get('api/post').then(function (_ref) {
+        var data = _ref.data;
+        return _this2.posts = data;
+      });
     },
     updatePost: function updatePost() {
       var _this3 = this;
@@ -3306,34 +3417,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3344,7 +3427,8 @@ __webpack_require__.r(__webpack_exports__);
         password: '',
         type: '',
         bio: '',
-        photo: ''
+        photo: '',
+        role: {}
       })
     };
   },
@@ -3755,6 +3839,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3766,9 +3851,9 @@ __webpack_require__.r(__webpack_exports__);
         name: '',
         email: '',
         password: '',
-        type: '3',
         bio: '',
-        photo: ''
+        photo: '',
+        role_id: 3
       })
     };
   },
@@ -63146,7 +63231,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _vm.$gate.isAdmin() || _vm.$gate.isSKAdmin()
+    _vm.$gate.isAdmin() || _vm.$gate.isSKAdmin() || _vm.$gate.isSKMember()
       ? _c("div", { staticClass: "row mt-3" }, [
           _c("div", { staticClass: "col-12" }, [
             _c("div", { staticClass: "card" }, [
@@ -63186,6 +63271,12 @@ var render = function() {
                           _c("td", [_vm._v(_vm._s(announcement.title))]),
                           _vm._v(" "),
                           _c("td", [_vm._v(_vm._s(announcement.user.name))]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _vm._v(
+                              _vm._s(_vm._f("upText")(announcement.category))
+                            )
+                          ]),
                           _vm._v(" "),
                           _c("td", [_vm._v(_vm._s(announcement.created_at))]),
                           _vm._v(" "),
@@ -63246,7 +63337,7 @@ var render = function() {
         ])
       : _vm._e(),
     _vm._v(" "),
-    !(_vm.$gate.isAdmin() || _vm.$gate.isSKAdmin())
+    !(_vm.$gate.isAdmin() || _vm.$gate.isSKAdmin() || _vm.$gate.isSKMember())
       ? _c("div", [_c("not-found")], 1)
       : _vm._e(),
     _vm._v(" "),
@@ -63397,6 +63488,68 @@ var render = function() {
                         _vm._v(" "),
                         _c("has-error", {
                           attrs: { form: _vm.form, field: "body" }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "form-group" },
+                      [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.category,
+                                expression: "form.category"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.form.errors.has("category")
+                            },
+                            attrs: { name: "category", id: "category" },
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.form,
+                                  "category",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              }
+                            }
+                          },
+                          [
+                            _c("option", { attrs: { value: "" } }, [
+                              _vm._v("Select Category")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "private" } }, [
+                              _vm._v("Private")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "public" } }, [
+                              _vm._v("Public")
+                            ])
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("has-error", {
+                          attrs: { form: _vm.form, field: "category" }
                         })
                       ],
                       1
@@ -63556,6 +63709,8 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Created by")]),
       _vm._v(" "),
+      _c("th", [_vm._v("Category")]),
+      _vm._v(" "),
       _c("th", [_vm._v("Date Created")]),
       _vm._v(" "),
       _c("th", [_vm._v("Modify")])
@@ -63644,16 +63799,168 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c(
-      "div",
-      { staticClass: "row justify-content-center" },
-      [_c("not-found")],
-      1
-    )
+  return _c("div", { staticClass: "container-fluid" }, [
+    _vm.$gate.isAdmin() || _vm.$gate.isSKAdmin() || _vm.$gate.isSKMember()
+      ? _c("div", { staticClass: "row mt-3" }, [
+          _vm.$gate.isAdmin() || _vm.$gate.isSKAdmin()
+            ? _c("div", { staticClass: "col-lg-3 col-6" }, [
+                _c("div", { staticClass: "small-box bg-info" }, [
+                  _c("div", { staticClass: "inner" }, [
+                    _vm.users > 0
+                      ? _c("h3", [_vm._v(_vm._s(_vm.users))])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.users === 0 || _vm.users === ""
+                      ? _c("h3", [_vm._v("0")])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("p", [_vm._v("Users")])
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _vm._m(1)
+                ])
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-3 col-6" }, [
+            _c("div", { staticClass: "small-box bg-success" }, [
+              _c("div", { staticClass: "inner" }, [
+                _vm.posts > 0
+                  ? _c("h3", [_vm._v(_vm._s(_vm.posts))])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.posts === 0 || _vm.posts === ""
+                  ? _c("h3", [_vm._v("0")])
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("p", [_vm._v("Posts")])
+              ]),
+              _vm._v(" "),
+              _vm._m(2),
+              _vm._v(" "),
+              _vm._m(3)
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-3 col-6" }, [
+            _c("div", { staticClass: "small-box bg-warning" }, [
+              _c("div", { staticClass: "inner" }, [
+                _vm.memos > 0
+                  ? _c("h3", [_vm._v(_vm._s(_vm.memos))])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.memos === 0 || _vm.memos === ""
+                  ? _c("h3", [_vm._v("0")])
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("p", [_vm._v("Memos")])
+              ]),
+              _vm._v(" "),
+              _vm._m(4),
+              _vm._v(" "),
+              _vm._m(5)
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-3 col-6" }, [
+            _c("div", { staticClass: "small-box bg-danger" }, [
+              _c("div", { staticClass: "inner" }, [
+                _vm.announcements > 0
+                  ? _c("h3", [_vm._v(_vm._s(_vm.announcements))])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.announcements === 0 || _vm.announcements === ""
+                  ? _c("h3", [_vm._v("0")])
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("p", [_vm._v("Announcements")])
+              ]),
+              _vm._v(" "),
+              _vm._m(6),
+              _vm._v(" "),
+              _vm._m(7)
+            ])
+          ])
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    !(_vm.$gate.isAdmin() || _vm.$gate.isSKAdmin() || _vm.$gate.isSKMember())
+      ? _c("div", [_c("not-found")], 1)
+      : _vm._e()
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "fas fa-users" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { staticClass: "small-box-footer", attrs: { href: "#" } }, [
+      _vm._v("More info "),
+      _c("i", { staticClass: "fa fa-arrow-circle-right" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "fas fa-blog" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { staticClass: "small-box-footer", attrs: { href: "#" } }, [
+      _vm._v("More info "),
+      _c("i", { staticClass: "fa fa-arrow-circle-right" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "fas fa-file" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { staticClass: "small-box-footer", attrs: { href: "#" } }, [
+      _vm._v("More info "),
+      _c("i", { staticClass: "fa fa-arrow-circle-right" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "fas fa-bullhorn" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { staticClass: "small-box-footer", attrs: { href: "#" } }, [
+      _vm._v("More info "),
+      _c("i", { staticClass: "fa fa-arrow-circle-right" })
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -63815,7 +64122,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _vm.$gate.isAdmin() || _vm.$gate.isSKAdmin()
+    _vm.$gate.isAdmin() || _vm.$gate.isSKAdmin() || _vm.$gate.isSKMember()
       ? _c("div", { staticClass: "row mt-3" }, [
           _c("div", { staticClass: "col-12" }, [
             _c("div", { staticClass: "card" }, [
@@ -63853,6 +64160,10 @@ var render = function() {
                           _c("td", [_vm._v(_vm._s(memo.title))]),
                           _vm._v(" "),
                           _c("td", [_vm._v(_vm._s(memo.user.name))]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _vm._v(_vm._s(_vm._f("upText")(memo.category)))
+                          ]),
                           _vm._v(" "),
                           _c("td", [_vm._v(_vm._s(memo.created_at))]),
                           _vm._v(" "),
@@ -63911,7 +64222,7 @@ var render = function() {
         ])
       : _vm._e(),
     _vm._v(" "),
-    !(_vm.$gate.isAdmin() || _vm.$gate.isSKAdmin())
+    !(_vm.$gate.isAdmin() || _vm.$gate.isSKAdmin() || _vm.$gate.isSKMember())
       ? _c("div", [_c("not-found")], 1)
       : _vm._e(),
     _vm._v(" "),
@@ -64060,6 +64371,68 @@ var render = function() {
                         _vm._v(" "),
                         _c("has-error", {
                           attrs: { form: _vm.form, field: "body" }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "form-group" },
+                      [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.category,
+                                expression: "form.category"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.form.errors.has("category")
+                            },
+                            attrs: { name: "category", id: "category" },
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.form,
+                                  "category",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              }
+                            }
+                          },
+                          [
+                            _c("option", { attrs: { value: "" } }, [
+                              _vm._v("Select Category")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "private" } }, [
+                              _vm._v("Private")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "public" } }, [
+                              _vm._v("Public")
+                            ])
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("has-error", {
+                          attrs: { form: _vm.form, field: "category" }
                         })
                       ],
                       1
@@ -64218,6 +64591,8 @@ var staticRenderFns = [
       _c("th", [_vm._v("Title")]),
       _vm._v(" "),
       _c("th", [_vm._v("Created by")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Category")]),
       _vm._v(" "),
       _c("th", [_vm._v("Date Created")]),
       _vm._v(" "),
@@ -64627,7 +65002,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _vm.$gate.isAdmin() || _vm.$gate.isSKAdmin()
+    _vm.$gate.isAdmin() || _vm.$gate.isSKAdmin() || _vm.$gate.isSKMember()
       ? _c("div", { staticClass: "row mt-3" }, [
           _c("div", { staticClass: "col-12" }, [
             _c("div", { staticClass: "card" }, [
@@ -64723,7 +65098,7 @@ var render = function() {
         ])
       : _vm._e(),
     _vm._v(" "),
-    !(_vm.$gate.isAdmin() || _vm.$gate.isSKAdmin())
+    !(_vm.$gate.isAdmin() || _vm.$gate.isSKAdmin() || _vm.$gate.isSKMember())
       ? _c("div", [_c("not-found")], 1)
       : _vm._e(),
     _vm._v(" "),
@@ -65056,22 +65431,37 @@ var render = function() {
     _c("div", { staticClass: "row justify-content-center" }, [
       _c("div", { staticClass: "col-md-12 mt-3" }, [
         _c("div", { staticClass: "card card-widget widget-user" }, [
-          _vm._m(0),
+          _c(
+            "div",
+            {
+              staticClass: "widget-user-header text-white",
+              staticStyle: {
+                background: "url('/img/photo1.png') center center"
+              }
+            },
+            [
+              _c("h3", { staticClass: "widget-user-username" }, [
+                _vm._v(_vm._s(_vm.form.name))
+              ]),
+              _vm._v(" "),
+              _c("h5", { staticClass: "widget-user-desc" }, [
+                _vm._v(_vm._s(_vm.form.role.name))
+              ])
+            ]
+          ),
           _vm._v(" "),
           _c("div", { staticClass: "widget-user-image" }, [
             _c("img", {
               staticClass: "img-circle",
               attrs: { src: _vm.getProfilePhoto(), alt: "User Avatar" }
             })
-          ]),
-          _vm._v(" "),
-          _vm._m(1)
+          ])
         ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-md-12" }, [
         _c("div", { staticClass: "card" }, [
-          _vm._m(2),
+          _vm._m(0),
           _vm._v(" "),
           _c("div", { staticClass: "card-body" }, [
             _c("div", { staticClass: "tab-content" }, [
@@ -65336,61 +65726,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "widget-user-header text-white",
-        staticStyle: { background: "url('/img/photo1.png') center center" }
-      },
-      [
-        _c("h3", { staticClass: "widget-user-username" }, [
-          _vm._v("Elizabeth Pierce")
-        ]),
-        _vm._v(" "),
-        _c("h5", { staticClass: "widget-user-desc" }, [_vm._v("Web Designer")])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-footer" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-sm-4 border-right" }, [
-          _c("div", { staticClass: "description-block" }, [
-            _c("h5", { staticClass: "description-header" }, [_vm._v("3,200")]),
-            _vm._v(" "),
-            _c("span", { staticClass: "description-text" }, [_vm._v("SALES")])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-sm-4 border-right" }, [
-          _c("div", { staticClass: "description-block" }, [
-            _c("h5", { staticClass: "description-header" }, [_vm._v("13,000")]),
-            _vm._v(" "),
-            _c("span", { staticClass: "description-text" }, [
-              _vm._v("FOLLOWERS")
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-sm-4" }, [
-          _c("div", { staticClass: "description-block" }, [
-            _c("h5", { staticClass: "description-header" }, [_vm._v("35")]),
-            _vm._v(" "),
-            _c("span", { staticClass: "description-text" }, [
-              _vm._v("PRODUCTS")
-            ])
-          ])
-        ])
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -66145,15 +66480,15 @@ var render = function() {
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.form.type,
-                                expression: "form.type"
+                                value: _vm.form.role_id,
+                                expression: "form.role_id"
                               }
                             ],
                             staticClass: "form-control",
                             class: {
-                              "is-invalid": _vm.form.errors.has("type")
+                              "is-invalid": _vm.form.errors.has("role_id")
                             },
-                            attrs: { name: "type", id: "type" },
+                            attrs: { name: "role_id", id: "role_id" },
                             on: {
                               change: function($event) {
                                 var $$selectedVal = Array.prototype.filter
@@ -66166,7 +66501,7 @@ var render = function() {
                                   })
                                 _vm.$set(
                                   _vm.form,
-                                  "type",
+                                  "role_id",
                                   $event.target.multiple
                                     ? $$selectedVal
                                     : $$selectedVal[0]
@@ -66191,7 +66526,7 @@ var render = function() {
                         ),
                         _vm._v(" "),
                         _c("has-error", {
-                          attrs: { form: _vm.form, field: "type" }
+                          attrs: { form: _vm.form, field: "role_id" }
                         })
                       ],
                       1
@@ -66217,7 +66552,8 @@ var render = function() {
                           attrs: {
                             type: "password",
                             name: "password",
-                            id: "password"
+                            id: "password",
+                            placeholder: "Password"
                           },
                           domProps: { value: _vm.form.password },
                           on: {
@@ -82928,15 +83264,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!******************************************!*\
   !*** ./resources/js/components/Post.vue ***!
   \******************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Post_vue_vue_type_template_id_5e8280ea___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Post.vue?vue&type=template&id=5e8280ea& */ "./resources/js/components/Post.vue?vue&type=template&id=5e8280ea&");
 /* harmony import */ var _Post_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Post.vue?vue&type=script&lang=js& */ "./resources/js/components/Post.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Post_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Post_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -82966,7 +83301,7 @@ component.options.__file = "resources/js/components/Post.vue"
 /*!*******************************************************************!*\
   !*** ./resources/js/components/Post.vue?vue&type=script&lang=js& ***!
   \*******************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

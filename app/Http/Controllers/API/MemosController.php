@@ -19,10 +19,12 @@ class MemosController extends Controller
      */
     public function index()
     {
-        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
+        if (\Gate::allows('isAdmin') || \Gate::allows('isSKAdmin')) {
             $memos = Memo::with(['user'])->latest()->paginate(5);
-            return $memos;
+        }else{
+            $memos = Memo::with(['user'])->latest()->where('user_id',auth()->user()->id)->paginate(5);
         }
+        return $memos;
     }
 
     /**
@@ -36,6 +38,7 @@ class MemosController extends Controller
         $this->validate($request,[
             'title' => 'required|string|max:191|unique:memos',
             'body' => 'required|string',
+            'category' => 'required|string',
         ]);
         return Memo::create([
             'title' => $request['title'],
@@ -43,6 +46,7 @@ class MemosController extends Controller
             'featureimage'=> $request['featureimage'],
             'url'=> $request['url'],
             'attachment'=> $request['attachment'],
+            'category'=> $request['category'],
             'user_id' => auth()->user()->id
         ]);
     }
@@ -72,6 +76,7 @@ class MemosController extends Controller
         $this->validate($request,[
             'title' => 'required|string|max:191|unique:memos,title,'.$memo->id,
             'body' => 'required|string',
+            'category' => 'required|string',
         ]);
 
 
@@ -100,7 +105,9 @@ class MemosController extends Controller
         if ($search = \Request::get('q')) {
             $memos = Memo::where(function($query) use ($search){
                 $query->where('name','LIKE',"%$search%")
-                        ->orWhere('body','LIKE',"%$search%");
+                        ->orWhere('body','LIKE',"%$search%")
+                        ->orWhere('category','LIKE',"%$search%");
+
             })->paginate(20);
         }else{
             $memos = Memo::latest()->paginate(5);
@@ -108,5 +115,12 @@ class MemosController extends Controller
 
         return $memos;
 
+    }
+    public function count(){
+        if (\Gate::allows('isAdmin') || \Gate::allows('isSKAdmin')) {
+            $count = Memo::count();
+        }else{
+            $count = Memo::where('user_id',auth()->user()->id)->count();
+        }
     }
 }

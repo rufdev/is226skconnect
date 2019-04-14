@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-       <div class="row mt-3" v-if="$gate.isAdmin() || $gate.isSKAdmin()">
+       <div class="row mt-3" v-if="$gate.isAdmin() || $gate.isSKAdmin() || $gate.isSKMember()">
           <div class="col-12">
             <div class="card">
             <div class="card-header">
@@ -16,6 +16,7 @@
                   <tbody><tr>
                     <th>Title</th>
                     <th>Created by</th>
+                    <th>Category</th>
                     <th>Date Created</th>
                     <th>Modify</th>
                   </tr>
@@ -23,6 +24,7 @@
                     <!-- <td>{{memo.id}}</td> -->
                     <td>{{memo.title}}</td>
                     <td>{{memo.user.name}}</td>
+                    <td>{{memo.category | upText}}</td>
                     <td>{{memo.created_at}}</td>
                     <td>
                         <a href="#" @click="editMemo(memo)">
@@ -43,7 +45,7 @@
             <!-- /.card -->
           </div>
         </div>
-        <div v-if="!($gate.isAdmin() || $gate.isSKAdmin())">
+        <div v-if="!($gate.isAdmin() || $gate.isSKAdmin() || $gate.isSKMember())">
             <not-found></not-found>
         </div>
         <!-- Modal -->
@@ -85,6 +87,14 @@
                         <has-error :form="form" field="body"></has-error>
                     </div>
                     <div class="form-group">
+                        <select name="category" v-model="form.category" id="category" class="form-control" :class="{ 'is-invalid': form.errors.has('category') } " >
+                            <option value="">Select Category</option>
+                            <option value="private">Private</option>
+                            <option value="public">Public</option>
+                        </select>
+                        <has-error :form="form" field="category"></has-error>
+                    </div>
+                    <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-btn">
                                 <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
@@ -112,6 +122,7 @@
                         </div>
                         <img id="holder2" style="margin-top:15px;max-height:100px;">
                     </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -139,6 +150,7 @@
                     body : '',
                     featureimage : '',
                     attachment : '',
+                    category : '',
                 })
 
             }
@@ -190,10 +202,7 @@
 
             },
             loadMemo(){
-                if(this.$gate.isAdmin() || this.$gate.isSKAdmin()){
-                    axios.get('api/memo').then(({data}) => (this.memos = data));
-                }
-
+                axios.get('api/memo').then(({data}) => (this.memos = data));
             },
             updateMemo(){
                 this.$Progress.start();

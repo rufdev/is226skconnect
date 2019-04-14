@@ -19,10 +19,12 @@ class PostsController extends Controller
      */
     public function index()
     {
-        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
+        if (\Gate::allows('isAdmin') || \Gate::allows('isSKAdmin')) {
             $posts = Post::with(['user'])->latest()->paginate(5);
-            return $posts;
+        }else{
+            $posts = Post::with(['user'])->latest()->where('user_id',auth()->user()->id)->paginate(5);
         }
+        return $posts;
     }
 
     /**
@@ -53,7 +55,10 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        //
+        // if (\Gate::allows('isAdmin') || \Gate::allows('isSKAdmin') || \Gate::allows('isSKMember')) {
+        //     $posts = Post::with(['user'])->latest()->where('user_id',auth()->user()->id)->paginate(5);
+        //     return $posts;
+        // }
     }
 
     /**
@@ -106,5 +111,13 @@ class PostsController extends Controller
 
         return $posts;
 
+    }
+
+    public function count(){
+        if (\Gate::allows('isAdmin') || \Gate::allows('isSKAdmin')) {
+            $count = Post::count();
+        }else{
+            $count = Post::where('user_id',auth()->user()->id)->count();
+        }
     }
 }

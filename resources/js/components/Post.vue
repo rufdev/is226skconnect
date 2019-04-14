@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-       <div class="row mt-3" v-if="$gate.isAdmin() || $gate.isSKAdmin()">
+       <div class="row mt-3" v-if="$gate.isAdmin() || $gate.isSKAdmin() || $gate.isSKMember()">
           <div class="col-12">
             <div class="card">
             <div class="card-header">
@@ -43,7 +43,7 @@
             <!-- /.card -->
           </div>
         </div>
-        <div v-if="!($gate.isAdmin() || $gate.isSKAdmin())">
+        <div v-if="!($gate.isAdmin() || $gate.isSKAdmin() || $gate.isSKMember())">
             <not-found></not-found>
         </div>
         <!-- Modal -->
@@ -139,15 +139,6 @@
     export default {
         data() {
             return {
-                // editor: ClassicEditor,
-                // editorConfig: {
-                //     // plugins: [ CKFinder],
-                //     // toolbar: [ 'ckfinder'],
-                //     ckfinder:{
-                //         // uploadUrl: '/laravel-filemanager/upload?command=QuickUpload&type=Files&responseType=json'
-                //         uploadUrl: '/laravel-filemanager/upload?type=Images&_token=' + $('meta[name="csrf-token"]').attr('content')
-                //     }
-                // },
                 editmode : false,
                 posts : {},
                 form: new Form({
@@ -160,18 +151,6 @@
             }
         },
         methods:{
-            // openFileManager () {
-            //     // lfm({type: 'image', prefix: '/laravel-filemanager'}, function(lfmItems, path) {
-            //     //     lfmItems.forEach(function (lfmItem) {
-            //     //         console.log(lfmItem.url)
-            //     //         // context.invoke('insertImage', lfmItem.url);
-            //     //     });
-            //     // });
-            //     // return false;
-            //     // lfm({type: 'image', prefix: '/laravel-filemanager'}, function(url, path) {
-            //     //     context.invoke('insertImage', url);
-            //     // });
-            // },
             file_browser_callback(field_name, url, type, win) {
                 var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
                 var y = window.innerHeight|| document.documentElement.clientHeight|| document.getElementsByTagName('body')[0].clientHeight;
@@ -216,10 +195,7 @@
 
             },
             loadPost(){
-                if(this.$gate.isAdmin() || this.$gate.isSKAdmin()){
-                    axios.get('api/post').then(({data}) => (this.posts = data));
-                }
-
+                axios.get('api/post').then(({data}) => (this.posts = data));
             },
             updatePost(){
                 this.$Progress.start();

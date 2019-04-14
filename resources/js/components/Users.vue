@@ -85,7 +85,7 @@
 
 
                     <div class="form-group">
-                        <select name="type" v-model="form.type" id="type" class="form-control" :class="{ 'is-invalid': form.errors.has('type') } " >
+                        <select name="role_id" v-model="form.role_id" id="role_id" class="form-control" :class="{ 'is-invalid': form.errors.has('role_id') } " >
                             <option v-for="role in roles" v-bind:key="role.id" v-bind:value="role.id">
                                 {{ role.name }}
                             </option>
@@ -94,11 +94,12 @@
                             <option value="skadmin">SK Admin</option>
                             <option value="skmember">SK Member</option> -->
                         </select>
-                        <has-error :form="form" field="type"></has-error>
+                        <has-error :form="form" field="role_id"></has-error>
                     </div>
 
                     <div class="form-group">
                         <input v-model="form.password" type="password" name="password" id="password"
+                        placeholder="Password"
                         class="form-control" :class="{ 'is-invalid': form.errors.has('password') }">
                         <has-error :form="form" field="password"></has-error>
                     </div>
@@ -127,9 +128,9 @@
                     name : '',
                     email : '',
                     password : '',
-                    type : '3',
                     bio : '',
-                    photo : ''
+                    photo : '',
+                    role_id : 3
                 })
             }
         },

@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-       <div class="row mt-3" v-if="$gate.isAdmin() || $gate.isSKAdmin()">
+       <div class="row mt-3" v-if="$gate.isAdmin() || $gate.isSKAdmin() || $gate.isSKMember()">
           <div class="col-12">
             <div class="card">
             <div class="card-header">
@@ -16,6 +16,7 @@
                   <tbody><tr>
                     <th>Title</th>
                     <th>Created by</th>
+                    <th>Category</th>
                     <th>Date Created</th>
                     <th>Modify</th>
                   </tr>
@@ -23,6 +24,7 @@
                     <!-- <td>{{announcement.id}}</td> -->
                     <td>{{announcement.title}}</td>
                     <td>{{announcement.user.name}}</td>
+                    <td>{{announcement.category | upText}}</td>
                     <td>{{announcement.created_at}}</td>
                     <td>
                         <a href="#" @click="editAnnouncement(announcement)">
@@ -43,7 +45,7 @@
             <!-- /.card -->
           </div>
         </div>
-        <div v-if="!($gate.isAdmin() || $gate.isSKAdmin())">
+        <div v-if="!($gate.isAdmin() || $gate.isSKAdmin() || $gate.isSKMember())">
             <not-found></not-found>
         </div>
         <!-- Modal -->
@@ -83,6 +85,14 @@
                         </editor>
 
                         <has-error :form="form" field="body"></has-error>
+                    </div>
+                    <div class="form-group">
+                        <select name="category" v-model="form.category" id="category" class="form-control" :class="{ 'is-invalid': form.errors.has('category') } " >
+                            <option value="">Select Category</option>
+                            <option value="private">Private</option>
+                            <option value="public">Public</option>
+                        </select>
+                        <has-error :form="form" field="category"></has-error>
                     </div>
                     <div class="form-group">
                         <div class="input-group">
@@ -139,6 +149,7 @@
                     body : '',
                     featureimage : '',
                     attachment : '',
+                    category : '',
                 })
 
             }
@@ -190,9 +201,7 @@
 
             },
             loadAnnouncement(){
-                if(this.$gate.isAdmin() || this.$gate.isSKAdmin()){
-                    axios.get('api/announcement').then(({data}) => (this.announcements = data));
-                }
+                axios.get('api/announcement').then(({data}) => (this.announcements = data));
 
             },
             updateAnnouncement(){

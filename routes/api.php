@@ -40,10 +40,19 @@ Route::apiResources([
 
 
 Route::get('profile','API\UserController@profile');
-Route::get('findUser','API\UserController@search');
 Route::put('profile','API\UserController@updateProfile');
 
+Route::get('findUser','API\UserController@search');
 Route::get('findRole','API\RolesController@search');
 Route::get('findPost','API\PostsController@search');
 Route::get('findMemo','API\MemosController@search');
 Route::get('findAnnouncement','API\AnnouncementsController@search');
+
+Route::get('countPost','API\PostsController@count');
+Route::get('countMemo','API\MemosController@count');
+Route::get('countUser','API\UserController@count');
+Route::get('countAnnouncement','API\AnnouncementsController@count');
+
+
+
+
