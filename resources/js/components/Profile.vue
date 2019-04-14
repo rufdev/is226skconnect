@@ -109,14 +109,11 @@
                 })
             }
         },
-        mounted() {
-            console.log('Component mounted.')
-        },
         methods:{
 
             getProfilePhoto(){
 
-                let photo = (this.form.photo.length > 200) ? this.form.photo : "img/profile/"+ this.form.photo ;
+                let photo = this.form.photo ? "img/profile/"+ this.form.photo : "img/logo.png";
                 return photo;
             },
 

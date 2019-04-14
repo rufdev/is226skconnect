@@ -128,7 +128,7 @@
                     name : '',
                     email : '',
                     password : '',
-                    bio : '',
+                    // bio : '',
                     photo : '',
                     role_id : 3
                 })

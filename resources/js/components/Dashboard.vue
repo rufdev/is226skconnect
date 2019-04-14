@@ -206,7 +206,7 @@
                 });
             },
             getProfilePhoto(userphoto){
-                let photo = (userphoto > 200) ? userphoto : "img/profile/"+ userphoto ;
+                let photo = userphoto ? "img/profile/"+ userphoto : "img/logo.png";
                 return photo;
             },
             countUsers(){

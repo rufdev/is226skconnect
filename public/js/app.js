@@ -2676,7 +2676,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     getProfilePhoto: function getProfilePhoto(userphoto) {
-      var photo = userphoto > 200 ? userphoto : "img/profile/" + userphoto;
+      var photo = userphoto ? "img/profile/" + userphoto : "img/logo.png";
       return photo;
     },
     countUsers: function countUsers() {
@@ -3586,12 +3586,9 @@ __webpack_require__.r(__webpack_exports__);
       })
     };
   },
-  mounted: function mounted() {
-    console.log('Component mounted.');
-  },
   methods: {
     getProfilePhoto: function getProfilePhoto() {
-      var photo = this.form.photo.length > 200 ? this.form.photo : "img/profile/" + this.form.photo;
+      var photo = this.form.photo ? "img/profile/" + this.form.photo : "img/logo.png";
       return photo;
     },
     updateInfo: function updateInfo() {
@@ -4005,7 +4002,7 @@ __webpack_require__.r(__webpack_exports__);
         name: '',
         email: '',
         password: '',
-        bio: '',
+        // bio : '',
         photo: '',
         role_id: 3
       })
