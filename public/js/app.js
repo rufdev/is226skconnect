@@ -2379,12 +2379,10 @@ __webpack_require__.r(__webpack_exports__);
     loadAnnouncement: function loadAnnouncement() {
       var _this2 = this;
 
-      if (this.$gate.isAdmin() || this.$gate.isSKAdmin()) {
-        axios.get('api/announcement').then(function (_ref) {
-          var data = _ref.data;
-          return _this2.announcements = data;
-        });
-      }
+      axios.get('api/announcement').then(function (_ref) {
+        var data = _ref.data;
+        return _this2.announcements = data;
+      });
     },
     updateAnnouncement: function updateAnnouncement() {
       var _this3 = this;
@@ -2927,12 +2925,10 @@ __webpack_require__.r(__webpack_exports__);
     loadMemo: function loadMemo() {
       var _this2 = this;
 
-      if (this.$gate.isAdmin() || this.$gate.isSKAdmin()) {
-        axios.get('api/memo').then(function (_ref) {
-          var data = _ref.data;
-          return _this2.memos = data;
-        });
-      }
+      axios.get('api/memo').then(function (_ref) {
+        var data = _ref.data;
+        return _this2.memos = data;
+      });
     },
     updateMemo: function updateMemo() {
       var _this3 = this;
@@ -3186,15 +3182,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      // editor: ClassicEditor,
-      // editorConfig: {
-      //     // plugins: [ CKFinder],
-      //     // toolbar: [ 'ckfinder'],
-      //     ckfinder:{
-      //         // uploadUrl: '/laravel-filemanager/upload?command=QuickUpload&type=Files&responseType=json'
-      //         uploadUrl: '/laravel-filemanager/upload?type=Images&_token=' + $('meta[name="csrf-token"]').attr('content')
-      //     }
-      // },
       editmode: false,
       posts: {},
       form: new Form({
@@ -3206,18 +3193,6 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    // openFileManager () {
-    //     // lfm({type: 'image', prefix: '/laravel-filemanager'}, function(lfmItems, path) {
-    //     //     lfmItems.forEach(function (lfmItem) {
-    //     //         console.log(lfmItem.url)
-    //     //         // context.invoke('insertImage', lfmItem.url);
-    //     //     });
-    //     // });
-    //     // return false;
-    //     // lfm({type: 'image', prefix: '/laravel-filemanager'}, function(url, path) {
-    //     //     context.invoke('insertImage', url);
-    //     // });
-    // },
     file_browser_callback: function file_browser_callback(field_name, url, type, win) {
       var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
       var y = window.innerHeight || document.documentElement.clientHeight || document.getElementsByTagName('body')[0].clientHeight;
@@ -3262,12 +3237,10 @@ __webpack_require__.r(__webpack_exports__);
     loadPost: function loadPost() {
       var _this2 = this;
 
-      if (this.$gate.isAdmin() || this.$gate.isSKAdmin()) {
-        axios.get('api/post').then(function (_ref) {
-          var data = _ref.data;
-          return _this2.posts = data;
-        });
-      }
+      axios.get('api/post').then(function (_ref) {
+        var data = _ref.data;
+        return _this2.posts = data;
+      });
     },
     updatePost: function updatePost() {
       var _this3 = this;
@@ -3871,6 +3844,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3882,9 +3856,9 @@ __webpack_require__.r(__webpack_exports__);
         name: '',
         email: '',
         password: '',
-        type: '3',
         bio: '',
-        photo: ''
+        photo: '',
+        role_id: 3
       })
     };
   },
@@ -63262,7 +63236,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _vm.$gate.isAdmin() || _vm.$gate.isSKAdmin()
+    _vm.$gate.isAdmin() || _vm.$gate.isSKAdmin() || _vm.$gate.isSKMember()
       ? _c("div", { staticClass: "row mt-3" }, [
           _c("div", { staticClass: "col-12" }, [
             _c("div", { staticClass: "card" }, [
@@ -63368,7 +63342,7 @@ var render = function() {
         ])
       : _vm._e(),
     _vm._v(" "),
-    !(_vm.$gate.isAdmin() || _vm.$gate.isSKAdmin())
+    !(_vm.$gate.isAdmin() || _vm.$gate.isSKAdmin() || _vm.$gate.isSKMember())
       ? _c("div", [_c("not-found")], 1)
       : _vm._e(),
     _vm._v(" "),
@@ -64143,7 +64117,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _vm.$gate.isAdmin() || _vm.$gate.isSKAdmin()
+    _vm.$gate.isAdmin() || _vm.$gate.isSKAdmin() || _vm.$gate.isSKMember()
       ? _c("div", { staticClass: "row mt-3" }, [
           _c("div", { staticClass: "col-12" }, [
             _c("div", { staticClass: "card" }, [
@@ -64243,7 +64217,7 @@ var render = function() {
         ])
       : _vm._e(),
     _vm._v(" "),
-    !(_vm.$gate.isAdmin() || _vm.$gate.isSKAdmin())
+    !(_vm.$gate.isAdmin() || _vm.$gate.isSKAdmin() || _vm.$gate.isSKMember())
       ? _c("div", [_c("not-found")], 1)
       : _vm._e(),
     _vm._v(" "),
@@ -65023,7 +64997,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _vm.$gate.isAdmin() || _vm.$gate.isSKAdmin()
+    _vm.$gate.isAdmin() || _vm.$gate.isSKAdmin() || _vm.$gate.isSKMember()
       ? _c("div", { staticClass: "row mt-3" }, [
           _c("div", { staticClass: "col-12" }, [
             _c("div", { staticClass: "card" }, [
@@ -65119,7 +65093,7 @@ var render = function() {
         ])
       : _vm._e(),
     _vm._v(" "),
-    !(_vm.$gate.isAdmin() || _vm.$gate.isSKAdmin())
+    !(_vm.$gate.isAdmin() || _vm.$gate.isSKAdmin() || _vm.$gate.isSKMember())
       ? _c("div", [_c("not-found")], 1)
       : _vm._e(),
     _vm._v(" "),
@@ -66501,15 +66475,15 @@ var render = function() {
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.form.type,
-                                expression: "form.type"
+                                value: _vm.form.role_id,
+                                expression: "form.role_id"
                               }
                             ],
                             staticClass: "form-control",
                             class: {
-                              "is-invalid": _vm.form.errors.has("type")
+                              "is-invalid": _vm.form.errors.has("role_id")
                             },
-                            attrs: { name: "type", id: "type" },
+                            attrs: { name: "role_id", id: "role_id" },
                             on: {
                               change: function($event) {
                                 var $$selectedVal = Array.prototype.filter
@@ -66522,7 +66496,7 @@ var render = function() {
                                   })
                                 _vm.$set(
                                   _vm.form,
-                                  "type",
+                                  "role_id",
                                   $event.target.multiple
                                     ? $$selectedVal
                                     : $$selectedVal[0]
@@ -66547,7 +66521,7 @@ var render = function() {
                         ),
                         _vm._v(" "),
                         _c("has-error", {
-                          attrs: { form: _vm.form, field: "type" }
+                          attrs: { form: _vm.form, field: "role_id" }
                         })
                       ],
                       1
@@ -66573,7 +66547,8 @@ var render = function() {
                           attrs: {
                             type: "password",
                             name: "password",
-                            id: "password"
+                            id: "password",
+                            placeholder: "Password"
                           },
                           domProps: { value: _vm.form.password },
                           on: {

@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-       <div class="row mt-3" v-if="$gate.isAdmin() || $gate.isSKAdmin()">
+       <div class="row mt-3" v-if="$gate.isAdmin() || $gate.isSKAdmin() || $gate.isSKMember()">
           <div class="col-12">
             <div class="card">
             <div class="card-header">
@@ -45,7 +45,7 @@
             <!-- /.card -->
           </div>
         </div>
-        <div v-if="!($gate.isAdmin() || $gate.isSKAdmin())">
+        <div v-if="!($gate.isAdmin() || $gate.isSKAdmin() || $gate.isSKMember())">
             <not-found></not-found>
         </div>
         <!-- Modal -->
@@ -202,10 +202,7 @@
 
             },
             loadMemo(){
-                if(this.$gate.isAdmin() || this.$gate.isSKAdmin()){
-                    axios.get('api/memo').then(({data}) => (this.memos = data));
-                }
-
+                axios.get('api/memo').then(({data}) => (this.memos = data));
             },
             updateMemo(){
                 this.$Progress.start();

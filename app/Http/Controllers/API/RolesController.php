@@ -19,7 +19,7 @@ class RolesController extends Controller
      */
     public function index()
     {
-        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
+        if (\Gate::allows('isAdmin') || \Gate::allows('isSKAdmin')) {
             return Role::latest()->paginate(5);
         }
     }

@@ -26,7 +26,7 @@ class UserController extends Controller
     public function index()
     {
 
-        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
+        if (\Gate::allows('isAdmin') || \Gate::allows('isSKAdmin')) {
             $users = User::with(['role'])->latest()->paginate(5);
             return $users;
         }
@@ -45,13 +45,15 @@ class UserController extends Controller
             'name' => 'required|string|max:191',
             'email' => 'required|string|email|max:191|unique:users',
             'password' => 'required|string|min:8',
+            'role_id' => 'required',
         ]);
+
         return User::create([
             'name' => $request['name'],
             'email' => $request['email'],
-            'type' => $request['type'],
             'bio' => $request['bio'],
             'photo' => $request['photo'],
+            'role_id' => $request['role_id'],
             'password' => Hash::make($request['password'])
         ]);
     }
@@ -64,7 +66,7 @@ class UserController extends Controller
         $this->validate($request,[
             'name' => 'required|string|max:191',
             'email' => 'required|string|email|max:191|unique:users,email,'.$user->id,
-            'password' => 'sometimes|required|min:6'
+            'password' => 'sometimes|required|min:6',
         ]);
 
 
@@ -131,7 +133,9 @@ class UserController extends Controller
         $this->validate($request,[
             'name' => 'required|string|max:191',
             'email' => 'required|string|email|max:191|unique:users,email,'.$user->id,
-            'password' => 'sometimes|min:6'
+            'password' => 'sometimes|min:6',
+            'role_id' => 'required',
+
         ]);
 
         if(!empty($request->password)){

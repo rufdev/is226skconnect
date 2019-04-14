@@ -19,10 +19,13 @@ class AnnouncementsController extends Controller
      */
     public function index()
     {
-        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
+        if (\Gate::allows('isAdmin') || \Gate::allows('isSKAdmin')) {
             $announcements = Announcement::with(['user'])->latest()->paginate(5);
-            return $announcements;
+
+        }else{
+            $announcements = Announcement::with(['user'])->latest()->where('user_id',auth()->user()->id)->paginate(5);
         }
+        return $announcements;
     }
 
     /**

@@ -19,10 +19,12 @@ class MemosController extends Controller
      */
     public function index()
     {
-        if (\Gate::allows('isAdmin') || \Gate::allows('isAuthor')) {
+        if (\Gate::allows('isAdmin') || \Gate::allows('isSKAdmin')) {
             $memos = Memo::with(['user'])->latest()->paginate(5);
-            return $memos;
+        }else{
+            $memos = Memo::with(['user'])->latest()->where('user_id',auth()->user()->id)->paginate(5);
         }
+        return $memos;
     }
 
     /**
