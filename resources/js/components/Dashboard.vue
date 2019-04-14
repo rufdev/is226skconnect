@@ -6,12 +6,13 @@
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>150</h3>
+                <h3 v-if="users > 0">{{ users }}</h3>
+                <h3 v-if="users === 0">0</h3>
 
-                <p>New Orders</p>
+                <p>Users</p>
               </div>
               <div class="icon">
-                <i class="ion ion-bag"></i>
+                <i class="fas fa-users"></i>
               </div>
               <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
@@ -21,12 +22,13 @@
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
+                <h3 v-if="posts > 0">{{ posts }}</h3>
+                <h3 v-if="posts === 0">0</h3>
 
-                <p>Bounce Rate</p>
+                <p>Posts</p>
               </div>
               <div class="icon">
-                <i class="ion ion-stats-bars"></i>
+                <i class="fas fa-blog"></i>
               </div>
               <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
@@ -36,12 +38,13 @@
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3>44</h3>
+                <h3 v-if="memos > 0">{{ memos }}</h3>
+                <h3 v-if="memos === 0">0</h3>
 
-                <p>User Registrations</p>
+                <p>Memos</p>
               </div>
               <div class="icon">
-                <i class="ion ion-person-add"></i>
+                <i class="fas fa-file"></i>
               </div>
               <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
@@ -51,12 +54,13 @@
             <!-- small box -->
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3>65</h3>
+                <h3 v-if="announcements > 0">{{ announcements }}</h3>
+                <h3 v-if="announcements === 0">0</h3>
 
-                <p>Unique Visitors</p>
+                <p>Announcements</p>
               </div>
               <div class="icon">
-                <i class="ion ion-pie-graph"></i>
+                <i class="fas fa-bullhorn"></i>
               </div>
               <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
@@ -73,42 +77,42 @@
     export default {
          data() {
             return {
-                posts : {},
-                memos : {},
-                users : {},
-                announcements : {}
+                posts : 0,
+                memos : 0,
+                users : 0,
+                announcements : 0
             }
         },
         methods : {
+             loadUsers(){
+                if(this.$gate.isAdmin() || this.$gate.isSKAdmin()){
+                    axios.get('api/countUser').then(({data}) => (this.users = data));
+                }
+
+            },
             loadPosts(){
                 if(this.$gate.isAdmin() || this.$gate.isSKAdmin()){
-                    axios.get('api/post').then(({data}) => (this.posts = data));
+                    axios.get('api/countPost').then(({data}) => (this.posts = data));
                 }
 
             },
             loadMemos(){
                 if(this.$gate.isAdmin() || this.$gate.isSKAdmin()){
-                    axios.get('api/post').then(({data}) => (this.posts = data));
-                }
-
-            },
-            loadUsers(){
-                if(this.$gate.isAdmin() || this.$gate.isSKAdmin()){
-                    axios.get('api/post').then(({data}) => (this.posts = data));
+                    axios.get('api/countMemo').then(({data}) => (this.memos = data));
                 }
 
             },
             loadAnnouncements(){
                 if(this.$gate.isAdmin() || this.$gate.isSKAdmin()){
-                    axios.get('api/post').then(({data}) => (this.posts = data));
+                    axios.get('api/countAnnouncement').then(({data}) => (this.announcements = data));
                 }
 
             }
         },
         created() {
+            this.loadUsers();
             this.loadPosts();
             this.loadMemos();
-            this.loadUsers();
             this.loadAnnouncements();
 
         }

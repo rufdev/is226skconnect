@@ -105,4 +105,7 @@ class RolesController extends Controller
         return $roles;
 
     }
+    public function count(){
+        return Role::count();
+    }
 }

@@ -107,4 +107,8 @@ class PostsController extends Controller
         return $posts;
 
     }
+
+    public function count(){
+        return Post::count();
+    }
 }

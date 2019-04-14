@@ -114,4 +114,7 @@ class MemosController extends Controller
         return $memos;
 
     }
+    public function count(){
+        return Memo::count();
+    }
 }

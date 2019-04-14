@@ -96,7 +96,12 @@ class UserController extends Controller
     }
 
     public function profile(){
-        return auth('api')->user();
+        $user = auth('api')->user()->load('role');
+        return $user;
+    }
+
+    public function count(){
+        return User::count();
     }
 
     /**
