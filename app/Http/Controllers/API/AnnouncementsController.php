@@ -118,5 +118,6 @@ class AnnouncementsController extends Controller
         }else{
             $count = Announcement::where('user_id',auth()->user()->id)->count();
         }
+        return $count;
     }
 }

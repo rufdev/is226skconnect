@@ -84,7 +84,7 @@
             }
         },
         methods : {
-             loadUsers(){
+            loadUsers(){
                 axios.get('api/countUser').then(({data}) => (this.users = data));
             },
             loadPosts(){

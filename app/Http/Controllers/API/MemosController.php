@@ -144,5 +144,6 @@ class MemosController extends Controller
         }else{
             $count = Memo::where('user_id',auth()->user()->id)->count();
         }
+        return $count;
     }
 }

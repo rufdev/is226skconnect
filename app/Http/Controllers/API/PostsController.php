@@ -119,5 +119,6 @@ class PostsController extends Controller
         }else{
             $count = Post::where('user_id',auth()->user()->id)->count();
         }
+        return $count;
     }
 }
