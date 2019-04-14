@@ -114,6 +114,10 @@ class PostsController extends Controller
     }
 
     public function count(){
-        return Post::count();
+        if (\Gate::allows('isAdmin') || \Gate::allows('isSKAdmin')) {
+            $count = Post::count();
+        }else{
+            $count = Post::where('user_id',auth()->user()->id)->count();
+        }
     }
 }

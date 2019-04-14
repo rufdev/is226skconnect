@@ -117,6 +117,10 @@ class AnnouncementsController extends Controller
 
     }
     public function count(){
-        return Announcement::count();
+        if (\Gate::allows('isAdmin') || \Gate::allows('isSKAdmin')) {
+            $count = Announcement::count();
+        }else{
+            $count = Announcement::where('user_id',auth()->user()->id)->count();
+        }
     }
 }

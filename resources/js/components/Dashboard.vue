@@ -1,13 +1,13 @@
 <template>
     <div class="container-fluid">
             <!-- <not-found></not-found> -->
-          <div class="row mt-3" v-if="$gate.isAdmin() || $gate.isSKAdmin()">
-          <div class="col-lg-3 col-6">
+          <div class="row mt-3" v-if="$gate.isAdmin() || $gate.isSKAdmin() || $gate.isSKMember()">
+          <div class="col-lg-3 col-6" v-if="$gate.isAdmin() || $gate.isSKAdmin()" >
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
                 <h3 v-if="users > 0">{{ users }}</h3>
-                <h3 v-if="users === 0">0</h3>
+                <h3 v-if='users === 0 || users === ""'>0</h3>
 
                 <p>Users</p>
               </div>
@@ -23,7 +23,7 @@
             <div class="small-box bg-success">
               <div class="inner">
                 <h3 v-if="posts > 0">{{ posts }}</h3>
-                <h3 v-if="posts === 0">0</h3>
+                <h3 v-if='posts === 0 || posts === ""'>0</h3>
 
                 <p>Posts</p>
               </div>
@@ -39,7 +39,7 @@
             <div class="small-box bg-warning">
               <div class="inner">
                 <h3 v-if="memos > 0">{{ memos }}</h3>
-                <h3 v-if="memos === 0">0</h3>
+                <h3 v-if='memos === 0 || memos === ""'>0</h3>
 
                 <p>Memos</p>
               </div>
@@ -55,7 +55,7 @@
             <div class="small-box bg-danger">
               <div class="inner">
                 <h3 v-if="announcements > 0">{{ announcements }}</h3>
-                <h3 v-if="announcements === 0">0</h3>
+                <h3 v-if='announcements === 0 || announcements === ""'>0</h3>
 
                 <p>Announcements</p>
               </div>
@@ -67,7 +67,7 @@
           </div>
           <!-- ./col -->
         </div>
-        <div v-if="!($gate.isAdmin() || $gate.isSKAdmin())">
+        <div v-if="!($gate.isAdmin() || $gate.isSKAdmin() || $gate.isSKMember())">
             <not-found></not-found>
         </div>
     </div>
@@ -85,32 +85,22 @@
         },
         methods : {
              loadUsers(){
-                if(this.$gate.isAdmin() || this.$gate.isSKAdmin()){
-                    axios.get('api/countUser').then(({data}) => (this.users = data));
-                }
-
+                axios.get('api/countUser').then(({data}) => (this.users = data));
             },
             loadPosts(){
-                if(this.$gate.isAdmin() || this.$gate.isSKAdmin()){
-                    axios.get('api/countPost').then(({data}) => (this.posts = data));
-                }
-
+                axios.get('api/countPost').then(({data}) => (this.posts = data));
             },
             loadMemos(){
-                if(this.$gate.isAdmin() || this.$gate.isSKAdmin()){
-                    axios.get('api/countMemo').then(({data}) => (this.memos = data));
-                }
-
+                axios.get('api/countMemo').then(({data}) => (this.memos = data));
             },
             loadAnnouncements(){
-                if(this.$gate.isAdmin() || this.$gate.isSKAdmin()){
-                    axios.get('api/countAnnouncement').then(({data}) => (this.announcements = data));
-                }
-
+                axios.get('api/countAnnouncement').then(({data}) => (this.announcements = data));
             }
         },
         created() {
-            this.loadUsers();
+            if (this.$gate.isAdmin() || this.$gate.isSKAdmin()){
+                this.loadUsers();
+            }
             this.loadPosts();
             this.loadMemos();
             this.loadAnnouncements();

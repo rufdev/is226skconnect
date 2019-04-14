@@ -2559,46 +2559,41 @@ __webpack_require__.r(__webpack_exports__);
     loadUsers: function loadUsers() {
       var _this = this;
 
-      if (this.$gate.isAdmin() || this.$gate.isSKAdmin()) {
-        axios.get('api/countUser').then(function (_ref) {
-          var data = _ref.data;
-          return _this.users = data;
-        });
-      }
+      axios.get('api/countUser').then(function (_ref) {
+        var data = _ref.data;
+        return _this.users = data;
+      });
     },
     loadPosts: function loadPosts() {
       var _this2 = this;
 
-      if (this.$gate.isAdmin() || this.$gate.isSKAdmin()) {
-        axios.get('api/countPost').then(function (_ref2) {
-          var data = _ref2.data;
-          return _this2.posts = data;
-        });
-      }
+      axios.get('api/countPost').then(function (_ref2) {
+        var data = _ref2.data;
+        return _this2.posts = data;
+      });
     },
     loadMemos: function loadMemos() {
       var _this3 = this;
 
-      if (this.$gate.isAdmin() || this.$gate.isSKAdmin()) {
-        axios.get('api/countMemo').then(function (_ref3) {
-          var data = _ref3.data;
-          return _this3.memos = data;
-        });
-      }
+      axios.get('api/countMemo').then(function (_ref3) {
+        var data = _ref3.data;
+        return _this3.memos = data;
+      });
     },
     loadAnnouncements: function loadAnnouncements() {
       var _this4 = this;
 
-      if (this.$gate.isAdmin() || this.$gate.isSKAdmin()) {
-        axios.get('api/countAnnouncement').then(function (_ref4) {
-          var data = _ref4.data;
-          return _this4.announcements = data;
-        });
-      }
+      axios.get('api/countAnnouncement').then(function (_ref4) {
+        var data = _ref4.data;
+        return _this4.announcements = data;
+      });
     }
   },
   created: function created() {
-    this.loadUsers();
+    if (this.$gate.isAdmin() || this.$gate.isSKAdmin()) {
+      this.loadUsers();
+    }
+
     this.loadPosts();
     this.loadMemos();
     this.loadAnnouncements();
@@ -63805,25 +63800,29 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container-fluid" }, [
-    _vm.$gate.isAdmin() || _vm.$gate.isSKAdmin()
+    _vm.$gate.isAdmin() || _vm.$gate.isSKAdmin() || _vm.$gate.isSKMember()
       ? _c("div", { staticClass: "row mt-3" }, [
-          _c("div", { staticClass: "col-lg-3 col-6" }, [
-            _c("div", { staticClass: "small-box bg-info" }, [
-              _c("div", { staticClass: "inner" }, [
-                _vm.users > 0
-                  ? _c("h3", [_vm._v(_vm._s(_vm.users))])
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.users === 0 ? _c("h3", [_vm._v("0")]) : _vm._e(),
-                _vm._v(" "),
-                _c("p", [_vm._v("Users")])
-              ]),
-              _vm._v(" "),
-              _vm._m(0),
-              _vm._v(" "),
-              _vm._m(1)
-            ])
-          ]),
+          _vm.$gate.isAdmin() || _vm.$gate.isSKAdmin()
+            ? _c("div", { staticClass: "col-lg-3 col-6" }, [
+                _c("div", { staticClass: "small-box bg-info" }, [
+                  _c("div", { staticClass: "inner" }, [
+                    _vm.users > 0
+                      ? _c("h3", [_vm._v(_vm._s(_vm.users))])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.users === 0 || _vm.users === ""
+                      ? _c("h3", [_vm._v("0")])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("p", [_vm._v("Users")])
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _vm._m(1)
+                ])
+              ])
+            : _vm._e(),
           _vm._v(" "),
           _c("div", { staticClass: "col-lg-3 col-6" }, [
             _c("div", { staticClass: "small-box bg-success" }, [
@@ -63832,7 +63831,9 @@ var render = function() {
                   ? _c("h3", [_vm._v(_vm._s(_vm.posts))])
                   : _vm._e(),
                 _vm._v(" "),
-                _vm.posts === 0 ? _c("h3", [_vm._v("0")]) : _vm._e(),
+                _vm.posts === 0 || _vm.posts === ""
+                  ? _c("h3", [_vm._v("0")])
+                  : _vm._e(),
                 _vm._v(" "),
                 _c("p", [_vm._v("Posts")])
               ]),
@@ -63850,7 +63851,9 @@ var render = function() {
                   ? _c("h3", [_vm._v(_vm._s(_vm.memos))])
                   : _vm._e(),
                 _vm._v(" "),
-                _vm.memos === 0 ? _c("h3", [_vm._v("0")]) : _vm._e(),
+                _vm.memos === 0 || _vm.memos === ""
+                  ? _c("h3", [_vm._v("0")])
+                  : _vm._e(),
                 _vm._v(" "),
                 _c("p", [_vm._v("Memos")])
               ]),
@@ -63868,7 +63871,9 @@ var render = function() {
                   ? _c("h3", [_vm._v(_vm._s(_vm.announcements))])
                   : _vm._e(),
                 _vm._v(" "),
-                _vm.announcements === 0 ? _c("h3", [_vm._v("0")]) : _vm._e(),
+                _vm.announcements === 0 || _vm.announcements === ""
+                  ? _c("h3", [_vm._v("0")])
+                  : _vm._e(),
                 _vm._v(" "),
                 _c("p", [_vm._v("Announcements")])
               ]),
@@ -63881,7 +63886,7 @@ var render = function() {
         ])
       : _vm._e(),
     _vm._v(" "),
-    !(_vm.$gate.isAdmin() || _vm.$gate.isSKAdmin())
+    !(_vm.$gate.isAdmin() || _vm.$gate.isSKAdmin() || _vm.$gate.isSKMember())
       ? _c("div", [_c("not-found")], 1)
       : _vm._e()
   ])
