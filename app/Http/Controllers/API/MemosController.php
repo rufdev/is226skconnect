@@ -36,6 +36,7 @@ class MemosController extends Controller
         $this->validate($request,[
             'title' => 'required|string|max:191|unique:memos',
             'body' => 'required|string',
+            'category' => 'required|string',
         ]);
         return Memo::create([
             'title' => $request['title'],
@@ -43,6 +44,7 @@ class MemosController extends Controller
             'featureimage'=> $request['featureimage'],
             'url'=> $request['url'],
             'attachment'=> $request['attachment'],
+            'category'=> $request['category'],
             'user_id' => auth()->user()->id
         ]);
     }
@@ -72,6 +74,7 @@ class MemosController extends Controller
         $this->validate($request,[
             'title' => 'required|string|max:191|unique:memos,title,'.$memo->id,
             'body' => 'required|string',
+            'category' => 'required|string',
         ]);
 
 
@@ -100,7 +103,9 @@ class MemosController extends Controller
         if ($search = \Request::get('q')) {
             $memos = Memo::where(function($query) use ($search){
                 $query->where('name','LIKE',"%$search%")
-                        ->orWhere('body','LIKE',"%$search%");
+                        ->orWhere('body','LIKE',"%$search%")
+                        ->orWhere('category','LIKE',"%$search%");
+
             })->paginate(20);
         }else{
             $memos = Memo::latest()->paginate(5);
