@@ -1,6 +1,6 @@
 .jssorb21 div, .jssorb21 div:hover, .jssorb21 .av
 {
-    background: url(../images/b21.png) no-repeat;
+    /* background: url(../images/b21.png) no-repeat; */
     overflow:hidden;
     cursor: pointer;
 }
@@ -13,7 +13,7 @@
     position: absolute;
     cursor: pointer;
     display: block;
-    background: url(../images/a21.png) center center no-repeat;
+    /* background: url(../images/a21.png) center center no-repeat; */
     overflow: hidden;
 }
 .jssora21l { background-position: -3px -33px; }
@@ -23,5 +23,5 @@
 .jssora21ldn { background-position: -243px -33px; }
 .jssora21rdn { background-position: -303px -33px; }
 .load{
-	background: url(../images/loading.gif) no-repeat center center;
+	/* background: url(../images/loading.gif) no-repeat center center; */
 }
