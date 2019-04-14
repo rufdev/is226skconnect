@@ -2299,15 +2299,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2318,8 +2309,7 @@ __webpack_require__.r(__webpack_exports__);
         title: '',
         body: '',
         featureimage: '',
-        attachment: '',
-        category: ''
+        attachment: ''
       })
     };
   },
@@ -63272,12 +63262,6 @@ var render = function() {
                           _vm._v(" "),
                           _c("td", [_vm._v(_vm._s(announcement.user.name))]),
                           _vm._v(" "),
-                          _c("td", [
-                            _vm._v(
-                              _vm._s(_vm._f("upText")(announcement.category))
-                            )
-                          ]),
-                          _vm._v(" "),
                           _c("td", [_vm._v(_vm._s(announcement.created_at))]),
                           _vm._v(" "),
                           _c("td", [
@@ -63488,68 +63472,6 @@ var render = function() {
                         _vm._v(" "),
                         _c("has-error", {
                           attrs: { form: _vm.form, field: "body" }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "form-group" },
-                      [
-                        _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.form.category,
-                                expression: "form.category"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            class: {
-                              "is-invalid": _vm.form.errors.has("category")
-                            },
-                            attrs: { name: "category", id: "category" },
-                            on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.form,
-                                  "category",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              }
-                            }
-                          },
-                          [
-                            _c("option", { attrs: { value: "" } }, [
-                              _vm._v("Select Category")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "private" } }, [
-                              _vm._v("Private")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "public" } }, [
-                              _vm._v("Public")
-                            ])
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c("has-error", {
-                          attrs: { form: _vm.form, field: "category" }
                         })
                       ],
                       1

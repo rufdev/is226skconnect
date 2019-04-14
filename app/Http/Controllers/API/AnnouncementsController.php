@@ -39,7 +39,6 @@ class AnnouncementsController extends Controller
         $this->validate($request,[
             'title' => 'required|string|max:191|unique:announcements',
             'body' => 'required|string',
-            'category' => 'required|string',
         ]);
         return Announcement::create([
             'title' => $request['title'],
@@ -47,7 +46,6 @@ class AnnouncementsController extends Controller
             'featureimage'=> $request['featureimage'],
             'url'=> $request['url'],
             'attachment'=> $request['attachment'],
-            'category'=> $request['category'],
             'user_id' => auth()->user()->id
         ]);
     }
@@ -77,7 +75,6 @@ class AnnouncementsController extends Controller
         $this->validate($request,[
             'title' => 'required|string|max:191|unique:announcements,title,'.$announcement->id,
             'body' => 'required|string',
-            'category' => 'required|string',
         ]);
 
 
@@ -106,8 +103,7 @@ class AnnouncementsController extends Controller
         if ($search = \Request::get('q')) {
             $announcements = Announcement::where(function($query) use ($search){
                 $query->where('name','LIKE',"%$search%")
-                        ->orWhere('body','LIKE',"%$search%")
-                        ->orWhere('category','LIKE',"%$search%");
+                        ->orWhere('body','LIKE',"%$search%");
             })->paginate(20);
         }else{
             $announcements = Announcement::latest()->paginate(5);

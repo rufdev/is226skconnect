@@ -24,7 +24,6 @@
                     <!-- <td>{{announcement.id}}</td> -->
                     <td>{{announcement.title}}</td>
                     <td>{{announcement.user.name}}</td>
-                    <td>{{announcement.category | upText}}</td>
                     <td>{{announcement.created_at}}</td>
                     <td>
                         <a href="#" @click="editAnnouncement(announcement)">
@@ -87,14 +86,6 @@
                         <has-error :form="form" field="body"></has-error>
                     </div>
                     <div class="form-group">
-                        <select name="category" v-model="form.category" id="category" class="form-control" :class="{ 'is-invalid': form.errors.has('category') } " >
-                            <option value="">Select Category</option>
-                            <option value="private">Private</option>
-                            <option value="public">Public</option>
-                        </select>
-                        <has-error :form="form" field="category"></has-error>
-                    </div>
-                    <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-btn">
                                 <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
@@ -149,7 +140,6 @@
                     body : '',
                     featureimage : '',
                     attachment : '',
-                    category : '',
                 })
 
             }
