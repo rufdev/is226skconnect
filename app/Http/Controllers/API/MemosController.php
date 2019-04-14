@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Memo;
+use App\User;
 class MemosController extends Controller
 {
     public function __construct()
@@ -49,6 +50,27 @@ class MemosController extends Controller
             'category'=> $request['category'],
             'user_id' => auth()->user()->id
         ]);
+
+
+        if($request['category']=="Private")
+        {
+            //get users to send to
+            $users = User::all();
+                //Send to all users
+                foreach($users as $user)
+                {
+                    $title = $request['title'];
+                    $content = 'A new memo has been posted for you buddy. Please login to the SK Connect Site';
+
+                    Mail::send('mail', ['title' => $title, 'content' => $content], function ($message)
+                    {
+                        $message->subject('New Memo');
+                        $message->to($user->email);
+                    });
+
+                } //end foreach
+        }
+
     }
 
     /**
