@@ -34,9 +34,10 @@
                                     <li class="menu-item"><a href="#contact">Contact</a></li>
 
                                     @if(Auth::check())
-                                        <li class="menu-item"><a class="btn btn-primary"  role="button" href="{{ route('login') }}">Login</a></li>
+                                        <li class="menu-item"><a href="/dashboard">My Dashboard</a></li>
                                     @else
-                                       <li class="menu-item"><a class="btn btn-primary"  role="button" href="/home">Dashboard</a></li>
+                                       <li class="menu-item"><a href="{{ route('login') }}">Login</a></li>
+
                                     @endif
                                     </ul>
                         </div>
