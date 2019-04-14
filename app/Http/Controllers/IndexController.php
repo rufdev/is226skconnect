@@ -70,4 +70,10 @@ class IndexController extends Controller
         return view('memos', compact('memos','recentposts'));
     }
 
+    public function error()
+    {
+        $recentposts = Post::orderBy('created_at', 'DESC')->take(10)->get();
+        return view('errors.404', compact('recentposts'));
+    }
+
 }
