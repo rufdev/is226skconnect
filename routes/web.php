@@ -23,6 +23,7 @@ Route::get('/events', 'IndexController@events');
 Route::get('/about', 'IndexController@about');
 Route::get('/blog', 'IndexController@blog');
 Route::get('/memos', 'IndexController@memos');
+Route::get('/404', 'IndexController@error');
 
 
 Auth::routes();
