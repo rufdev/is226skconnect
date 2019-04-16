@@ -69,11 +69,11 @@
                                         <li class="col-md-4 col-sm-3" style="list-style: none; overflow:hidden;">
                                         <div class="small-post" >
                                             <figure class="tg-featuredimg">
-                                                <a href="/post/{{ $post->id }}"">
+                                                <a href="/post/{{ $post->id }}">
                                                 <img src="{{ url(''.$post->featureimage) }}" alt="" style="width:275px; height:183px;"> </a>
                                             </figure>
                                             <div class="cp-post-content">
-                                            <h3><a href="">{{ $post->title}}</a></h3>
+                                            <h3><a href="/post/{{ $post->id }}">{{ $post->title}}</a></h3>
                                             <div> <p style="font-size: 12pt!important"> {!! str_limit($post->body, 100) !!} </p> </div>
                                                 <a href="/post/{{ $post->id }}">Read More</a>
                                             </div>
