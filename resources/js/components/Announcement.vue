@@ -16,7 +16,7 @@
                   <tbody><tr>
                     <th>Title</th>
                     <th>Created by</th>
-                    <th>Category</th>
+                    <!-- <th>Category</th> -->
                     <th>Date Created</th>
                     <th>Modify</th>
                   </tr>

@@ -184,6 +184,8 @@ return [
     */
     'php_ini_overrides' => [
         'memory_limit'        => '500M',
+        'max_size'            => '50000'
+        // 'max_file_size'       => '50000'
     ],
 
 ];

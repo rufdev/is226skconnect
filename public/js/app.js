@@ -63841,8 +63841,6 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Created by")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Category")]),
-      _vm._v(" "),
       _c("th", [_vm._v("Date Created")]),
       _vm._v(" "),
       _c("th", [_vm._v("Modify")])
@@ -63949,9 +63947,7 @@ var render = function() {
                     _c("p", [_vm._v("Users")])
                   ]),
                   _vm._v(" "),
-                  _vm._m(0),
-                  _vm._v(" "),
-                  _vm._m(1)
+                  _vm._m(0)
                 ])
               ])
             : _vm._e(),
@@ -63970,9 +63966,7 @@ var render = function() {
                 _c("p", [_vm._v("Posts")])
               ]),
               _vm._v(" "),
-              _vm._m(2),
-              _vm._v(" "),
-              _vm._m(3)
+              _vm._m(1)
             ])
           ]),
           _vm._v(" "),
@@ -63990,9 +63984,7 @@ var render = function() {
                 _c("p", [_vm._v("Memos")])
               ]),
               _vm._v(" "),
-              _vm._m(4),
-              _vm._v(" "),
-              _vm._m(5)
+              _vm._m(2)
             ])
           ]),
           _vm._v(" "),
@@ -64010,9 +64002,7 @@ var render = function() {
                 _c("p", [_vm._v("Announcements")])
               ]),
               _vm._v(" "),
-              _vm._m(6),
-              _vm._v(" "),
-              _vm._m(7)
+              _vm._m(3)
             ])
           ])
         ])
@@ -64022,7 +64012,7 @@ var render = function() {
       ? _c("div", { staticClass: "row mt-3" }, [
           _c("div", { staticClass: "col-md-12" }, [
             _c("div", { staticClass: "card" }, [
-              _vm._m(8),
+              _vm._m(4),
               _vm._v(" "),
               _c("div", { staticClass: "card-body" }, [
                 _c("div", { staticClass: "tab-content" }, [
@@ -64289,7 +64279,7 @@ var render = function() {
                   [_vm._v(_vm._s(_vm.content.title))]
                 ),
                 _vm._v(" "),
-                _vm._m(9)
+                _vm._m(5)
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body report-modal-body" }, [
@@ -64345,26 +64335,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "small-box-footer", attrs: { href: "#" } }, [
-      _vm._v("More info "),
-      _c("i", { staticClass: "fa fa-arrow-circle-right" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "icon" }, [
       _c("i", { staticClass: "fas fa-blog" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "small-box-footer", attrs: { href: "#" } }, [
-      _vm._v("More info "),
-      _c("i", { staticClass: "fa fa-arrow-circle-right" })
     ])
   },
   function() {
@@ -64379,26 +64351,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "small-box-footer", attrs: { href: "#" } }, [
-      _vm._v("More info "),
-      _c("i", { staticClass: "fa fa-arrow-circle-right" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "icon" }, [
       _c("i", { staticClass: "fas fa-bullhorn" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "small-box-footer", attrs: { href: "#" } }, [
-      _vm._v("More info "),
-      _c("i", { staticClass: "fa fa-arrow-circle-right" })
     ])
   },
   function() {
