@@ -2411,7 +2411,7 @@ __webpack_require__.r(__webpack_exports__);
             swal.fire('Deleted!', 'Your file has been deleted.', 'success');
             Fire.$emit('AfterCreate');
           }).catch(function () {
-            swal.fire("Failed!", "There was something wronge.", "warning");
+            swal.fire("Failed!", "There was something wrong.", "warning");
           });
         }
       });
@@ -3121,7 +3121,7 @@ __webpack_require__.r(__webpack_exports__);
             swal.fire('Deleted!', 'Your file has been deleted.', 'success');
             Fire.$emit('AfterCreate');
           }).catch(function () {
-            swal.fire("Failed!", "There was something wronge.", "warning");
+            swal.fire("Failed!", "There was something wrong.", "warning");
           });
         }
       });
@@ -3425,7 +3425,7 @@ __webpack_require__.r(__webpack_exports__);
             swal.fire('Deleted!', 'Your file has been deleted.', 'success');
             Fire.$emit('AfterCreate');
           }).catch(function () {
-            swal.fire("Failed!", "There was something wronge.", "warning");
+            swal.fire("Failed!", "There was something wrong.", "warning");
           });
         }
       });
@@ -3823,7 +3823,7 @@ __webpack_require__.r(__webpack_exports__);
             swal.fire('Deleted!', 'Your file has been deleted.', 'success');
             Fire.$emit('AfterCreate');
           }).catch(function () {
-            swal.fire("Failed!", "There was something wronge.", "warning");
+            swal.fire("Failed!", "There was something wrong.", "warning");
           });
         }
       });
@@ -4074,7 +4074,7 @@ __webpack_require__.r(__webpack_exports__);
             swal.fire('Deleted!', 'Your file has been deleted.', 'success');
             Fire.$emit('AfterCreate');
           }).catch(function () {
-            swal.fire("Failed!", "There was something wronge.", "warning");
+            swal.fire("Failed!", "There was something wrong.", "warning");
           });
         }
       });
