@@ -183,9 +183,9 @@ return [
     | directives are not supported.
     */
     'php_ini_overrides' => [
-        'memory_limit'        => '256M',
-        'max_image_size'      => '50000',
-        'max_file_size'       => '50000'
+        'memory_limit'        => '500M',
+        'max_size'            => '50000'
+        // 'max_file_size'       => '50000'
     ],
 
 ];
