@@ -2651,6 +2651,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     viewModal: function viewModal(content) {
       $('#viewModal').modal('show');
+      $("#viewModal").css("z-index", "1500");
       this.content = content;
     },
     getPostResults: function getPostResults() {

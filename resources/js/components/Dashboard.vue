@@ -185,6 +185,7 @@
         methods : {
             viewModal(content){
                 $('#viewModal').modal('show');
+                $("#viewModal").css("z-index", "1500");
                 this.content = content;
             },
             getPostResults(page = 1) {
