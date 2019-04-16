@@ -2351,11 +2351,13 @@ __webpack_require__.r(__webpack_exports__);
       $('#lfm2').filemanager('file', {
         prefix: route_prefix
       });
+      $("#addNewAnnouncement").css("z-index", "1500");
     },
     editAnnouncement: function editAnnouncement(announcement) {
       this.editmode = true;
       this.form.reset();
       $('#addNewAnnouncement').modal('show');
+      $("#addNewAnnouncement").css("z-index", "1500");
       this.form.fill(announcement);
       $('#holder').attr('src', this.form.featureimage); // $('#holder2').attr('src',this.form.attachment);
 
@@ -3061,11 +3063,13 @@ __webpack_require__.r(__webpack_exports__);
       $('#lfm2').filemanager('file', {
         prefix: route_prefix
       });
+      $("#addNewMemo").css("z-index", "1500");
     },
     editMemo: function editMemo(memo) {
       this.editmode = true;
       this.form.reset();
       $('#addNewMemo').modal('show');
+      $("#addNewMemo").css("z-index", "1500");
       this.form.fill(memo);
       $('#holder').attr('src', this.form.featureimage); // $('#holder2').attr('src',this.form.attachment);
 
@@ -3372,11 +3376,13 @@ __webpack_require__.r(__webpack_exports__);
       this.editmode = false;
       this.form.reset();
       $('#lfm').filemanager('image');
+      $("#addNewPost").css("z-index", "1500");
     },
     editPost: function editPost(post) {
       this.editmode = true;
       this.form.reset();
       $('#addNewPost').modal('show');
+      $("#addNewPost").css("z-index", "1500");
       this.form.fill(post);
       $('#holder').attr('src', this.form.featureimage);
       $('#lfm').filemanager('image');
@@ -3773,11 +3779,13 @@ __webpack_require__.r(__webpack_exports__);
     newRole: function newRole() {
       this.editmode = false;
       this.form.reset();
+      $("#addNewRole").css("z-index", "1500");
     },
     editRole: function editRole(role) {
       this.editmode = true;
       this.form.reset();
       $('#addNewRole').modal('show');
+      $("#addNewRole").css("z-index", "1500");
       this.form.fill(role);
     },
     loadRoles: function loadRoles() {
@@ -4020,11 +4028,13 @@ __webpack_require__.r(__webpack_exports__);
     newUser: function newUser() {
       this.editmode = false;
       this.form.reset();
+      $("#addNewUser").css("z-index", "1500");
     },
     editUser: function editUser(user) {
       this.editmode = true;
       this.form.reset();
       $('#addNewUser').modal('show');
+      $("#addNewUser").css("z-index", "1500");
       this.form.fill(user);
     },
     loadUsers: function loadUsers() {

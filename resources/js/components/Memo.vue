@@ -189,11 +189,13 @@
                 this.form.reset();
                 $('#lfm').filemanager('image', {prefix: route_prefix});
                 $('#lfm2').filemanager('file', {prefix: route_prefix});
+                $("#addNewMemo").css("z-index", "1500");
             },
             editMemo(memo){
                 this.editmode = true;
                 this.form.reset();
                 $('#addNewMemo').modal('show');
+                $("#addNewMemo").css("z-index", "1500");
                 this.form.fill(memo);
                 $('#holder').attr('src',this.form.featureimage);
                 // $('#holder2').attr('src',this.form.attachment);

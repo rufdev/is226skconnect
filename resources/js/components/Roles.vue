@@ -118,11 +118,14 @@
             newRole(){
                 this.editmode = false;
                 this.form.reset();
+                $("#addNewRole").css("z-index", "1500");
+
             },
             editRole(role){
                 this.editmode = true;
                 this.form.reset();
                 $('#addNewRole').modal('show');
+                $("#addNewRole").css("z-index", "1500");
                 this.form.fill(role);
             },
             loadRoles(){

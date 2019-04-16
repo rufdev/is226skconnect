@@ -178,11 +178,13 @@
                 this.form.reset();
                 $('#lfm').filemanager('image', {prefix: route_prefix});
                 $('#lfm2').filemanager('file', {prefix: route_prefix});
+                $("#addNewAnnouncement").css("z-index", "1500");
             },
             editAnnouncement(announcement){
                 this.editmode = true;
                 this.form.reset();
                 $('#addNewAnnouncement').modal('show');
+                $("#addNewAnnouncement").css("z-index", "1500");
                 this.form.fill(announcement);
                 $('#holder').attr('src',this.form.featureimage);
                 // $('#holder2').attr('src',this.form.attachment);

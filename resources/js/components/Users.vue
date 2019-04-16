@@ -144,11 +144,15 @@
             newUser(){
                 this.editmode = false;
                 this.form.reset();
+                $("#addNewUser").css("z-index", "1500");
+
             },
             editUser(user){
                 this.editmode = true;
                 this.form.reset();
                 $('#addNewUser').modal('show');
+                $("#addNewUser").css("z-index", "1500");
+
                 this.form.fill(user);
             },
             loadUsers(){

@@ -174,12 +174,16 @@
                 this.editmode = false;
                 this.form.reset();
                 $('#lfm').filemanager('image');
+                $("#addNewPost").css("z-index", "1500");
+
             },
             editPost(post){
 
                 this.editmode = true;
                 this.form.reset();
                 $('#addNewPost').modal('show');
+                $("#addNewPost").css("z-index", "1500");
+
                 this.form.fill(post);
                  $('#holder').attr('src',this.form.featureimage);
                 $('#lfm').filemanager('image');
