@@ -229,7 +229,7 @@
                                     );
                                     Fire.$emit('AfterCreate');
                                 }).catch(()=> {
-                                    swal.fire("Failed!", "There was something wronge.", "warning");
+                                    swal.fire("Failed!", "There was something wrong.", "warning");
                                 });
                          }
                     })
